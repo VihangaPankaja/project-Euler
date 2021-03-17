@@ -47,5 +47,3 @@ for i in range(10_000):                              # last number can get 9 dig
         numerbs.append((i, concatenate(i)))
 
 print(max(list(y for x, y in numerbs)))               # find biggest pandigital number
-
-class
