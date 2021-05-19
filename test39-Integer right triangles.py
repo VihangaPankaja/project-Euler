@@ -3,7 +3,7 @@
 # For which value of p ≤ 1000, is the number of solutions maximised?
 
 
-def max_solutions(p_max: int):
+def max_solutions(p_max: int)-> int:
     solutions = {x:[] for x in range(1, p_max+1)}  # p as key and solutions list
 
 
