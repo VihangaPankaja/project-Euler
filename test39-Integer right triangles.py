@@ -14,19 +14,27 @@ def max_solutions(p_max: int):
     # c = k(m**2 + n**2)
     for n in range(1, (p_max+1)):
         for m in range(n+1, (p_max+1)):
+
             a0 = m**2 - n**2
             b0 = 2 * m * n
             c0 = m**2 + n**2
             k = 1
+            
+            
             while True:
+
                 a = k * a0
                 b = k * b0
                 c = k * c0
                 p = a + b + c
+                
+                
                 if p <= p_max:
                     tripple = {a, b, c}     # sets not permutate
+                    
                     if tripple not in solutions[p]:
                         solutions[p].append(tripple)
+                        
                 else:
                     break
                 k += 1
