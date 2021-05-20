@@ -10,7 +10,7 @@
 # What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
 
-def is_pendigital(n):
+def is_pendigital(n: int)-> bool:
     '''check if a number use all 1 to 9 digits once'''
 
     digits = list(range(1, 10))
@@ -41,9 +41,11 @@ def concatenate(n):
         elif len(num_gented) > 9:    # cannot generate 9 digits
             return False
 
-numerbs = []
-for i in range(10_000):                              # last number can get 9 digits like this is 9999 (4 and 5 digits)
-    if is_pendigital(concatenate(i)):
-        numerbs.append((i, concatenate(i)))
+            
+if __name__ == '__main__':
+    numerbs = []
+    for i in range(10_000):                              # last number can get 9 digits like this is 9999 (4 and 5 digits)
+        if is_pendigital(concatenate(i)):
+            numerbs.append((i, concatenate(i)))
 
-print(max(list(y for x, y in numerbs)))               # find biggest pandigital number
+    print(max(list(y for x, y in numerbs)))               # find biggest pandigital number

@@ -5,7 +5,8 @@
 
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-def is_prime(n):
+
+def is_prime(n: int)-> int:
     '''return if prime or not'''
 
     for i in range(2, int(n ** 0.5) + 2):
@@ -17,29 +18,34 @@ def is_prime(n):
     return False
 
 
-trunctable = []
-lst_digits = [2, 3, 5, 7]
 
-n = 10
-while True:
-    if len(trunctable) == 11:  # there is only 11 trunctables
-        break
+def main():
+    trunctable = []
+    lst_digits = [2, 3, 5, 7]
 
-    elif (int(str(n)[0]) not in lst_digits) or (int(str(n)[-1]) not in lst_digits):   #firs an last digit should be a prime. to save proccesing
-        pass
-    
-    elif n < 100:
-        if is_prime(n):
-            trunctable.append(n)
+    n = 10
+    while True:
+        if len(trunctable) == 11:  # there is only 11 trunctables
+            break
 
-    else:
-        if is_prime(n):
-            for i in range(len(str(n)) - 2):
-                if not (is_prime(int(str(n)[:i + 2])) and is_prime(int(str(n)[i + 1:]))):      # going right to left and left to right and check if not prime
-                    break
-            else:
-                trunctable.append(n)        # add to list if all not prime checks failed
+        elif (int(str(n)[0]) not in lst_digits) or (int(str(n)[-1]) not in lst_digits):   #firs an last digit should be a prime. to save proccesing
+            pass
 
-    n += 1
+        elif n < 100:
+            if is_prime(n):
+                trunctable.append(n)
 
-print(sum(trunctable))
+        else:
+            if is_prime(n):
+                for i in range(len(str(n)) - 2):
+                    if not (is_prime(int(str(n)[:i + 2])) and is_prime(int(str(n)[i + 1:]))):      # going right to left and left to right and check if not prime
+                        break
+                else:
+                    trunctable.append(n)        # add to list if all not prime checks failed
+
+        n += 1
+        
+    return trunctable
+
+if __name__ == '__main__':
+    print(sum(main()))
