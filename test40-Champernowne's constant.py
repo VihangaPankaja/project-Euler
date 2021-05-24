@@ -16,8 +16,8 @@ def d_n(n: int)-> int:
         return n
     
     else:
-        last_digit = 9
-        power = 1       # 10 th power (digits in decimal number)
+        last_digit: int = 9
+        power: int = 1       # 10 th power (digits in decimal number)
 
         while True:
             if (last_digit + 1) <= n <= (last_digit + (power + 1) * (10**(power + 1) - 10**power)):    # digits in decimal number

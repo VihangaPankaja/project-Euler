@@ -6,14 +6,10 @@
 # 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
 # How many different ways can £2 be made using any number of coins?
 
-tar_val = 200
-coins = (1, 2, 5, 10, 20, 50, 100, 200)
-
-posibilities = 0
-def pos_count(cur_index=0, cur_tot=0,chs = []):
+def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []):
     global coins, tar_val, posibilities
 
-    coin_count = 0
+    coin_count: int = 0
     while True:
         cur_val = coin_count * coins[cur_index]  #value from currunt type of coin
         
@@ -22,7 +18,8 @@ def pos_count(cur_index=0, cur_tot=0,chs = []):
         
         elif cur_val + cur_tot == tar_val:  #check if the currunt combination can rech the target
             posibilities +=1
-            break
+            
+            return posibilities
         
         else:
             if cur_index != 7:  #check if not the last item
@@ -31,6 +28,10 @@ def pos_count(cur_index=0, cur_tot=0,chs = []):
         
         coin_count +=1 #coins selected from currn type of coins increase by 1
 
-pos_count()
-print(posibilities)
 
+if __name__ == '__main__':
+    tar_val: int = 200
+    coins: tuple[int] = (1, 2, 5, 10, 20, 50, 100, 200)
+    posibilities: int = 0
+    
+    print(pos_count())

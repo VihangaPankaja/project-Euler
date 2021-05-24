@@ -6,57 +6,42 @@
 
 # HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
-numbers = list(range(1,10))   # digits using
-nums_found = []
-
-
-tem_numbers = numbers.copy()
-for i in tem_numbers:                               ## strat of number selector from digits ##
-    tem_num1 = tem_numbers.copy()
-    tem_num1.remove(i)
-    for j in tem_num1:
-        tem_num2 = tem_num1.copy()
-        tem_num2.remove(j)
-        for k in tem_num2:
-            tem_num3 = tem_num2.copy()
-            tem_num3.remove(k)
-            for l in tem_num3:
-                tem_num4 = tem_num3.copy()
-                tem_num4.remove(l)
-                for m in tem_num4:
-                    tem_num5 = tem_num4.copy()
-                    tem_num5.remove(m)              ## end of number selector form digits ##
                     
-                    ## 1 digit by 4 digit posibilities ##
-                    pro = i * int(str(j) + str(k) + str(l) + str(m))  # multiply
-                    
-                    if 1000 < pro < 9999 and (len(list(str(pro))) == len(set(str(pro)))):    # check for digits in multipy is in list
-                        try:
-                            tem_num6 = tem_num5.copy()
-                            for n in map(int, list(str(pro))):
-                                tem_num6.remove(n)
-                        
-                        except:
-                            pass
-                        
-                        else:
-                            nums_found.append(pro)         # posible numerbs
-                    ###########################
-                    
-                    ## 2 digit by 3 digit posibilities ##
-                    pro = int(str(i) + str(j)) * int(str(k) + str(l) + str(m))  # multiply
+from itertools import permutations
 
-                    if 1000 < pro < 9999 and (len(list(str(pro))) == len(set(str(pro)))):    # check for digits in multipy is in list
-                        try:
-                            tem_num6 = tem_num5.copy()
-                            for n in map(int, list(str(pro))):
-                                tem_num6.remove(n)
-                        
-                        except:
-                            pass
-                        
-                        else:
-                            nums_found.append(pro)       #posible numbers
-                    ###########################
 
-print(sum(set(nums_found)))
+def pandigital_nums()-> set[int]:
+    nums_found: set[int] = set()   
+    
+    def is_pandigital(product: int, digits: tuple[int])-> bool:
+        """ check if pandigital """
+        
+        for i in map(int, str(product)):
+            if i in digits or i == 0:    # also no 0 in digits
+                return False
+        return True
+    
+    
+    for digits in permutations([*range(1, 10)], 5):      # factors only using digits once
+        
+        ## 1 digit by 4 digit posibilities ##
+        product: int = digits[0] * int(''.join(map(str, digits[1:])))  # product in $ * $$$$
+        
+        ## check if contains 4 digits # check product has different digits ## chech product and identity is pandigital ##
+        if 1000 <= product <= 9999   and   len(set(str(product))) == 4   and   is_pandigital(product, digits):      
+            nums_found.add(product)
+        
+        
+        ## 2 digit by 3 digit posibilities ##
+        product: int= int(''.join(map(str, digits[:2]))) * int(''.join(map(str, digits[2:])))  # product in $$ * $$$
+        
+        ## check if contains 4 digits # check product has different digits ## chech product and identity is pandigital ##
+        if 1000 <= product <= 9999   and   len(set(str(product))) == 4   and   is_pandigital(product, digits):
+            nums_found.add(product)
+            
+            
+    return nums_found
+
+
+if __name__ == '__main__':
+    print(sum(pandigital_nums()))

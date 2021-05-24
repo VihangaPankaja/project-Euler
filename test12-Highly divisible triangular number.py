@@ -18,16 +18,17 @@
 
 import my_math
 
-divisors = 500
-triangle = lambda n: int(n * (n + 1) / 2)           # get triangle number from the term number
-prime_list = my_math.prime_list_for(divisors)       # generate prime list
+
+divisors: int = 500
+triangle: __import__('typing').Callable[[int], int] = lambda n: int(n * (n + 1) / 2)           # get triangle number from the term number
+prime_list: list[int] = my_math.prime_list_for(divisors)       # generate prime list
 
 
 ## returns all the prime factors for given number ##
-def factors_list(n):
+def factors_list(n: int)-> list[int]:
     global prime_list
     
-    lst = []
+    lst: list[int] = []
     
     for i in prime_list:
         if i > n:             # if number larger than currunly checking prime stop looping
@@ -44,19 +45,27 @@ def factors_list(n):
     return lst                  # return prime factor list maybe with same numbers included
 ###########################################
 
-n = 1
-while True:
-    fac_lst = factors_list(triangle(n))     # get prime factor list
-    combinations = 1
-    
-    ## tottal divicors are equal to multipy of power of same primes that raised to power plus one (x^a * y^b * .... >>>> (a+1)(b+1)*......)
-    for i in list(set(fac_lst)):
-        combinations *= (fac_lst.count(i) + 1)
-    ##################
 
-    if combinations >= divisors:   # if required divicors reached
-        break
+def above_divisors(divisors: int)-> tuple[int]:
+    """ return triangle number that has divisors over given number with divisors found as tupple """
     
-    n += 1
+    n: int = 1
+    while True:
+        fac_lst: list[int] = factors_list(triangle(n))     # get prime factor list
+        combinations = 1
 
-print(combinations,triangle(n))
+        ## tottal divicors are equal to multipy of power of same primes that raised to power plus one (x^a * y^b * .... >>>> (a+1)(b+1)*......)
+        for i in list(set(fac_lst)):
+            combinations *= (fac_lst.count(i) + 1)
+        ##################
+
+        if combinations >= divisors:   # if required divicors reached
+            break
+
+        n += 1
+
+    return (combinations, triangle(n))
+
+
+if __name__ == '__main__':
+    print(above_divisors(divisors))

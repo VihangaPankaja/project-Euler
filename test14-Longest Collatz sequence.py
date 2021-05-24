@@ -12,11 +12,8 @@
 #
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
-max_number = 1_000_000
 
-def T_n(n):
-    global term_lst
-
+def T_n(n: int, term_lst: list[int]):
     if n == 2:
         term_lst.append(1)
 
@@ -25,24 +22,29 @@ def T_n(n):
 
     elif n % 2 == 0:                    # if n even
         term_lst.append(int(n /2))
-        T_n(int(n / 2))
+        T_n(int(n / 2), term_lst)
 
     else:                              # if n odd
         term_lst.append(3 * n + 1)
-        T_n(3 * n + 1)
+        T_n(3 * n + 1, term_lst)
 
     return term_lst
 
-max_start = 0
-max_terms = 0
 
-for i in range(1, max_number):
-    term_lst = [i]                      # new term list with currunt number for function
-    seq_lenth = len(T_n(i))             # lenth for that number
+def lonst_chain(max_number: int)-> int:
+    max_start: int = 0
+    max_terms: int = 0
 
-    if seq_lenth > max_terms:           # lenth higher than currunt max
-        max_terms = seq_lenth
-        max_start = i
+    for i in range(1, max_number):
+        term_lst: list[int] = [i]                      # new term list with currunt number for function
+        seq_lenth = len(T_n(i, term_lst))             # lenth for that number
+
+        if seq_lenth > max_terms:           # lenth higher than currunt max
+            max_terms = seq_lenth
+            max_start = i
+    return max_start, max_terms
 
 
-print(max_start,max_terms)
+
+if __name__ == '__main__':
+    print(*lonst_chain(1_000_000))

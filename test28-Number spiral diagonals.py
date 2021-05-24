@@ -10,28 +10,27 @@
 #
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
-grid = 1001  # size of grid in one side
+
+def f_lef_up(n: int)-> int: return (2 * n + 1) ** 2 - (2 * n)  # values for left up direction from middle
 
 
-def f_lef_up(n):
-    return (2 * n + 1) ** 2 - (2 * n)  # values for left up direction from middle
+def f_lef_down(n: int)-> int: return (2 * n + 1) ** 2 - (4 * n)  # values for left down direction from middle
 
 
-def f_lef_down(n):
-    return (2 * n + 1) ** 2 - (4 * n)  # values for left down direction from middle
+def f_right_up(n: int)-> int: return (2 * n + 1) ** 2  # values for right up direction from middle
 
 
-def f_right_up(n):
-    return (2 * n + 1) ** 2  # values for right up direction from middle
+def f_right_down(n: int)-> int: return (2 * n + 1) ** 2 - (6 * n)  # values for right down direction from middle
 
 
-def f_right_down(n):
-    return (2 * n + 1) ** 2 - (6 * n)  # values for right down direction from middle
-
-
-## sum of diagonal numers ##
-print(sum([1, sum(f_lef_up(n) for n in range(1, int(grid / 2) + 1)),
-           sum(f_lef_down(n) for n in range(1, int(grid / 2) + 1)),
-           sum(f_right_up(n) for n in range(1, int(grid / 2) + 1)),
-           sum(f_right_down(n) for n in range(1, int(grid / 2) + 1))]))
-#############################
+def sum_of_diagonal_numbers(grid: int)-> int:
+    return sum([1, 
+                sum(f_lef_up(n) for n in range(1, int(grid / 2) + 1)),
+                sum(f_lef_down(n) for n in range(1, int(grid / 2) + 1)),
+                sum(f_right_up(n) for n in range(1, int(grid / 2) + 1)),
+                sum(f_right_down(n) for n in range(1, int(grid / 2) + 1))
+            ])
+    
+    
+if __name__ == '__main__':
+    print(sum_of_diagonal_numbers(1_001))

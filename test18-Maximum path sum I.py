@@ -46,21 +46,12 @@ numbers = '''  75
   63 66 04 68 89 53 67 30 73 16 69 87 40 31
  04 62 98 27 23 09 70 98 73 93 38 53 60 04 23'''
 
-# get numbers as a list
-num_lst = numbers.split(' ')
-for i in range(num_lst.count('')):
-    num_lst.remove('')
-#############
-
-for i in range(my_math.reverse_triangle(len(num_lst)) - 1):                                 # itterate for lines - 1 times
-    num_lst[my_math.triangle(i + 1) - 1] = num_lst[my_math.triangle(i + 1) - 1][:-1]        # remove line break(\n) from last vale for every line
-
-total_lines = my_math.reverse_triangle(len(num_lst))
-sum_list = []
 
 
-def value_for_cordinate(line, position):                                # get value for given coordinates at grid
+def value_for_cordinate(line, position):
+    """ get value for given coordinates at grid """
     global num_lst
+    
     return int(num_lst[my_math.triangle(line - 1) + (position - 1)])
 
 
@@ -80,5 +71,20 @@ def maxmum_sum(cur_line=1, currunt_position=1, currunt_sum=0):
         maxmum_sum(cur_line + 1, currunt_position + 1, currunt_sum + value_for_cordinate(cur_line, currunt_position))
 
 
-maxmum_sum()
-print(max(sum_list))
+
+if __name__ == '__main__':
+    # get numbers as a list
+    num_lst: str = numbers.split(' ')
+    for i in range(num_lst.count('')):
+        num_lst.remove('')
+    #############
+
+    for i in range(my_math.reverse_triangle(len(num_lst)) - 1):                                 # itterate for lines - 1 times
+        num_lst[my_math.triangle(i + 1) - 1] = num_lst[my_math.triangle(i + 1) - 1][:-1]        # remove line break(\n) from last vale for every line
+
+    total_lines: int = my_math.reverse_triangle(len(num_lst))
+    sum_list: list[int] = []
+    
+    maxmum_sum()
+    
+    print(max(sum_list))

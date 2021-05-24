@@ -6,6 +6,10 @@
 # Find the sum of the digits in the number 100!
 
 from math import factorial
-fac_num = int(input('Eneter the number to find factorial sum: '))
 
-print(sum(int(i) for i in str(factorial(fac_num))))
+def factorial_sum(num: int)-> int:
+    return sum(int(i) for i in str(factorial(num)))
+
+
+if __name__ == '__main__':
+    print(factorial_sum(100))

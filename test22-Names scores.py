@@ -7,17 +7,20 @@
 
 # What is the total of all the name scores in the file?
 
-file = open('files\p022_names.txt', 'r').read().split('"')
-file = file[1:-1]    # remove "" from list
 
-for i in range(file.count(',')):  # remove , from list
-    file.remove(',')
+def sum_score_for_names()-> list[int]:
+    with open('files\p022_names.txt', 'r', encoding='utf-8') as file:
+        file = [x for x in file.read().split('"') if x not in ['"', ',']]  # get names from file
+        file.sort()    # sort alphabaticaly
 
-file.sort()    # sort alphabaticaly
 
-values = []
-for i in file:
-    charact = list(i)
-    values.append(sum((ord(i) - 64) for i in charact))   # get value for each charactor and add them to list
+        values: list[int] = []
+        for i in file:
+            charact: str = list(i)
+            values.append(sum((ord(i) - 64) for i in charact))   # get value for each charactor and add them to list
 
-print(sum(((i + 1) * (values[i])) for i in range(len(values))))  # calculate scores for names and add them
+    return sum(((i + 1) * (values[i])) for i in range(len(values)))  # calculate scores for names and add them
+
+
+if __name__ == '__main__':
+    print(sum_score_for_names())

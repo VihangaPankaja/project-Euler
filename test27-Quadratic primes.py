@@ -16,48 +16,60 @@
 
 
 
-######less optimised code. run time about an hour############
+###### less optimised code. run time about an hour 😢 ############
 
 from my_math import prime_list_till
 
-a = range(-999, 1000)  # a value range
-b = range(-1000, 1001) # b value range
-dictionary = {0: 0}  # key = prime numbers count , values = a,b values used
 
-
-## count primes possible for given a,b ##
 def q_formula_prime_count(a, b):
-    n = 0
-    prime_coun = 0
+    """ count primes possible for given a,b """ 
+
+    n: int = 0
+    prime_coun: int = 0
+
     while True:
         if isPrime((n ** 2) + (a * n) + b):
             prime_coun += 1
+            
         else:
             break
+        
         n += 1
+        
+        
     return prime_coun
-##########################################
 
 
-primes = prime_list_till(1000000)  # get prime list till 1 000 000
+def isPrime(n: int)-> bool:
+    """ check if prime """
 
-
-## check if prime ##
-def isPrime(n):
     if n in primes:
         return True
+
     else:
         return False
-####################
 
 
-## get primes possible for all a,b values ##
-for i in a:
-    for j in b:
-        prime_coun = q_formula_prime_count(i, j)
-        dictionary[prime_coun] = (i, j)
-#############################################
+def main()-> tuple[int]:
+    global primes
+
+    a: range = range(-999, 1000)  # a value range
+    b: range = range(-1000, 1001) # b value range
+    dictionary: dict = {0: 0}  # key = prime numbers count , values = a,b values used
+    primes: list[int] = prime_list_till(1000000)  # get prime list till 1 000 000
+
+    
+    """ get primes possible for all a,b values """ 
+
+    for i in a:
+        for j in b:
+            prime_coun: int = q_formula_prime_count(i, j)
+            dictionary[prime_coun] = (i, j)
+
+    return dictionary[max(dictionary.keys())]  # get a,b for maximus primes found
 
 
-a, b = dictionary[max(dictionary.keys())]  # get a,b for maximus primes found
-print(a * b)
+
+if __name__ == '__main__':
+    a, b = main()
+    print(a * b)

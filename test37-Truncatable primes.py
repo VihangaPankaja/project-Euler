@@ -20,8 +20,8 @@ def is_prime(n: int)-> int:
 
 
 def main():
-    trunctable = []
-    lst_digits = [2, 3, 5, 7]
+    trunctable: list[int] = []
+    lst_digits: list[int] = [2, 3, 5, 7]
 
     n = 10
     while True:

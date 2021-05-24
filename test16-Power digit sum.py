@@ -2,6 +2,9 @@
 
 # What is the sum of the digits of the number 2^1000?
 
-power = int(input("Enter the power: "))
+def pow(num: int)-> int:
+    return sum(map(int, str(2 ** num)))
 
-print(sum(map(int, str(2 ** power))))
+
+if __name__ == "__main__":
+    print(pow(1_000))

@@ -4,20 +4,24 @@
 
 # Note: As 1! = 1 and 2! = 2 are not sums they are not included.
 
-from  math import factorial, log10
-
-fatorials_for_digts = {0:factorial(0), 1:factorial(1), 2: factorial(2), 3: factorial(3), 4: factorial(4), 
-                                5: factorial(5), 6: factorial(6), 7: factorial(7), 8: factorial(8), 9: factorial(9)}   # dictionary of factorils for respective digits for reduse proccesing needed
+from  math import factorial
 
 
-numbers = []
-for n in range(10, 7 * factorial(9)):    # all possible number range at 7 digits it reaches maximum like this
-    digits = list(map(int, str(n)))      # n as a digit list
-    
-    if fatorials_for_digts[max(digits)] > n:    # check factorial of maximum digit exceeds n
-        continue
+def factorial_digits()-> list[int]:
+    fatorials_for_digts: dict[int: int] = {x:factorial(x) for x in range(10)}   # dictionary of factorils for respective digits for reduse proccesing needed
+    numbers: list[int] = []
 
-    if n == sum(map(lambda x: fatorials_for_digts[x], digits)):     # what was asked
-        numbers.append(n)
+    for n in range(10, 7 * factorial(9)):    # all possible number range at 7 digits it reaches maximum like this
+        digits: list[int] = list(map(int, str(n)))      # n as a digit list
 
-print(sum(numbers))
+        if fatorials_for_digts[max(digits)] > n:    # check factorial of maximum digit exceeds n
+            continue
+
+        if n == sum(map(lambda x: fatorials_for_digts[x], digits)):     # what was asked
+            numbers.append(n)
+            
+    return numbers
+
+
+if __name__ == "__main__":
+    print(sum(factorial_digits()))

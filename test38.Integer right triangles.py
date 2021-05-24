@@ -13,7 +13,7 @@
 def is_pendigital(n: int)-> bool:
     '''check if a number use all 1 to 9 digits once'''
 
-    digits = list(range(1, 10))
+    digits: list[int] = list(range(1, 10))
     try:
         for i in str(n):           # check for pandigital
             digits.remove(int(i))
@@ -28,10 +28,10 @@ def is_pendigital(n: int)-> bool:
     return False
 
 
-def concatenate(n):
+def concatenate(n: int)-> __import__('typing').Union[bool, int]:
     '''generate concatenated product of n and (1, 2, 3, ....) till 9 digits'''
 
-    num_gented = ''
+    num_gented: str = ''
     for i in range(1, 10):
         num_gented += str(n * i)     # concatenate products
 
@@ -43,7 +43,7 @@ def concatenate(n):
 
             
 if __name__ == '__main__':
-    numerbs = []
+    numerbs: list[int] = []
     for i in range(10_000):                              # last number can get 9 digits like this is 9999 (4 and 5 digits)
         if is_pendigital(concatenate(i)):
             numerbs.append((i, concatenate(i)))

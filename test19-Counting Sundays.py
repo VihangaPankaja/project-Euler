@@ -10,24 +10,8 @@
 # A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
 # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
-start_day = (1900, 1, 1, 'Monday')
 
-## create calender list for every month ##
-calender_curr = [0] * (7 * 6)
-calender_prev = []
-calender_lst = []   # calender list
-#########################################
-
-## first month ##
-for day in range(31):
-    calender_curr[day] = 1
-
-calender_prev = calender_curr           # add to last month for use of calculating next month
-calender_lst.append(calender_prev.copy())       # add to calender list
-####
-
-
-def days_for_month(year, month):
+def days_for_month(year: int, month: int)-> int:
     '''return how many days in given month and year'''
 
     if month == 4 or month == 6 or month == 9 or month == 11:
@@ -43,7 +27,7 @@ def days_for_month(year, month):
         return 31
 
 
-def calender(year, month):
+def calender(year: int, month: int)-> None:
     '''create a calender and add to calender list by using previous calender'''
 
     global calender_curr, calender_lst, calender_prev
@@ -60,36 +44,72 @@ def calender(year, month):
     calender_prev = calender_curr
     calender_lst.append(calender_prev.copy())  # add to calender list
 
-
-## generate calender list for given range
-for year in range(1900, 2001):
-    for month in range(1, 13):
-        if year != 1900 or month != 1:
-            calender(year, month)
-######
+    return None
 
 
-count = 0
-for i in range(12, len(calender_lst)):     # star from year ahead in calender list
-    cur = calender_lst[i]                   # get each month
+def firs_month()-> None:
+    global calender_curr, calender_prev, calender_lst
+    
+    for day in range(31):
+        calender_curr[day] = 1
 
-    if cur.index(1) == 6:           # check for fist day as Sunday
-        count += 1
+    calender_prev = calender_curr           # add to last month for use of calculating next month
+    calender_lst.append(calender_prev.copy())       # add to calender 
+    
+    return None
 
-print(count)
 
-#### or use simply #####
 
-# import calendar
+def calender_generator(end_year: int)-> None:
+    """ generate calender list for given range from 1900"""
+    
+    for year in range(1900, end_year + 1):
+        for month in range(1, 13):
+            if year != 1900 or month != 1:
+                calender(year, month)
+    
+    return None
 
-# count = 0
-# for year in range(1901,2001):
-#     for month in range(1,13):
-#         cal = calendar.monthcalendar(year,month)       # gives 2D array of days in month start from monday. if not in month it's 0
-#         cal = cal[0]                                  # get first week
 
-#         if cal.index(1) == 6:                         # first day is Sunday
-#             count += 1
+def sundat_1st_counter()-> int:
+    count = 0
+    for i in range(12, len(calender_lst)):     # star from year ahead in calender list
+        cur = calender_lst[i]                   # get each month
 
-# print(count)
-########################
+        if cur.index(1) == 6:           # check for fist day as Sunday
+            count += 1
+
+    return count
+
+
+def easy_way(end_year: int)-> int:
+    import calendar
+
+    count = 0
+    for year in range(1901, end_year + 1):
+        for month in range(1, 13):
+            cal = calendar.monthcalendar(year, month)       # gives 2D array of days in month start from monday. if not in month it's 0
+            cal = cal[0]                                  # get first week
+
+            if cal.index(1) == 6:                         # first day is Sunday
+                count += 1
+
+    return count
+
+    
+if __name__ == '__main__':
+    start_day: tuple[int, str] = (1900, 1, 1, 'Monday')
+
+    ## create calender list for every month ##
+    calender_curr: list[int] = [0] * (7 * 6)
+    calender_prev: list[int] = []
+    calender_lst: list[list[int]] = []          # calender list
+    #########################################
+    
+    firs_month()
+    calender_generator(2000)
+
+    print(sundat_1st_counter())
+    
+    #######
+    # print(easy_way(2000))

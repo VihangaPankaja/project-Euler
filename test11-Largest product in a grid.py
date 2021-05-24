@@ -27,11 +27,12 @@ num_list = (''.join('''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 
 
 import numpy as np
 
-grid = np.array(num_list, dtype='i').reshape(20, 20)    # format num_list to int and create 20 by 20 matrix
-cur_max = 0
+grid: np.ndarray = np.array(num_list, dtype='i').reshape(20, 20)    # format num_list to int and create 20 by 20 matrix
 
 
-def max_in_block(array_block):     # returns max possible product from 4 numbers in 4 by 4 array
+def max_in_block(array_block: np.ndarray)-> int:
+    """ returns max possible product from 4 numbers in 4 by 4 array """
+    
     diag1 = array_block[0, 0] * array_block[1, 1] * array_block[2, 2] * array_block[3, 3]     # diagonal product
     diag2 = array_block[0, 3] * array_block[1, 2] * array_block[2, 1] * array_block[3, 0]     # diagonal product
 
@@ -50,10 +51,20 @@ def max_in_block(array_block):     # returns max possible product from 4 numbers
     return max(diag1, diag2, max_column, max_row)   # max from 4 numbers
 
 
-for i in range(16):
-    for j in range(16):     # break 20 by 20 block to 4 by 4 blocks
-        maximum = max_in_block(np.array(grid[i:i + 4, j:j + 4]))   # max from one 4 by 4 block
-        if maximum > cur_max:
-            cur_max = maximum
+def greatest_product(grid: np.ndarray)-> int:
+    cur_max: int = 0
+    x, y = grid.shape      # len in x,y axis
 
-print(cur_max)
+    for i in range(x-4):
+        for j in range(y-4):     # break 20 by 20 block to 4 by 4 blocks
+            maximum = max_in_block(np.array(grid[i:(i + 4) , j:(j + 4)]))   # max from one 4 by 4 block
+            if maximum > cur_max:
+                cur_max = maximum
+                
+                
+    return cur_max
+
+
+
+if __name__ == '__main__':
+    print(greatest_product(grid))

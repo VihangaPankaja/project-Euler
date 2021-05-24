@@ -1,18 +1,12 @@
 # A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the
 # digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order.
 # The lexicographic permutations of 0, 1 and 2 are:
-#
+
 # 012   021   102   120   201   210
-#
+
 # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # digits used for create numbers
-stop = False
-number = 0
-how_number = int(input('Enter the lexicographic permutations number: '))   # which number to find ascending order
 
-
-count = 0
 def lex_permu(sel_nums = []):
     global count, digits, stop, number
     
@@ -39,7 +33,14 @@ def lex_permu(sel_nums = []):
                 break
             
             lex_permu(sel_nums + [i])  # choose next set of numbers
-lex_permu()
 
 
-print(number)
+if __name__ == '__main__':
+    digits: list[int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # digits used for create numbers
+    stop: bool = False
+    how_number: int = 1_000_000   # which number to find ascending order
+    count , number = 0, 0
+    
+    lex_permu()
+
+    print(number)

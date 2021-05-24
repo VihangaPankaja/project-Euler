@@ -6,10 +6,16 @@
 # (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 
 from my_math import num_to_word
-number = 1000
-word_count = 0
 
-for i in range(1,number + 1):
-    word_count += len(num_to_word(i))
 
-print(word_count)
+def wrd_count(number: int)-> int:
+    word_count: int = 0
+
+    for i in range(1,number + 1):
+        word_count += len(num_to_word(i))
+        
+    return word_count
+
+
+if __name__ == '__main__':
+    print(wrd_count(1_000))

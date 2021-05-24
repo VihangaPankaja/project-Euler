@@ -4,7 +4,7 @@
 
 
 def max_solutions(p_max: int)-> int:
-    solutions = {x:[] for x in range(1, p_max+1)}  # p as key and solutions list
+    solutions: dict[int : list[set[int]]] = {x:[] for x in range(1, p_max+1)}  # p as key and solutions list
 
 
     # a,b,c    a**2+b**2 = c**2    
@@ -15,22 +15,22 @@ def max_solutions(p_max: int)-> int:
     for n in range(1, (p_max+1)):
         for m in range(n+1, (p_max+1)):
 
-            a0 = m**2 - n**2
-            b0 = 2 * m * n
-            c0 = m**2 + n**2
-            k = 1
+            a0: int = m**2 - n**2
+            b0: int = 2 * m * n
+            c0: int = m**2 + n**2
+            k: int = 1
             
             
             while True:
 
-                a = k * a0
-                b = k * b0
-                c = k * c0
-                p = a + b + c
+                a: int = k * a0
+                b: int = k * b0
+                c: int = k * c0
+                p: int = a + b + c
                 
                 
                 if p <= p_max:
-                    tripple = {a, b, c}     # sets not permutate
+                    tripple: set[int] = {a, b, c}     # sets not permutate
                     
                     if tripple not in solutions[p]:
                         solutions[p].append(tripple)
@@ -39,7 +39,7 @@ def max_solutions(p_max: int)-> int:
                     break
                 k += 1
 
-    return (max(solutions, key=lambda x: len(solutions.get(x))))    # return what key have maximum solutions
+    return max(solutions, key=lambda x: len(solutions.get(x)))    # return what key have maximum solutions
 
 
 

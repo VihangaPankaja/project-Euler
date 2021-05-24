@@ -13,13 +13,12 @@
 
 # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 
-max_d = 1000  # max d checking for 1/d
-cyc_lenths = [] # list of number of recurring digits for given number
 
-
-## returns number of rucurring digits for 1/d for given d ##
-def cycle_lenth(d):
-    remainig = [1]   # because 1/
+def cycle_lenth(d: int)-> int:
+    """ returns number of rucurring digits for 1/d for given d """
+    
+    remainig: list[int] = [1]   # because 1/
+    
     while True:
         remainig.append((remainig[-1] * 10) % d)    ## remaing from dividing
 
@@ -28,11 +27,18 @@ def cycle_lenth(d):
 
         elif remainig[-1] in remainig[:-1]:        ## check for recurring cycle completed
             return len(remainig) - remainig.index(remainig[-1]) - 1
-#####################################
 
 
-for d in range(1, max_d):
-    cyc_lenths.append(cycle_lenth(d))
+def longest_repeating_decimal(max_d: int)-> int:
+    """ returns longest repeating decimal for 1/2 to 1/d when d is given """
+    
+    cyc_lenths: list[int] = [] # list of number of recurring digits for given number
+
+    for d in range(1, max_d):
+        cyc_lenths.append(cycle_lenth(d))
+
+    return cyc_lenths.index(max(cyc_lenths)) + 1        # find dthat has max recurring digit cycle
 
 
-print(cyc_lenths.index(max(cyc_lenths)) + 1)  # find dthat has max recurring digit cycle
+if __name__ == '__main__':
+    print(longest_repeating_decimal(1_000))

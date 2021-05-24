@@ -1,7 +1,7 @@
 def prime_list_till(prime):
     '''returns list of primes till a given number
     param:prime = last number to check as prime'''
-    marked = [0] * prime
+    marked = [0] * (prime + 1)
     value = 3
 
     prime_lst = []
@@ -41,7 +41,7 @@ def n_C_r(n, r):
 def num_to_word(n):
     '''return word for given number without spaces'''
     if n > 1000 or n < 0:
-        print('out of range')
+        print('not implemented')
         return ''
     elif n == 0:
         return 'zero'

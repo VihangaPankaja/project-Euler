@@ -12,25 +12,37 @@
 
 from my_math import divisors
 
-max_non_abn = 28123
 
-## check for abundant numbers in range
-abn_lst = []
-for i in range(max_non_abn):
-    if sum(divisors(i + 1)) > (i + 1):
-        abn_lst.append((i + 1))
-####################################
+def abn_list():
+    """ check for abundant numbers in range """
+    global max_non_abn
 
-## get sum of abundant numbers under range
-sum_of_adn = []
-for i in range(len(abn_lst)):
-    for j in range(i, len(abn_lst)):
-        if abn_lst[i] + abn_lst[j] > max_non_abn:
-            break
+    abn_lst: list[int] = []
+    for i in range(max_non_abn):
+        if sum(divisors(i + 1)) > (i + 1):
+            abn_lst.append((i + 1))
 
-        else:
-            sum_of_adn.append(abn_lst[i] + abn_lst[j])
-####################################
+    return abn_lst
 
 
-print(sum(i for i in range(1, max_non_abn + 1) if i not in sum_of_adn))   # sum of numbers not in list
+def sum_of_abn_lst(abn_lst: list[int])-> list[int]:
+    """ get sum of abundant numbers under range """
+    global max_non_abn
+
+    sum_of_adn: list[int] = []
+    
+    for i in range(len(abn_lst)):
+        for j in range(i, len(abn_lst)):
+            if abn_lst[i] + abn_lst[j] > max_non_abn:
+                break
+
+            else:
+                sum_of_adn.append(abn_lst[i] + abn_lst[j])
+                
+    return sum_of_adn
+
+
+if __name__ == '__main__':
+    max_non_abn: int = 28123
+    
+    print(sum(i for i in range(1, max_non_abn + 1) if i not in sum_of_abn_lst(abn_list())))   # sum of numbers not in list
