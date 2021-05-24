@@ -30,6 +30,26 @@ def prime_list_for(prime_for):
             return lst[:prime_for]
         else:
             n += 100000
+            
+
+def is_prime(n: int) -> bool:
+    """Primality test using 6k+-1 optimization.
+    https://en.wikipedia.org/wiki/Primality_test#Python_code"""
+    
+    if n <= 3:          # only defines for above 3
+        return n > 1
+    
+    if n % 2 == 0 or n % 3 == 0:    # multiples of 2 and 3
+        return False
+    
+    i: int = 5
+    while i ** 2 <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        
+        i += 6
+        
+    return True
 
 
 def n_C_r(n, r):
@@ -40,6 +60,7 @@ def n_C_r(n, r):
 
 def num_to_word(n):
     '''return word for given number without spaces'''
+    
     if n > 1000 or n < 0:
         print('not implemented')
         return ''
@@ -141,3 +162,6 @@ def divisors(n):
         if n % i == 0:
             divisors.append(i)
     return divisors
+
+if __name__ == '__main__':
+    pass
