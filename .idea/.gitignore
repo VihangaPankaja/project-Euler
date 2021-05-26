@@ -5,3 +5,6 @@
 ../.vscode/
 ../eular/
 !../eular/Scripts
+/.vscode/
+/eular/
+!/eular/Scripts
