@@ -60,8 +60,10 @@ def n_C_r(n: int, r: int)-> int:
     return int(factorial(n) / (factorial(n - r) * factorial(r)))
 
 
-def num_to_word(n: __import__('typing').Union(int, float), spaces:bool=True)-> str:
-    '''return word for given number'''
+from typing import Union
+def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
+    '''return word for given number
+    for long floating point numbers use string format(after about 17 digits)'''
     
     wrd = {
         0:'zero',
@@ -92,33 +94,122 @@ def num_to_word(n: __import__('typing').Union(int, float), spaces:bool=True)-> s
         70:'seventy',
         80:'eighty',
         90:'ninety',
-
+        'e+3':'thousand',
+        'e+6':'million',
+        'e+9':'billion',
+        'e+12':'trillion',
+        'e+15':'quardillion',
+        'e+18':'quintillion',
+        'e+21':'sextillion',
+        'e+24':'septillion',
+        'e+27':'octillion',
+        'e+30':'nonillion',
+        'e+33':'decillion',
+        'e+63':'vigintillion',
+        'e+93':'trigintillion',
+        'e+123':'quadragintillion',
+        'e+153':'quinquagintillion',
+        'e+183':'sexagintillion',
+        'e+213':'septuagintillion',
+        'e+243':'octogintillion',
+        'e+273':'nonagintillion',
+        'e+303':'centillion',
+        'e+(x+3)':'un',
+        'e+(x+6)':'duo',
+        'e+(x+9)':'tre',
+        'e+(x+12)':'quattour',
+        'e+(x+15)':'quin',
+        'e+(x+18)':'sex',
+        'e+(x+21)':'septen',
+        'e+(x+24)':'octo',
+        'e+(x+27)':'novem',
     }
+
+    def dec_to_wrd(dec: str, spaces:bool=True)-> str:
+        return (' ' if spaces else '').join([wrd[int(digit)] for digit in dec])
+            
+    def digit_grp_to_str(key: str, val: str, spaces:bool=True)-> str:
+        if val == '0':
+            return wrd[0]
+        
+        elif val == '000':
+            return ''
+        
+        else:
+            def hundrads(digit: int, spaces:bool=True)-> str: return (' ' if spaces else '').join([wrd[digit], 'hundrad'])
+            def tenths(digit: int)-> str: return wrd[digit*10]
+            def ones_and_till_nineteen(digit: int)-> str: return wrd[digit]
+            
+            val = val.rjust(3, '0')
+            suffix = suffix_for_digit_grp(key)
+            gap = ' ' if spaces else ''
+            
+            if val[0]!='0' and val[1:]=='00':
+                return hundrads(int(val[0]), spaces) + (' 'if suffix!='' and spaces else '') + suffix
+            
+            elif val[0]!='0':
+                if val[1] in ['0', '1']:
+                    return hundrads(int(val[0]), spaces) + gap + 'and' + gap + ones_and_till_nineteen(int(val[1:])) + (' 'if suffix!='' and spaces else '') + suffix
+                
+                else:
+                    return hundrads(int(val[0]), spaces) + gap + 'and' + gap + tenths(int(val[1])) + ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else '') + (' 'if suffix!='' and spaces else '') + suffix
+                
+            else:
+                if val[1] in ['0', '1']:
+                    return ones_and_till_nineteen(int(val[1:])) + (' 'if suffix!='' and spaces else '') + suffix
+                
+                else:
+                    return tenths(int(val[1])) + ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else '') + (' 'if suffix!='' and spaces else '') + suffix
+            
     
-    if n > 1000 or n < 0:
-        print('not implemented')
-        return ''
-    elif 20 < n < 30:
-        return 'twenty' + num_to_word(n - 20)
-    elif 30 < n < 40:
-        return 'thirty' + num_to_word(n - 30)
-    elif 40 < n < 50:
-        return 'forty' + num_to_word(n - 40)
-    elif 50 < n < 60:
-        return 'fifty' + num_to_word(n - 50)
-    elif 60 < n < 70:
-        return 'sixty' + num_to_word(n - 60)
-    elif 70 < n < 80:
-        return 'seventy' + num_to_word(n - 70)
-    elif 80 < n < 90:
-        return 'eighty' + num_to_word(n - 80)
-    elif 90 < n < 100:
-        return 'ninety' + num_to_word(n - 90)
-    # 100 or n == 200 or n == 300 or n == 400 or n == 500 or n == 600 or n == 700 or n == 800 or n == 900:num_to_word(int(n / 100)) + 'hundred',
-    elif n < 1000:
-        return num_to_word(int(str(n)[0])) + 'hundred' + 'and' + num_to_word(int(str(n)[1:]))
+    def suffix_for_digit_grp(key: str)-> str:
+        pow = int(key[2:])
+        
+        if pow == 0:
+            return ''
+        
+        elif 3 <= pow <= 33 or (pow <= 303 and (pow-33)%30==0):
+            return wrd[key] + ','
+        
+        elif 33 < pow < 303:
+            return wrd[f'e+(x+{(pow-33)%30})'] + wrd[f'e+{((pow-33)//30)*30 + 33}'] + ','
+        
+        elif pow > 303:
+            return f'{100 + int((pow - 303)/3)}-illon,'
+        
+          
+    if type(n) == int:
+        n = str(n)
+        ### group to 3 digit classes ###
+        quo, rem = len(n)//3, len(n)%3
+        
+        digit_grps = {f'e+{quo*3}':n[:-quo*3]} if rem != 0 else {}
+        digit_grps.update({f'e+{(i - 1) * 3}' : n[(-i * 3) : (-i * 3 + 3) if (-i * 3 + 3) != 0 else None] for i in range(quo, 0, -1)})
+        
+        if len(n) < 3:
+            digit_grps = {'e+0':n}
+        ###################################
+        
+        num_name = (' ' if spaces else '').join([digit_grp_to_str(key, val, spaces) for key, val in digit_grps.items()])
+        
+        return num_name[:-1] if num_name[-1] == ',' else num_name
+    
+    elif type(n) == float:
+        whole_part, decimal_part = str(n).split('.')
+
+        return num_to_word(int(whole_part), spaces) + (' ' if spaces else '') + 'point' + (' ' if spaces else '') + dec_to_wrd(decimal_part, spaces)
+    
+    elif type(n) == str:
+        if '.' in n:
+            whole_part, decimal_part = n.split('.')
+            
+            return num_to_word(int(whole_part), spaces) + (' ' if spaces else '') + 'point' + (' ' if spaces else '') + dec_to_wrd(decimal_part, spaces)
+        
+        else:
+            return num_to_word(int(n), spaces)
+            
     else:
-        return 'one' + 'thousand'
+        return 'wrong data type'
 
 
 def triangle(n):

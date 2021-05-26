@@ -12,7 +12,7 @@ def wrd_count(number: int)-> int:
     word_count: int = 0
 
     for i in range(1,number + 1):
-        word_count += len(num_to_word(i))
+        word_count += len(num_to_word(i, spaces=False))
         
     return word_count
 
