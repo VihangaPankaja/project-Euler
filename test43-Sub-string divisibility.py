@@ -30,7 +30,7 @@ def divicible_pandigital(divicible: dict[str, Iterator[str]])-> Generator[int, N
     """
     
     for digits in permutations(map(str, range(10))):
-        num = ''.join(digits)   # digits to number
+        num: str = ''.join(digits)   # digits to number
         
         if all((
                 num[0]!='0', 
