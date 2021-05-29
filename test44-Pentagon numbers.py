@@ -7,3 +7,32 @@
 # Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
 
+def pentagonal(n: int)-> int:
+    return n* (3*n - 1) / 2
+
+
+def D_min_for_pentagonal(n: int)-> int:
+    """ minimum possible D value for a given number """
+    return 3*n - 2
+
+
+def penagonal_till(pen_lst: dict[int, int], num_till: int)-> dict[int, int]:
+    """ increase pentagonal number list till given number includes in range """
+    
+    num: int = pen_lst.keys()[-1]
+    while num <= num_till:
+        pen_lst[pentagonal(len(pen_lst) + 1)] = D_min_for_pentagonal(len(pen_lst) + 1)  # next pentagonal number
+        
+    return pen_lst
+
+
+def main():
+    """ find the pair of pentagonal numbers that sum and difference also penagonal and D is minimised """
+
+    pen_lst: dict[int, int] = {pentagonal(1):D_min_for_pentagonal(1), pentagonal(2):D_min_for_pentagonal(2)}
+    
+    
+
+
+if __name__ == '__main__':
+    print(main())
