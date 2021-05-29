@@ -1,10 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-../__pycache__/
-../.vscode/
-../eular/
+../__pycache__
+../.vscode
+../eular
 !../eular/Scripts
-/.vscode/
-/eular/
+/.vscode
+/eular
 !/eular/Scripts
+
+../*.exe
