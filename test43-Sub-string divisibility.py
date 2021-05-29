@@ -47,7 +47,7 @@ def divicible_pandigital(divicible: dict[str, Iterator[str]])-> Generator[int, N
 
 if __name__ == "__main__":
     #################################################################################################################################################
-    divicible = {
+    divicible: dict[str, list[str]] = {
         ###############    filter only has different digits     ############ fill 0 till 3 digits ## numbers divicible by 2 have max 3 digits ###
         'd2':list(filter(lambda x: all([x.count(i)==1 for i in x]), map( lambda x:str(x).rjust(3,'0') , [ i for i in range(1000) if i%2 == 0 ] ))),
         'd3':list(filter(lambda x: all([x.count(i)==1 for i in x]), map( lambda x:str(x).rjust(3,'0') , [ i for i in range(1000) if i%3 == 0 ] ))),
@@ -57,6 +57,6 @@ if __name__ == "__main__":
         'd13':list(filter(lambda x: all([x.count(i)==1 for i in x]), map( lambda x:str(x).rjust(3,'0') , [ i for i in range(1000) if i%13 == 0 ] ))),
         'd17':list(filter(lambda x: all([x.count(i)==1 for i in x]), map( lambda x:str(x).rjust(3,'0') , [ i for i in range(1000) if i%17 == 0 ] )))
     }
-    #####################################################################################################################################################
+    ##################################################################################################################################################
     
     print(sum(divicible_pandigital(divicible)))
