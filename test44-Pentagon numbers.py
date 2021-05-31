@@ -6,33 +6,53 @@
 
 # Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
-
-def pentagonal(n: int)-> int:
-    return n* (3*n - 1) / 2
+from typing import Generator
 
 
-def D_min_for_pentagonal(n: int)-> int:
-    """ minimum possible D value for a given number """
-    return 3*n - 2
+def pentagonal(n: int=1)-> Generator[int, None, None]:
+    """ 
+    generates pentagonal numbers.
+        Parameters:
+            n (int): (optional) starts with given number
+            
+    ! infine generator
+    """
 
-
-def penagonal_till(pen_lst: dict[int, int], num_till: int)-> dict[int, int]:
-    """ increase pentagonal number list till given number includes in range """
+    while True:
+        yield int(n* (3*n - 1) / 2)
+        n += 1
     
-    num: int = pen_lst.keys()[-1]
-    while num <= num_till:
-        pen_lst[pentagonal(len(pen_lst) + 1)] = D_min_for_pentagonal(len(pen_lst) + 1)  # next pentagonal number
-        
-    return pen_lst
+
+def is_pentagonal(n: int)-> bool:
+    if (1 + (1 + 24*n)**0.5) % 6 == 0:
+        return True
+    
+    return False
 
 
 def main():
     """ find the pair of pentagonal numbers that sum and difference also penagonal and D is minimised """
 
-    pen_lst: dict[int, int] = {pentagonal(1):D_min_for_pentagonal(1), pentagonal(2):D_min_for_pentagonal(2)}
+    D_min: int = None
     
-    
+    for index_k, P_k in enumerate(pentagonal()):    # P_k values
 
+        start: int = int((1 + (72*index_k + 49)**0.5) /6) if D_min == None else int((1 + (24*D_min + 1)**0.5) /6)   # reduce unnecessary computation by strat from higher term
+        for P_j in pentagonal(start):   # P_j values
+            if P_j == P_k:
+                break
+            
+            if is_pentagonal(P_k - P_j) and is_pentagonal(P_k + P_j):   # addtion and substractiona aloso in pentagonal
+                if D_min == None or D_min > P_k - P_j:
+                    D_min = P_k - P_j
+                print(P_k - P_j)            # first D is answer but after find may take long time to reach loop end
+                
+        if D_min != None and D_min <= 3*index_k + 2:    # when p_k - P_(k-1) > D_min , more smallar D is not possible
+            break
+        
+    return D_min
+    
 
 if __name__ == '__main__':
     print(main())
+    
