@@ -9,3 +9,42 @@
 ? Find the next triangle number that is also pentagonal and hexagonal.
 """
 
+from typing import Generator
+
+
+def triangle(n: int=286)-> Generator[int, None, None]:
+    """ 
+    generates triangle numbers
+        Parameters:
+            n (int): (optional) starts with given number
+            
+    ! infine generator
+    """
+    
+    while True:
+        yield int(n * (n + 1) / 2)
+        n += 1
+        
+
+def is_pentagonal(n: int)-> bool:
+    if (1 + (1 + 24*n)**0.5) % 6 == 0:
+        return True
+    
+    return False
+
+
+def is_hexagonal(n: int)-> bool:
+    if (1 + (1 + 8*n)**0.5) % 4 == 0:
+        return True
+    
+    return False
+
+
+def next_3_5_6_num()-> int:
+    for i in triangle():
+        if is_pentagonal(i) and is_hexagonal(i):
+            return i
+
+
+if __name__ == '__main__':
+    print(next_3_5_6_num())
