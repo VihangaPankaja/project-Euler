@@ -1,16 +1,19 @@
-# The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a rather interesting 
-# sub-string divisibility property.
+""" 
+  The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, 
+  but it also has a rather interesting sub-string divisibility property.
+  
+  Let 𝑑₁ be the 1ˢᵗ digit, 𝑑₂ be the 2ⁿᵈ digit, and so on. 
+  In this way, we note the following:
+*       𝑑₂𝑑₃𝑑₄  = 406   is divisible by 2
+*       𝑑₃𝑑₄𝑑₅  = 063   is divisible by 3
+*       𝑑₄𝑑₅𝑑₆  = 635   is divisible by 5
+*       𝑑₅𝑑₆𝑑₇  = 357   is divisible by 7
+*       𝑑₆𝑑₇𝑑₈  = 572   is divisible by 11
+*       𝑑₇𝑑₈𝑑₉  = 728   is divisible by 13
+*       𝑑₇𝑑₉𝑑₁₀ = 289   is divisible by 17
 
-# Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note the following:
-
-# d2d3d4=406 is divisible by 2
-# d3d4d5=063 is divisible by 3
-# d4d5d6=635 is divisible by 5
-# d5d6d7=357 is divisible by 7
-# d6d7d8=572 is divisible by 11
-# d7d8d9=728 is divisible by 13
-# d8d9d10=289 is divisible by 17
-# Find the sum of all 0 to 9 pandigital numbers with this property.
+? Find the sum of all 0 to 9 pandigital numbers with this property.
+"""
 
 from typing import Generator, Iterator
 from itertools import permutations
@@ -19,14 +22,14 @@ from itertools import permutations
 def divicible_pandigital(divicible: dict[str, Iterator[str]])-> Generator[int, None, None]:
     """ 
         generates 0 to 9 digits pandigital numbers that are follows
-            d2d3d4 is divisible by 2
-            d3d4d5 is divisible by 3
-            d4d5d6 is divisible by 5
-            d5d6d7 is divisible by 7
-            d6d7d8 is divisible by 11
-            d7d8d9 is divisible by 13
-            d8d9d10 is divisible by 17
-        rules where dn is nth digit
+            * 𝑑₂𝑑₃𝑑₄  is divisible by 2
+            * 𝑑₃𝑑₄𝑑₅  is divisible by 3
+            * 𝑑₄𝑑₅𝑑₆  is divisible by 5
+            * 𝑑₅𝑑₆𝑑₇  is divisible by 7
+            * 𝑑₆𝑑₇𝑑₈  is divisible by 11
+            * 𝑑₇𝑑₈𝑑₉  is divisible by 13
+            * 𝑑₈𝑑₉𝑑₁₀ is divisible by 17
+        rules where 𝑑ₙ is 𝑛ᵗʰ digit
     """
     
     for digits in permutations(map(str, range(10))):

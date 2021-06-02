@@ -1,6 +1,7 @@
-# In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
+# In the 20×20 grid below,
 
-num_list = (''.join('''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 
+num_list = (''.join(
+'''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65 
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91 
@@ -21,9 +22,12 @@ num_list = (''.join('''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54 
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''.split('\n'))).split(' ')    ## create list of numbers as string
 
-# The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
+""" 
+  The product of [9×7][10×8][11×9][12×10] numbers is 
+* 26 × 63 × 78 × 14 = 1788696.
 
-# What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+? What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid
+"""
 
 import numpy as np
 

@@ -1,10 +1,12 @@
-# An irrational decimal fraction is created by concatenating the positive integers:
+""" 
+  An irrational decimal fraction is created by concatenating the positive integers:
+*   0.123456789101112131415161718192021...
 
-# 0.123456789101112131415161718192021...
-# It can be seen that the 12th digit of the fractional part is 1.
-
-# If dn represents the nth digit of the fractional part, find the value of the following expression.
-# d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
+  It can be seen that the 12ᵗʰ digit of the fractional part is 1.
+  
+  If 𝑑ₙ represents the 𝑛ᵗʰ digit of the fractional part, find the value of the following expression.
+?   𝑑₁ × 𝑑₁₀ × 𝑑₁₀₀ × 𝑑₁₀₀₀ × 𝑑₁₀₀₀₀ × 𝑑₁₀₀₀₀₀ × 𝑑₁₀₀₀₀₀₀
+"""
 
 
 
@@ -17,14 +19,14 @@ def d_n(n: int)-> int:
     
     else:
         last_digit: int = 9
-        power: int = 1       # 10 th power (digits in decimal number)
+        power: int = 1       # 10ᵗʰ power (digits in decimal number)
 
         while True:
             if (last_digit + 1) <= n <= (last_digit + (power + 1) * (10**(power + 1) - 10**power)):    # digits in decimal number
                 
                 n -= last_digit    # remove nth digits till previous digit
 
-                num = (10**power -1) + ( (n//(power + 1) + 1) if n%(power + 1)!=0 else (n//(power + 1)) )   # selct number in nth digit
+                num = (10**power -1) + ( (n//(power + 1) + 1) if n%(power + 1)!=0 else (n//(power + 1)) )   # selct number in 𝑛ᵗʰ digit
                 ######{last num of   ###{ quotient + 1}#########{remainder is 0 }#######{   quotient   }####
                 ######previous digit}#######################################################################
                 ## eg: 10 -> 10-9=1 -> quo=0 rem=1
