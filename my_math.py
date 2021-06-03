@@ -1,6 +1,10 @@
 def prime_list_till(prime: int)-> list[int]:
-    '''returns list of primes till a given number
-    param:prime = last number to check as prime'''
+    '''
+    returns list of primes till a given number
+        Parameters:
+            prime (int) last number to check as prime
+    '''
+
     marked: list[bool] = [0] * (prime + 1)
     value: int = 3
 
@@ -21,8 +25,11 @@ def prime_list_till(prime: int)-> list[int]:
 
 
 def prime_list_for(prime_for: int)-> list[int]:
-    '''returns list of first n prime numbers
-    param:prime_for = number of prime numbers return in list'''
+    '''
+    returns list of first n prime numbers
+        parameters:
+            prime_for (int) number of prime numbers return in list
+    '''
 
     n: int = 0
     while True:
@@ -34,7 +41,7 @@ def prime_list_for(prime_for: int)-> list[int]:
             
 
 def is_prime(n: int) -> bool:
-    """Primality test using 6k+-1 optimization.
+    """Primality test using 6𝑘 ± 1 optimization.
     https://en.wikipedia.org/wiki/Primality_test#Python_code"""
     
     if n <= 3:          # only defines for above 3
@@ -45,8 +52,8 @@ def is_prime(n: int) -> bool:
     
     i: int = 5      # for 5
     # coprimes below 25 is divisible by 2 or 3
-    while i ** 2 <= n:      # only check till sqrt(i)  6k +-1 <= sqrt(n) (i as 6k-1)
-        if n % i == 0 or n % (i + 2) == 0:      # divicable by 6k-1 or 6k + 1 as i is 6k-1 type
+    while i ** 2 <= n:      # only check till √̅𝑖  6𝑘 ± 1 <= √̅𝑛 (i as 6𝑘-1)
+        if n % i == 0 or n % (i + 2) == 0:      # divicable by 6𝑘-1 or 6𝑘 + 1 as 𝑖 is 6𝑘-1 type
             return False
 
         i += 6
@@ -55,15 +62,20 @@ def is_prime(n: int) -> bool:
 
 
 def n_C_r(n: int, r: int)-> int:
-    '''returns value of combinations formula'''
+    '''
+    returns value of combinations formula
+    '''
+
     from math import factorial
     return int(factorial(n) / (factorial(n - r) * factorial(r)))
 
 
 from typing import Union
 def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
-    '''return word for given number
-    for long floating point numbers use string format(after about 17 digits)'''
+    '''
+    return word for given number
+    for long floating point numbers use string format(after about 17 digits)
+    '''
     
     wrd = {
         0:'zero',
@@ -126,59 +138,94 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
     }
 
     def dec_to_wrd(dec: str, spaces:bool=True)-> str:
+        """ return words for digits after decimal place """
         return (' ' if spaces else '').join([wrd[int(digit)] for digit in dec])
             
     def digit_grp_to_str(key: str, val: str, spaces:bool=True)-> str:
-        if val == '0':
+        """ returns name for 3 digit group with suffix appended """
+        
+        if val == '0':  # zero point number
             return wrd[0]
         
-        elif val == '000':
+        elif val == '000':  # no value in given digit group
             return ''
         
         else:
-            def hundrads(digit: int, spaces:bool=True)-> str: return (' ' if spaces else '').join([wrd[digit], 'hundrad'])
-            def tenths(digit: int)-> str: return wrd[digit*10]
-            def ones_and_till_nineteen(digit: int)-> str: return wrd[digit]
+            def hundrads(digit: int, spaces:bool=True)-> str: return (' ' if spaces else '').join([wrd[digit], 'hundrad'])  # str for 100 multiplications
+            def tenths(digit: int)-> str: return wrd[digit*10]      # str for 10 multiplications after 20
+            def ones_and_till_nineteen(digit: int)-> str: return wrd[digit]     # str for 1 to 19
             
-            val = val.rjust(3, '0')
-            suffix = suffix_for_digit_grp(key)
-            gap = ' ' if spaces else ''
+            val = val.rjust(3, '0')             # if not have 3 digits
+            suffix = suffix_for_digit_grp(key)  # suffix for digit group
+            gap = ' ' if spaces else ''         # spaces
             
-            if val[0]!='0' and val[1:]=='00':
-                return hundrads(int(val[0]), spaces) + (' 'if suffix!='' and spaces else '') + suffix
+            if val[0]!='0' and val[1:]=='00':       # multiplications of 100
+                return ''.join([
+                        hundrads(int(val[0]), spaces),
+                        (' 'if suffix!='' and spaces else ''),
+                        suffix
+                    ])
             
-            elif val[0]!='0':
-                if val[1] in ['0', '1']:
-                    return hundrads(int(val[0]), spaces) + gap + 'and' + gap + ones_and_till_nineteen(int(val[1:])) + (' 'if suffix!='' and spaces else '') + suffix
+            elif val[0]!='0':   # values above 100
                 
-                else:
-                    return hundrads(int(val[0]), spaces) + gap + 'and' + gap + tenths(int(val[1])) + ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else '') + (' 'if suffix!='' and spaces else '') + suffix
+                if val[1] in ['0', '1']:    # values above 100 and last 2 digits between 1 and 19
+                    return ''.join([
+                            hundrads(int(val[0]), spaces),
+                            gap,
+                            'and',
+                            gap,
+                            ones_and_till_nineteen(int(val[1:])),
+                            (' 'if suffix!='' and spaces else ''),
+                            suffix
+                        ])
                 
-            else:
-                if val[1] in ['0', '1']:
-                    return ones_and_till_nineteen(int(val[1:])) + (' 'if suffix!='' and spaces else '') + suffix
+                else:                       # values above 100 and last 2 digits between 20 and 99
+                    return ''.join([
+                            hundrads(int(val[0]), spaces),
+                            gap,
+                            'and', 
+                            gap,
+                            tenths(int(val[1])),
+                            ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else ''),
+                            (' 'if suffix!='' and spaces else ''),
+                            suffix
+                        ])
                 
-                else:
-                    return tenths(int(val[1])) + ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else '') + (' 'if suffix!='' and spaces else '') + suffix
+            else:       # value under 100
+                if val[1] in ['0', '1']:    # value between 1 and 19
+                    return ''.join([
+                            ones_and_till_nineteen(int(val[1:])),
+                            (' 'if suffix!='' and spaces else ''),
+                            suffix
+                        ])
+                
+                else:       # value between 20 and 99
+                    return ''.join([
+                            tenths(int(val[1])),
+                            ((('-' if spaces else '') + ones_and_till_nineteen(int(val[-1]))) if val[-1]!='0' else ''),
+                            (' 'if suffix!='' and spaces else ''),
+                            suffix
+                        ])
             
-    
     def suffix_for_digit_grp(key: str)-> str:
+        """ suffix for thousand digit groups """
+
         pow = int(key[2:])
         
-        if pow == 0:
+        if pow == 0:    # under 1000
             return ''
         
-        elif 3 <= pow <= 33 or (pow <= 303 and (pow-33)%30==0):
+        elif 3 <= pow <= 33 or (pow <= 303 and (pow-33)%30==0):     # thousand to dectillion
             return wrd[key] + ','
         
-        elif 33 < pow < 303:
+        elif 33 < pow < 303:        # dectillion to centillion
             return wrd[f'e+(x+{(pow-33)%30})'] + wrd[f'e+{((pow-33)//30)*30 + 33}'] + ','
         
-        elif pow > 303:
+        elif pow > 303:             # above centillion
             return f'{100 + int((pow - 303)/3)}-illon,'
         
           
-    if type(n) == int:
+    if type(n) == int:  # integer n
         n = str(n)
         ### group to 3 digit classes ###
         quo, rem = len(n)//3, len(n)%3
@@ -190,22 +237,22 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
             digit_grps = {'e+0':n}
         ###################################
         
-        num_name = (' ' if spaces else '').join([digit_grp_to_str(key, val, spaces) for key, val in digit_grps.items()])
+        num_name = (' ' if spaces else '').join([digit_grp_to_str(key, val, spaces) for key, val in digit_grps.items()])    # name for given integer
         
-        return num_name[:-1] if num_name[-1] == ',' else num_name
+        return num_name[:-1] if num_name[-1] == ',' else num_name   # if last character is ',' then remove it
     
-    elif type(n) == float:
-        whole_part, decimal_part = str(n).split('.')
+    elif type(n) == float:  # float n
+        whole_part, decimal_part = str(n).split('.')    # separate from decimal point
 
         return num_to_word(int(whole_part), spaces) + (' ' if spaces else '') + 'point' + (' ' if spaces else '') + dec_to_wrd(decimal_part, spaces)
     
-    elif type(n) == str:
-        if '.' in n:
-            whole_part, decimal_part = n.split('.')
+    elif type(n) == str:    # string n
+        if '.' in n:    # if has a decimal point
+            whole_part, decimal_part = n.split('.') # separate from decimal point
             
             return num_to_word(int(whole_part), spaces) + (' ' if spaces else '') + 'point' + (' ' if spaces else '') + dec_to_wrd(decimal_part, spaces)
         
-        else:
+        else:   # no decimal point
             return num_to_word(int(n), spaces)
             
     else:
