@@ -38,10 +38,10 @@ def distinct_prime_factors(n: int) -> int:
 def consecutive_prime_factors(distinct_factors: int) -> int:
     """ returns first number for first n consecutive integers to have distinct n prime factors """
 
-    cur_num = 10    # starts checking numbers from 9
+    cur_num: int = 10    # starts checking numbers from 9
     
     while True:
-        found = []      # reset found numbers
+        found: list[int] = []      # reset found numbers
         
         if distinct_prime_factors(cur_num) != distinct_factors:     # distinct prime factors of current number is not given number
             cur_num += distinct_factors                             # increment current number by given number
