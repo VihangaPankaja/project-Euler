@@ -24,7 +24,7 @@ int largest_factor(long long number_left){
 
 
 int main(){
-    
     cout << largest_factor(600851475143);
+    
     return 0;
 }
