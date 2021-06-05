@@ -15,7 +15,7 @@ using namespace std;
 
 /* returns max of palindromic products */
 int max_prod_digit_palimdrome(int num){
-    int cur_max = 0;
+    int cur_max = 0;    // holds max palindrome curruntly found
 
     for (int i = pow(10,(num-1)); i < pow(10,num); i++){
         for (int j = pow(10,(num-1)); j < pow(10,num); j++){
