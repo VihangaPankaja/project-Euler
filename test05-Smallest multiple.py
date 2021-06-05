@@ -17,8 +17,8 @@ def smallest_divisible(num: int)-> int:
         for j in range(2, (i + 1)):   # check number multily by 2 to currunt check if that divicable
             if (cur_num * j) % i == 0:
                 cur_num *= j
-
                 break
+            
     return cur_num
 
 
