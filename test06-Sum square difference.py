@@ -12,7 +12,6 @@
 """
 
 
-
 def diff(num: int)-> int:
        ###########{         sum of squares            }######{    square of sum              }########
        return (sum(n for n in range(1, num + 1)) ** 2) - sum(n ** 2 for n in range(1, num + 1))
