@@ -9,3 +9,29 @@
 ? Which prime, below one-million, can be written as the sum of the most consecutive primes
 """
 
+from my_math import prime_gen, is_prime
+
+
+def prime_sum_of_consecutive_primes(limit: int) -> int:
+    """ returns prime that can be written as the lonest sum of consecutive primes below given limit """
+
+    prime_lst = []
+    prime_sum = 0
+
+    for prime in prime_gen():
+        if prime_sum >= limit:
+            break
+        print(prime)
+        prime_sum += prime
+        prime_lst.append(prime)
+
+    print(prime_lst)
+    for prime in prime_lst[::-1]:
+        if is_prime(prime_sum):
+            return prime_sum
+
+        prime_sum -= prime
+
+
+if __name__ == '__main__':
+    print(prime_sum_of_consecutive_primes(1_000_000))

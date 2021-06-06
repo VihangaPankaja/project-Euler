@@ -1,3 +1,4 @@
+###########################################################################
 def prime_list_till(prime: int)-> list[int]:
     '''
     returns list of primes till a given number
@@ -24,6 +25,85 @@ def prime_list_till(prime: int)-> list[int]:
     return prime_lst
 
 
+def primes(n: int)-> list[int]:
+    """ Returns  a list of primes < n 
+    excec time about 78.9  ms for 1mil"""
+    
+    sieve = [True] * n
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i]:
+            sieve[i*i::2*i]=[False]*((n-i*i-1)//(2*i)+1)
+    return [2] + [i for i in range(3,n,2) if sieve[i]]
+
+
+def primes1(n):
+    """ Returns  a list of primes < n 
+    excec time about 76.1  ms for 1mil"""
+    sieve = [True] * (n//2)
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i//2]:
+            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
+    return [2] + [2*i+1 for i in range(1,n//2) if sieve[i]]
+
+
+def primes2(n):
+    """ Input n>=6, Returns a list of primes, 2 <= p < n 
+    excec time about 57.9  ms for 1mil"""
+    n, correction = n-n%6+6, 2-(n%6>1)
+    sieve = [True] * (n//3)
+    for i in range(1,int(n**0.5)//3+1):
+      if sieve[i]:
+        k=3*i+1|1
+        sieve[      k*k//3      ::2*k] = [False] * ((n//6-k*k//6-1)//k+1)
+        sieve[k*(k-2*(i&1)+4)//3::2*k] = [False] * ((n//6-k*(k-2*(i&1)+4)//6-1)//k+1)
+    return [2,3] + [3*i+1|1 for i in range(1,n//3-correction) if sieve[i]]
+
+
+def primesfrom2to(n):
+    """ Input n>=6, Returns a array of primes, 2 <= p < n 
+    excec time about 3.71  ms for 1mil"""
+    import numpy
+    sieve = numpy.ones(n//3 + (n%6==2), dtype=numpy.bool_)
+    for i in range(1,int(n**0.5)//3+1):
+        if sieve[i]:
+            k=3*i+1|1
+            sieve[       k*k//3     ::2*k] = False
+            sieve[k*(k-2*(i&1)+4)//3::2*k] = False
+    return numpy.r_[2,3,((3*numpy.nonzero(sieve)[0][1:]+1)|1)]
+
+
+def primesfrom3to(n):
+    """ Returns a array of primes, 3 <= p < n 
+    excec time about 3.95 ms for 1mil"""
+    import numpy
+    sieve = numpy.ones(n//2, dtype=numpy.bool_)
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i//2]:
+            sieve[i*i//2::i] = False
+    return 2*numpy.nonzero(sieve)[0][1::]+1
+
+
+def get_primes_erat(n):
+    """ excec time about 596 ms for 1mil """
+    import itertools
+    
+    def erat2( ):
+        D = {  }
+        yield 2
+        for q in itertools.islice(itertools.count(3), 0, None, 2):
+            p = D.pop(q, None)
+            if p is None:
+                D[q*q] = q
+                yield q
+            else:
+                x = p + q
+                while x in D or not (x&1):
+                    x += p
+                D[x] = p
+                
+    return list(itertools.takewhile(lambda p: p<n, erat2()))
+
+
 def prime_list_for(prime_for: int)-> list[int]:
     '''
     returns list of first n prime numbers
@@ -39,6 +119,33 @@ def prime_list_for(prime_for: int)-> list[int]:
         else:
             n += 100000
             
+
+##############################################################################
+
+from typing import Generator
+def prime_gen(recursionLimit: int = 1_000_000)-> Generator[int, None, None]:
+    """
+    generates primes numbers on demand 
+     set recursion limit to higher number if recursion depth exceeds exception occured
+        default limit is 1_000_000
+    ! not working very well because of lot of recursions and generators
+    """
+
+    import sys
+    sys.setrecursionlimit(recursionLimit)
+    def nats(n):
+        """ generates integers from given point """
+        while True:
+            yield n
+            n += 1
+        
+    def sieve(s):
+        n = next(s)
+        yield n
+        yield from sieve(i for i in s if i%n!=0)
+    
+    return sieve(nats(2))
+
 
 def is_prime(n: int) -> bool:
     """Primality test using 6𝑘 ± 1 optimization.
