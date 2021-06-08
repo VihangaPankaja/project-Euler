@@ -16,25 +16,26 @@ import numpy as np
 def prime_sum_of_consecutive_primes(limit: int) -> int:
     """ returns prime that can be written as the lonest sum of consecutive primes below given limit """
 
-    primes: np.ndarray[int] = primesfrom2to(limit)
-    prime_sum: tuple[int, int] = (0, 0)
+    primes: np.ndarray[int] = primesfrom2to(limit)      # all primes under given limit
+    prime_sum: tuple[int, int] = (0, 0)                 # holds max chain sum found and chain length
 
-    for i in range(primes.size):
-        prime_sums: np.ndarray[int] = np.add.accumulate(primes[i:])
-        prime_sums = prime_sums[prime_sums < limit]
+    for i in range(primes.size):    # chain starting possition
+        prime_sums: np.ndarray[int] = np.add.accumulate(primes[i:])     # sum of previous primes ``similar to itertools.accumulate```
+        prime_sums = prime_sums[prime_sums < limit]                     # filter primes smaller than limit
 
-        if prime_sums.size < prime_sum[1]:
+        if prime_sums.size < prime_sum[1]:  # current chain smaller than maximum prime chain found
             break
         
-        for j in prime_sums[::-1]:
-            if j < prime_sum[0]:
+        for j in prime_sums[::-1]:  # check for prime from last to beginnig
+            if j < prime_sum[0]:    # current sum smaller than maximum prime sum found
                 break
-
+            
+            #                  chain length                           is larger than previous max
             if is_prime(j) and (l := np.nonzero(prime_sums == j)[0] + 1) > prime_sum[1]:
-                prime_sum = (j, l)
+                prime_sum = (j, l)      # update new max
                 break
 
-    return prime_sum[0]
+    return prime_sum[0]     # max consecutive prime sum found
 
 
 if __name__ == '__main__':
