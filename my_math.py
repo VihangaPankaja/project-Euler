@@ -63,7 +63,9 @@ def primesfrom2to(n):
     """ Input n>=6, Returns a array of primes, 2 <= p < n 
     excec time about 3.71  ms for 1mil"""
     import numpy
+    
     sieve = numpy.ones(n//3 + (n%6==2), dtype=numpy.bool_)
+    
     for i in range(1,int(n**0.5)//3+1):
         if sieve[i]:
             k=3*i+1|1

@@ -9,28 +9,32 @@
 ? Which prime, below one-million, can be written as the sum of the most consecutive primes
 """
 
-from my_math import prime_gen, is_prime
+from my_math import is_prime, primesfrom2to
+import numpy as np
 
 
 def prime_sum_of_consecutive_primes(limit: int) -> int:
     """ returns prime that can be written as the lonest sum of consecutive primes below given limit """
 
-    prime_lst = []
-    prime_sum = 0
+    primes: np.ndarray[int] = primesfrom2to(limit)
+    prime_sum: tuple[int, int] = (0, 0)
 
-    for prime in prime_gen():
-        if prime_sum >= limit:
+    for i in range(primes.size):
+        prime_sums: np.ndarray[int] = np.add.accumulate(primes[i:])
+        prime_sums = prime_sums[prime_sums < limit]
+
+        if prime_sums.size < prime_sum[1]:
             break
-        print(prime)
-        prime_sum += prime
-        prime_lst.append(prime)
+        
+        for j in prime_sums[::-1]:
+            if j < prime_sum[0]:
+                break
 
-    print(prime_lst)
-    for prime in prime_lst[::-1]:
-        if is_prime(prime_sum):
-            return prime_sum
+            if is_prime(j) and (l := np.nonzero(prime_sums == j)[0] + 1) > prime_sum[1]:
+                prime_sum = (j, l)
+                break
 
-        prime_sum -= prime
+    return prime_sum[0]
 
 
 if __name__ == '__main__':
