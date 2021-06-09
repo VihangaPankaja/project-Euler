@@ -31,7 +31,9 @@ def prime_sum_of_consecutive_primes(limit: int) -> int:
                 break
             
             #                  chain length                           is larger than previous max
-            if is_prime(j) and (l := np.nonzero(prime_sums == j)[0] + 1) > prime_sum[1]:
+            if (is_prime(j) and 
+                (l := np.nonzero(prime_sums == j)[0] + 1) > prime_sum[1]):
+                
                 prime_sum = (j, l)      # update new max
                 break
 
