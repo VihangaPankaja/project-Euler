@@ -13,8 +13,10 @@
 ? What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , 𝑛) where 𝑛 > 1
 """
 
+from typing import Union
 
-def is_pendigital(n: int)-> bool:
+
+def is_pendigital(n: int) -> bool:
     '''check if a number use all 1 to 9 digits once'''
 
     digits: list[int] = list(range(1, 10))
@@ -32,7 +34,7 @@ def is_pendigital(n: int)-> bool:
     return False
 
 
-def concatenate(n: int)-> __import__('typing').Union[bool, int]:
+def concatenate(n: int) -> Union[bool, int]:
     '''generate concatenated product of 𝑛 and (1, 2, 3, ....) till 9 digits'''
 
     num_gented: str = ''
@@ -48,8 +50,9 @@ def concatenate(n: int)-> __import__('typing').Union[bool, int]:
             
 if __name__ == '__main__':
     numerbs: list[int] = []
+    
     for i in range(10_000):                              # last number can get 9 digits like this is 9999 (4 and 5 digits)
         if is_pendigital(concatenate(i)):
             numerbs.append((i, concatenate(i)))
 
-    print(max(list(y for x, y in numerbs)))               # find biggest pandigital number
+    print(max(list(y for _, y in numerbs)))               # find biggest pandigital number

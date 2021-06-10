@@ -18,7 +18,7 @@
 import my_math
 
 
-def uncheck_prime()-> None:
+def uncheck_prime() -> None:
     prime_lst = my_math.prime_list_till(amicable_num - 1)       # get primes under target
 
     num_check[0] = -1   # uncheck number 1
@@ -29,18 +29,18 @@ def uncheck_prime()-> None:
     return None
 
 
-def d(n: int)-> int:
+def d(n: int) -> int:
     '''return sum divisors'''
     divisors = []
 
-    for i in range(1, int(n / 2 + 1)):
+    for i in range(1, int(n/2 + 1)):
         if n % i == 0:
             divisors.append(i)
 
     return sum(divisors)
 
 
-def amicable_cheack()-> list[int]:
+def amicable_cheack() -> list[int]:
     for i in range(1, amicable_num):
         if num_check[i - 1] == 0:           # check if not unchecked
 

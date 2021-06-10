@@ -22,20 +22,20 @@ from functools import cache    # only hashable objects can be cached
 # implementing frozendict for cache dict
 # using cache because using function multiple times with same variable
 
-class frozendict(dict):
+class Frozendict(dict):
     """ hashable dictionary """
     def __hash__(self):
         return hash(frozenset(self.items()))
 
 
 @cache
-def wrd_scor(wrd: str)-> int:
-    scores = frozendict({chr(x+64):x for x in range(1, 27)})
+def wrd_scor(wrd: str) -> int:
+    scores = Frozendict({chr(x+64):x for x in range(1, 27)})
     
     return sum([scores[i] for i in wrd])
 
 
-def triangle_lst(num: int)-> list[int]:
+def triangle_lst(num: int) -> list[int]:
     triangles: list[int] = [1]
     n = 1
     

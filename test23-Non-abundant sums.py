@@ -25,7 +25,7 @@
 from my_math import divisors
 
 
-def abn_list():
+def abn_list() -> list[int]:
     """ check for abundant numbers in range """
     global max_non_abn
 
@@ -37,7 +37,7 @@ def abn_list():
     return abn_lst
 
 
-def sum_of_abn_lst(abn_lst: list[int])-> list[int]:
+def sum_of_abn_lst(abn_lst: list[int]) -> list[int]:
     """ get sum of abundant numbers under range """
     global max_non_abn
 
@@ -57,4 +57,5 @@ def sum_of_abn_lst(abn_lst: list[int])-> list[int]:
 if __name__ == '__main__':
     max_non_abn: int = 28123
     
-    print(sum(i for i in range(1, max_non_abn + 1) if i not in sum_of_abn_lst(abn_list())))   # sum of numbers not in list
+    print(sum(i for i in range(1, max_non_abn + 1) 
+                    if i not in sum_of_abn_lst(abn_list())))   # sum of numbers not in list

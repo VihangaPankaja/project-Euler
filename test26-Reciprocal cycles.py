@@ -19,22 +19,24 @@
 """
 
 
-def cycle_lenth(d: int)-> int:
+def cycle_lenth(d: int) -> int:
     """ returns number of rucurring digits for 1/𝑑 for given 𝑑 """
     
     remainig: list[int] = [1]   # because 1/
     
     while True:
-        remainig.append((remainig[-1] * 10) % d)    ## remaing from dividing
+        remainig.append((remainig[-1]*10) % d)    ## remaing from dividing
 
         if remainig[-1] == 0:                       # check if 1/𝑑 has no recurring digits
             return 0
 
         elif remainig[-1] in remainig[:-1]:        ## check for recurring cycle completed
-            return len(remainig) - remainig.index(remainig[-1]) - 1
+            return (len(remainig) 
+                    - remainig.index(remainig[-1]) 
+                    - 1)
 
 
-def longest_repeating_decimal(max_d: int)-> int:
+def longest_repeating_decimal(max_d: int) -> int:
     """ returns longest repeating decimal for ⅟₂ to 1/𝑑 when 𝑑 is given """
     
     cyc_lenths: list[int] = []      # list of number of recurring digits for given number

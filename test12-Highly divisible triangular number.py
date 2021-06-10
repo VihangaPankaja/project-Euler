@@ -20,15 +20,16 @@ Let us list the factors of the first seven triangle numbers:
 """
 
 import my_math
+from typing import Callable
 
 
 divisors: int = 500
-triangle: __import__('typing').Callable[[int], int] = lambda n: int(n * (n + 1) / 2)           # get triangle number from the term number
-prime_list: list[int] = my_math.prime_list_for(divisors)       # generate prime list
+triangle: Callable[[int], int] = lambda n: int(n * (n+1) / 2)           # get triangle number from the term number
+prime_list: list[int] = my_math.prime_list_for(divisors)                  # generate prime list
 
 
 ## returns all the prime factors for given number ##
-def factors_list(n: int)-> list[int]:
+def factors_list(n: int) -> list[int]:
     global prime_list
     
     lst: list[int] = []
@@ -49,7 +50,7 @@ def factors_list(n: int)-> list[int]:
 ###########################################
 
 
-def above_divisors(divisors: int)-> tuple[int]:
+def above_divisors(divisors: int) -> tuple[int]:
     """ return triangle number that has divisors over given number with divisors found as tupple """
     
     n: int = 1

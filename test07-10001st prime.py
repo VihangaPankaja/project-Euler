@@ -8,7 +8,7 @@
 
 
 
-def nth_prime(prime_no: int)-> int:
+def nth_prime(prime_no: int) -> int:
     from math import sqrt
 
     prime_count: int = 0
@@ -28,7 +28,7 @@ def nth_prime(prime_no: int)-> int:
 
 
 ## alternative #####################
-def alternative(prime_no: int)-> int:
+def alternative(prime_no: int) -> int:
     from my_math import prime_list_for
 
     return (prime_list_for(prime_no)[-1])

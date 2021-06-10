@@ -7,8 +7,8 @@
  """
  
  
-def pow(num: int)-> int:
-    return sum(map(int, str(2 ** num)))
+def pow(num: int) -> int:
+    return sum(map(int, str(2**num)))
 
 
 if __name__ == "__main__":

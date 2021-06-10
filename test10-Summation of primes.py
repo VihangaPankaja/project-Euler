@@ -6,7 +6,7 @@
 """
 
 
-def prime_lst_till(number_range: int)-> list[int]:
+def prime_lst_till(number_range: int) -> list[int]:
     """ generates prime list till given number """
     
     from math import sqrt
@@ -33,7 +33,7 @@ def prime_lst_till(number_range: int)-> list[int]:
 
 
 ######fastest method found#######
-def sum_of_primes_till(number_range: int)-> int:
+def sum_of_primes_till(number_range: int) -> int:
     marked = [0] * number_range       # create check box for each number
     value = 3                    # currunt checking value
     s = 2                        # total of primes

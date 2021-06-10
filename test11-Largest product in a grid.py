@@ -34,34 +34,49 @@ import numpy as np
 grid: np.ndarray = np.array(num_list, dtype='i').reshape(20, 20)    # format num_list to int and create 20 by 20 matrix
 
 
-def max_in_block(array_block: np.ndarray)-> int:
+def max_in_block(array_block: np.ndarray) -> int:
     """ returns max possible product from 4 numbers in 4 by 4 array """
     
-    diag1 = array_block[0, 0] * array_block[1, 1] * array_block[2, 2] * array_block[3, 3]     # diagonal product
-    diag2 = array_block[0, 3] * array_block[1, 2] * array_block[2, 1] * array_block[3, 0]     # diagonal product
+    diag1 = (array_block[0, 0] 
+             * array_block[1, 1] 
+             * array_block[2, 2] 
+             * array_block[3, 3])     # diagonal product
+    diag2 = (array_block[0, 3] 
+             * array_block[1, 2] 
+             * array_block[2, 1] 
+             * array_block[3, 0])     # diagonal product
 
     max_row = 0
     for i in range(4):
-        row_product = array_block[i, 3] * array_block[i, 2] * array_block[i, 1] * array_block[i, 0]     # vertical products
+        row_product = (array_block[i, 3] 
+                       * array_block[i, 2] 
+                       * array_block[i, 1] 
+                       * array_block[i, 0])     # vertical products
+        
         if row_product > max_row:
             max_row = row_product
 
     max_column = 0
     for i in range(4):
-        column_product = array_block[0, i] * array_block[1, i] * array_block[2, i] * array_block[3, i]    # horizontal products
+        column_product = (array_block[0, i] 
+                          * array_block[1, i] 
+                          * array_block[2, i] 
+                          * array_block[3, i])    # horizontal products
+        
         if column_product > max_column:
             max_column = column_product
 
     return max(diag1, diag2, max_column, max_row)   # max from 4 numbers
 
 
-def greatest_product(grid: np.ndarray)-> int:
+def greatest_product(grid: np.ndarray) -> int:
     cur_max: int = 0
     x, y = grid.shape      # len in x,y axis
 
     for i in range(x-4):
         for j in range(y-4):     # break 20 by 20 block to 4 by 4 blocks
-            maximum = max_in_block(np.array(grid[i:(i + 4) , j:(j + 4)]))   # max from one 4 by 4 block
+            maximum = max_in_block(np.array(grid[i : (i+4) , j : (j+4)]))   # max from one 4 by 4 block
+            
             if maximum > cur_max:
                 cur_max = maximum
                 

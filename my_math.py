@@ -1,5 +1,5 @@
 ###########################################################################
-def prime_list_till(prime: int)-> list[int]:
+def prime_list_till(prime: int) -> list[int]:
     '''
     returns list of primes till a given number
         Parameters:
@@ -25,67 +25,77 @@ def prime_list_till(prime: int)-> list[int]:
     return prime_lst
 
 
-def primes(n: int)-> list[int]:
+def primes(n: int) -> list[int]:
     """ Returns  a list of primes < n 
     excec time about 78.9  ms for 1mil"""
     
     sieve = [True] * n
-    for i in range(3,int(n**0.5)+1,2):
+    
+    for i in range(3, int(n**0.5) + 1, 2):
         if sieve[i]:
-            sieve[i*i::2*i]=[False]*((n-i*i-1)//(2*i)+1)
-    return [2] + [i for i in range(3,n,2) if sieve[i]]
+            sieve[i*i :: 2*i] = [False] * ((n - i*i - 1)//(2*i) + 1)
+            
+    return [2] + [i for i in range(3, n, 2) if sieve[i]]
 
 
-def primes1(n):
+def primes1(n) -> list[int]:
     """ Returns  a list of primes < n 
     excec time about 76.1  ms for 1mil"""
+    
     sieve = [True] * (n//2)
-    for i in range(3,int(n**0.5)+1,2):
+    
+    for i in range(3, int(n**0.5) + 1, 2):
         if sieve[i//2]:
-            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
-    return [2] + [2*i+1 for i in range(1,n//2) if sieve[i]]
+            sieve[i*i // 2 :: i] = [False] * ((n - i*i - 1)//(2*i) + 1)
+            
+    return [2] + [2*i + 1 for i in range(1, n//2) if sieve[i]]
 
 
-def primes2(n):
+def primes2(n) -> list[int]:
     """ Input n>=6, Returns a list of primes, 2 <= p < n 
     excec time about 57.9  ms for 1mil"""
-    n, correction = n-n%6+6, 2-(n%6>1)
+    n, correction = n - n%6 + 6, 2 - (n%6 > 1)
     sieve = [True] * (n//3)
-    for i in range(1,int(n**0.5)//3+1):
+    
+    for i in range(1,int(n**0.5)//3 + 1):
       if sieve[i]:
-        k=3*i+1|1
-        sieve[      k*k//3      ::2*k] = [False] * ((n//6-k*k//6-1)//k+1)
-        sieve[k*(k-2*(i&1)+4)//3::2*k] = [False] * ((n//6-k*(k-2*(i&1)+4)//6-1)//k+1)
-    return [2,3] + [3*i+1|1 for i in range(1,n//3-correction) if sieve[i]]
+        k = 3*i + 1 | 1
+        sieve[(k*k//3) :: 2*k] = [False] * ((n//6 - k*k//6 - 1)//k + 1)
+        sieve[(k*(k - 2*(i & 1) + 4) // 3) :: 2*k] = [False] * ((n//6 - k*(k -2*(i & 1) + 4)//6 -1)//k + 1)
+        
+    return ([2, 3] + [(3*i + 1 | 1) for i in range(1, n//3 - correction) if sieve[i]])
 
 
-def primesfrom2to(n):
+import numpy
+def primesfrom2to(n) -> numpy.ndarray:
     """ Input n>=6, Returns a array of primes, 2 <= p < n 
     excec time about 3.71  ms for 1mil"""
-    import numpy
     
-    sieve = numpy.ones(n//3 + (n%6==2), dtype=numpy.bool_)
+    sieve = numpy.ones(n//3 + (n%6 == 2), dtype=numpy.bool_)
     
     for i in range(1,int(n**0.5)//3+1):
         if sieve[i]:
-            k=3*i+1|1
-            sieve[       k*k//3     ::2*k] = False
-            sieve[k*(k-2*(i&1)+4)//3::2*k] = False
-    return numpy.r_[2,3,((3*numpy.nonzero(sieve)[0][1:]+1)|1)]
+            k = (3*i + 1) | 1
+            sieve[(k*k // 3) :: 2*k] = False
+            sieve[(k*(k - 2*(i & 1) + 4) // 3) :: 2*k] = False
+            
+    return numpy.r_[2, 3, ((3 * numpy.nonzero(sieve)[0][1:] + 1) | 1)]
 
 
-def primesfrom3to(n):
+def primesfrom3to(n) -> numpy.ndarray:
     """ Returns a array of primes, 3 <= p < n 
     excec time about 3.95 ms for 1mil"""
-    import numpy
+    
     sieve = numpy.ones(n//2, dtype=numpy.bool_)
-    for i in range(3,int(n**0.5)+1,2):
+    
+    for i in range(3, int(n**0.5) + 1, 2):
         if sieve[i//2]:
-            sieve[i*i//2::i] = False
-    return 2*numpy.nonzero(sieve)[0][1::]+1
+            sieve[(i*i // 2) :: i] = False
+            
+    return 2 * numpy.nonzero(sieve)[0][1::] + 1
 
 
-def get_primes_erat(n):
+def get_primes_erat(n) -> list[int]:
     """ excec time about 596 ms for 1mil """
     import itertools
     
@@ -106,7 +116,7 @@ def get_primes_erat(n):
     return list(itertools.takewhile(lambda p: p<n, erat2()))
 
 
-def prime_list_for(prime_for: int)-> list[int]:
+def prime_list_for(prime_for: int) -> list[int]:
     '''
     returns list of first n prime numbers
         parameters:
@@ -170,7 +180,7 @@ def is_prime(n: int) -> bool:
     return True
 
 
-def n_C_r(n: int, r: int)-> int:
+def n_C_r(n: int, r: int) -> int:
     '''
     returns value of combinations formula
     '''
@@ -180,7 +190,7 @@ def n_C_r(n: int, r: int)-> int:
 
 
 from typing import Union
-def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
+def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
     '''
     return word for given number
     for long floating point numbers use string format(after about 17 digits)
@@ -246,11 +256,11 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
         'e+(x+27)':'novem',
     }
 
-    def dec_to_wrd(dec: str, spaces:bool=True)-> str:
+    def dec_to_wrd(dec: str, spaces:bool=True) -> str:
         """ return words for digits after decimal place """
         return (' ' if spaces else '').join([wrd[int(digit)] for digit in dec])
             
-    def digit_grp_to_str(key: str, val: str, spaces:bool=True)-> str:
+    def digit_grp_to_str(key: str, val: str, spaces:bool=True) -> str:
         """ returns name for 3 digit group with suffix appended """
         
         if val == '0':  # zero point number
@@ -316,7 +326,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
                             suffix
                         ])
             
-    def suffix_for_digit_grp(key: str)-> str:
+    def suffix_for_digit_grp(key: str) -> str:
         """ suffix for thousand digit groups """
 
         pow = int(key[2:])
@@ -368,17 +378,17 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True)-> str:
         return 'wrong data type'
 
 
-def triangle(n):
+def triangle(n) -> int:
     '''retunrs triange value of the given number'''
-    return int(n * (n + 1) / 2)
+    return int(n * (n+1) / 2)
 
 
-def reverse_triangle(x):
+def reverse_triangle(x) -> int:
     '''retuns n value for trangle n'''
-    return int((((8 * x + 1) ** 0.5) - 1) / 2)
+    return int((((8*x + 1)**0.5) - 1) / 2)
 
 
-def divisors(n):
+def divisors(n) -> list[int]:
     '''returnd a list of divisors'''
     divisors = []
     for i in range(1, int(n / 2 + 1)):

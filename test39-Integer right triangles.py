@@ -7,9 +7,8 @@
 """
 
 
-def max_solutions(p_max: int)-> int:
+def max_solutions(p_max: int) -> int:
     solutions: dict[int : list[set[int]]] = {x:[] for x in range(1, p_max+1)}  # p as key and solutions list
-
 
     """ 
     𝑎,𝑏,𝑐 ∈ ℤ , 𝑚 > 𝑛 > 0 ∈ ℤ ,  𝑘 ∈ ℤ
@@ -22,7 +21,7 @@ def max_solutions(p_max: int)-> int:
         for m in range(n+1, (p_max+1)):
 
             a0: int = m**2 - n**2
-            b0: int = 2 * m * n
+            b0: int = 2*m*n
             c0: int = m**2 + n**2
             k: int = 1
             
@@ -45,7 +44,8 @@ def max_solutions(p_max: int)-> int:
                     break
                 k += 1
 
-    return max(solutions, key=lambda x: len(solutions.get(x)))    # return what key have maximum solutions
+    return max(solutions, 
+               key=lambda x: len(solutions.get(x)))    # return what key have maximum solutions
 
 
 

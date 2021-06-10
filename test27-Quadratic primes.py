@@ -21,21 +21,17 @@ Euler discovered the remarkable quadratic formula:
 ?   of primes for consecutive values of 𝑛, starting with 𝑛 = 0
 """
 
+from my_math import is_prime
 
 
-###### ! less optimised code. run time about an hour 😢 ############
-
-from my_math import prime_list_till
-
-
-def q_formula_prime_count(a, b):
+def q_formula_prime_count(a, b) -> int:
     """ count primes possible for given 𝑎,𝑏 """ 
 
     n: int = 0
     prime_coun: int = 0
 
     while True:
-        if isPrime((n ** 2) + (a * n) + b):
+        if is_prime((n**2) + (a*n) + b):
             prime_coun += 1
             
         else:
@@ -47,24 +43,11 @@ def q_formula_prime_count(a, b):
     return prime_coun
 
 
-def isPrime(n: int)-> bool:
-    """ check if prime """
-
-    if n in primes:
-        return True
-
-    else:
-        return False
-
-
-def main()-> tuple[int]:
-    global primes
+def main() -> tuple[int, int]:
 
     a: range = range(-999, 1000)        # 𝑎 value range
     b: range = range(-1000, 1001)       # 𝑏 value range
-    dictionary: dict = {0: 0}        # key = prime numbers count , values = 𝑎,𝑏 values used
-    primes: list[int] = prime_list_till(1000000)  # get prime list till 1 000 000
-
+    dictionary: dict = {}        # key = prime numbers count , values = 𝑎,𝑏 values used
     
     """ get primes possible for all 𝑎,𝑏 values """ 
 
@@ -79,4 +62,4 @@ def main()-> tuple[int]:
 
 if __name__ == '__main__':
     a, b = main()
-    print(a * b)
+    print(a*b)

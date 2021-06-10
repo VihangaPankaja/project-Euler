@@ -30,6 +30,7 @@
         it cannot be solved by brute force, and requires a clever method! ;o) 
 """
 
+from typing import NoReturn
 import my_math
 
 numbers = '''  75
@@ -50,53 +51,34 @@ numbers = '''  75
 
 
 
-def value_for_cordinate(line, position):
+def value_for_cordinate(line, position) -> int:
     """ get value for given coordinates at grid """
     global num_lst
     
-    return int(num_lst[my_math.triangle(line - 1) + (position - 1)])
+    return int(num_lst[my_math.triangle(line-1) + (position-1)])
 
 
-def maxmum_sum(cur_line=1, currunt_position=1, currunt_sum=0):
+def maxmum_sum(cur_line: int = 1, currunt_position: int = 1, currunt_sum: int = 0) -> NoReturn:
     global total_lines, sum_list
 
     if cur_line == total_lines - 1:                                                                                     # at 2nd last line complete path and calculate sum
-        sum_list.append(
-                currunt_sum + value_for_cordinate(
-                                cur_line, 
-                                currunt_position
-                                ) + value_for_cordinate(
-                                        cur_line + 1,
-                                        currunt_position
-                                        )
-                )
-        sum_list.append(
-                currunt_sum + value_for_cordinate(
-                                cur_line, 
-                                currunt_position
-                                ) + value_for_cordinate(
-                                        cur_line + 1,
-                                        currunt_position + 1
-                                        )
-                )
+        sum_list.append(currunt_sum 
+                        + value_for_cordinate(cur_line, currunt_position) 
+                        + value_for_cordinate(cur_line+1, currunt_position))
+        
+        sum_list.append(currunt_sum 
+                        + value_for_cordinate(cur_line, currunt_position) 
+                        + value_for_cordinate(cur_line+1, currunt_position+1))
+        
     else:                                                                                                               # go along possible 2 paths
 
-        maxmum_sum(
-            cur_line + 1,
-            currunt_position,
-            currunt_sum + value_for_cordinate(
-                                cur_line,
-                                currunt_position
-                                )
-            )
-        maxmum_sum(
-            cur_line + 1,
-            currunt_position + 1,
-            currunt_sum + value_for_cordinate(
-                                cur_line,
-                                currunt_position
-                                )
-            )
+        maxmum_sum(cur_line + 1, 
+                   currunt_position, 
+                   currunt_sum + value_for_cordinate(cur_line, currunt_position))
+        
+        maxmum_sum(cur_line + 1,
+                    currunt_position + 1,
+                    currunt_sum + value_for_cordinate(cur_line, currunt_position))
 
 
 
@@ -108,7 +90,7 @@ if __name__ == '__main__':
     #############
 
     for i in range(my_math.reverse_triangle(len(num_lst)) - 1):                                 # itterate for lines - 1 times
-        num_lst[my_math.triangle(i + 1) - 1] = num_lst[my_math.triangle(i + 1) - 1][:-1]        # remove line break(\n) from last vale for every line
+        num_lst[my_math.triangle(i+1) - 1] = num_lst[my_math.triangle(i+1) - 1][:-1]            # remove line break(\n) from last vale for every line
 
     total_lines: int = my_math.reverse_triangle(len(num_lst))
     sum_list: list[int] = []

@@ -15,7 +15,7 @@
 from my_math import num_to_word
 
 
-def wrd_count(number: int)-> int:
+def wrd_count(number: int) -> int:
     word_count: int = 0
 
     for i in range(1,number + 1):

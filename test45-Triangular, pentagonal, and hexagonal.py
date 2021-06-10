@@ -12,7 +12,7 @@
 from typing import Generator
 
 
-def triangle(n: int=286)-> Generator[int, None, None]:
+def triangle(n: int=286) -> Generator[int, None, None]:
     """ 
     generates triangle numbers
         Parameters:
@@ -22,27 +22,29 @@ def triangle(n: int=286)-> Generator[int, None, None]:
     """
     
     while True:
-        yield int(n * (n + 1) / 2)
+        yield int(n * (n+1) / 2)
         n += 1
         
 
-def is_pentagonal(n: int)-> bool:
-    if (1 + (1 + 24*n)**0.5) % 6 == 0:
+def is_pentagonal(n: int) -> bool:
+    if (1 + (1 + 24*n) ** 0.5) % 6 == 0:
         return True
     
     return False
 
 
-def is_hexagonal(n: int)-> bool:
-    if (1 + (1 + 8*n)**0.5) % 4 == 0:
+def is_hexagonal(n: int) -> bool:
+    if (1 + (1 + 8*n) ** 0.5) % 4 == 0:
         return True
     
     return False
 
 
-def next_3_5_6_num()-> int:
+def next_3_5_6_num() -> int:
     for i in triangle():
-        if is_pentagonal(i) and is_hexagonal(i):
+        if (is_pentagonal(i) and 
+            is_hexagonal(i)):
+            
             return i
 
 

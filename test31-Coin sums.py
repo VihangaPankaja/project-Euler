@@ -11,7 +11,7 @@
 """
 
 
-def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []):
+def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []) -> int:
     global coins, tar_val, posibilities
 
     coin_count: int = 0
@@ -28,7 +28,9 @@ def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []):
         
         else:
             if cur_index != 7:  #check if not the last item
-                pos_count(cur_index + 1, cur_tot + cur_val, chs + [coin_count])  #calling functioon again to choose next type of coin
+                pos_count(cur_index + 1, 
+                          cur_tot + cur_val, 
+                          chs + [coin_count])  #calling functioon again to choose next type of coin
         
         
         coin_count +=1 #coins selected from currn type of coins increase by 1

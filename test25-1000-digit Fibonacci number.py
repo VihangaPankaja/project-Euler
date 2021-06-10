@@ -21,13 +21,14 @@
 ? What is the index of the first term in the Fibonacci sequence to contain 1000 digits
 """
 
-def fib_digits(digits_in_num: int)-> int:
+def fib_digits(digits_in_num: int) -> int:
     """ get term number for given digits for fibonacci number """
     
     fib_num = [1, 1]  # fibanachi series with first 2 numbers
 
     while True:
         fib_num.append(fib_num[-1] + fib_num[-2])   # find next nuber in series
+        
         if len(str(fib_num[-1])) == digits_in_num:  # check dgits in number satisfies
             break
         

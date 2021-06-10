@@ -8,7 +8,7 @@
 """
 
 
-def palindrome_list_till(top: int)-> list[int]:
+def palindrome_list_till(top: int) -> list[int]:
     palindromic: list[int] = []
 
     n: int= 0
@@ -16,10 +16,13 @@ def palindrome_list_till(top: int)-> list[int]:
         n += 1
         binary = format(n, 'b')  # convert to binary
         
-        if str(n)[-1] == 0 or str(binary)[-1] == 0:   # if last digit 0
+        if (str(n)[-1] == '0' or 
+            str(binary)[-1] == '0'):   # if last digit 0
+            
             continue
 
-        elif n == int(str(n)[::-1]) and int(binary) == int(str(binary)[::-1]):  # if decimal and binary are palindromic
+        elif (n == int(str(n)[::-1]) and 
+              int(binary) == int(str(binary)[::-1])):  # if decimal and binary are palindromic
             palindromic.append(n)
             
     return palindromic

@@ -30,15 +30,15 @@ number = '''73167176531330624919225119674426574742355349194934
 from math import prod  # to find product of list
 
 
-def adj_prod(digit: int)-> list[int]:
+def adj_prod(digit: int) -> list[int]:
     """ returns list of products in adjecent digits """
     global number
     
     number = ''.join(number.split('\n'))                                # make number one line
-
     products: list[int] = []
+    
     for i in range(len(number) + 1 - digit):            # select adjecent digits
-        slected = list(number[i:i + digit])             # list the adjecent digits
+        slected = list(number[i : (i+digit)])             # list the adjecent digits
         products.append(prod(map(int, slected)))        # add product to list
 
     return products

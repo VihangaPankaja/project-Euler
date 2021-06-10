@@ -6,8 +6,8 @@
 """
 
 
-def total(num: int)-> int:
-    return sum(n for n in range(num) if n % 3 == 0 or n % 5 == 0)
+def total(num: int) -> int:
+    return sum(n for n in range(num) if (n%3 == 0 or n%5 == 0))
 
 
 if __name__ == '__main__':

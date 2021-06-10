@@ -8,13 +8,13 @@
 ? find the sum of the even-valued terms
  """
 
-def sum_fib(max_num: int)-> int:
+def sum_fib(max_num: int) -> int:
     fib: list[int] = [1,2] # fibanachi values s a list
 
     while fib[-1] <= max_num:
         fib.append(fib[-1] + fib[-2]) # find next in series
 
-    return (sum(n for n in fib if n % 2 == 0)) # sum of even in series
+    return (sum(n for n in fib if n%2 == 0)) # sum of even in series
 
 
 if __name__ == '__main__':

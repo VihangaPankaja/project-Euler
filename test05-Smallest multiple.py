@@ -5,17 +5,17 @@
 """
 
 
-def smallest_divisible(num: int)-> int:
+def smallest_divisible(num: int) -> int:
     """ returns smallest positive number that is evenly divisible by all of the numbers from 1 to num """
     
     cur_num: int= num
 
-    for i in range(1, (num + 1)):
+    for i in range(1, (num+1)):
         if cur_num % i == 0:         # check the number divicable by the number curruntly checking
             continue
 
-        for j in range(2, (i + 1)):   # check number multily by 2 to currunt check if that divicable
-            if (cur_num * j) % i == 0:
+        for j in range(2, (i+1)):   # check number multily by 2 to currunt check if that divicable
+            if (cur_num*j) % i == 0:
                 cur_num *= j
                 break
             

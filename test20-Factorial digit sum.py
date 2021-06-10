@@ -12,7 +12,7 @@
 
 from math import factorial
 
-def factorial_sum(num: int)-> int:
+def factorial_sum(num: int) -> int:
     return sum(int(i) for i in str(factorial(num)))
 
 

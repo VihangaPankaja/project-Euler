@@ -17,7 +17,7 @@ from typing import Generator
 from my_math import is_prime
 
 
-def twice_square()-> Generator[int, None, None]:
+def twice_square() -> Generator[int, None, None]:
     """ 
     Generates twice of square numbers
     ! infinite generator
@@ -30,7 +30,7 @@ def twice_square()-> Generator[int, None, None]:
         n += 1
         
 
-def odd_composite()-> Generator[int, None, None]:
+def odd_composite() -> Generator[int, None, None]:
     """ 
     Generates odd composite numbers
     ! infinite generator
@@ -45,7 +45,7 @@ def odd_composite()-> Generator[int, None, None]:
         n += 2
         
 
-def smallest_odd_composite()-> int:
+def smallest_odd_composite() -> int:
     """ 
     returns smallest odd composite that cannot be written as the sum of a prime and twice a square
     """

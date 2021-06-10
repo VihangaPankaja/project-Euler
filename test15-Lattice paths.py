@@ -15,13 +15,13 @@
 """
 
 
-def grid_paths(grid: int)-> list[int]:
-    lst1 = list(range(1, grid + 2))
+def grid_paths(grid: int) -> list[int]:
+    lst1 = list(range(1, grid+2))
 
     for _ in range(grid - 2):
         lst2 = []
 
-        for j in range(1, grid + 2):
+        for j in range(1, grid+2):
             lst2.append(sum(lst1[:j]))
 
         lst1 = lst2
@@ -30,10 +30,10 @@ def grid_paths(grid: int)-> list[int]:
 
 
 #### or just use 2nCn function ####
-def easy_grid_path(grid: int)-> int:
+def easy_grid_path(grid: int) -> int:
     from my_math import n_C_r
     
-    return n_C_r(2 * grid, grid)
+    return n_C_r(2*grid, grid)
 ###################################
 
 

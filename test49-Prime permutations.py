@@ -14,7 +14,7 @@
 from my_math import is_prime
 from itertools import permutations
 
-def arithmetic_seq()-> str:
+def arithmetic_seq() -> str:
     """ returns concatenated three terms in above arithmetic sequence """
     
     for i in range(1_000, 10_000 - 3330):

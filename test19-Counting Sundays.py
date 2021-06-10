@@ -14,13 +14,19 @@
 """
 
 
-def days_for_month(year: int, month: int)-> int:
+def days_for_month(year: int, month: int) -> int:
     '''return how many days in given month and year'''
 
-    if month == 4 or month == 6 or month == 9 or month == 11:
+    if (month == 4 or 
+        month == 6 or 
+        month == 9 or 
+        month == 11):
         return 30
 
-    elif month == 2 and ((year % 100 == 0 and year % 400 != 0) or year % 4 != 0):
+    elif (month == 2 and 
+        ((year % 100 == 0 and 
+                year % 400 != 0) or 
+                year % 4 != 0)):
         return 28
 
     elif month == 2:
@@ -30,12 +36,12 @@ def days_for_month(year: int, month: int)-> int:
         return 31
 
 
-def calender(year: int, month: int)-> None:
+def calender(year: int, month: int) -> None:
     '''create a calender and add to calender list by using previous calender'''
 
     global calender_curr, calender_lst, calender_prev
 
-    calender_curr = [0] * (7 * 6)   # get new calender to fill
+    calender_curr = [0] * (7*6)   # get new calender to fill
     ## calculating firs day's possition ##
     calender_prev.reverse()
     next_start = (14 - calender_prev.index(1)) % 7  # as indexing use in python (strat from 0)
@@ -50,7 +56,7 @@ def calender(year: int, month: int)-> None:
     return None
 
 
-def firs_month()-> None:
+def firs_month() -> None:
     global calender_curr, calender_prev, calender_lst
     
     for day in range(31):
@@ -63,7 +69,7 @@ def firs_month()-> None:
 
 
 
-def calender_generator(end_year: int)-> None:
+def calender_generator(end_year: int) -> None:
     """ generate calender list for given range from 1900"""
     
     for year in range(1900, end_year + 1):
@@ -74,7 +80,7 @@ def calender_generator(end_year: int)-> None:
     return None
 
 
-def sundat_1st_counter()-> int:
+def sundat_1st_counter() -> int:
     count = 0
     for i in range(12, len(calender_lst)):     # star from year ahead in calender list
         cur = calender_lst[i]                   # get each month
@@ -85,7 +91,7 @@ def sundat_1st_counter()-> int:
     return count
 
 
-def easy_way(end_year: int)-> int:
+def easy_way(end_year: int) -> int:
     import calendar
 
     count = 0

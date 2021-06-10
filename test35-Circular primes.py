@@ -11,7 +11,7 @@
 from my_math import prime_list_till
 
 
-def number_rotations(n):
+def number_rotations(n) -> list[int]:
     digits: list[str] = list(str(n))
     rotate: list[int] = []
 
@@ -22,7 +22,7 @@ def number_rotations(n):
     return rotate                               # return rotated digits
 
 
-def circular_prime_count(prime_lst: list[int])-> list[int]:
+def circular_prime_count(prime_lst: list[int]) -> list[int]:
     circular_primes: list[int] = []                          # circukar primes pound
     
     while True:

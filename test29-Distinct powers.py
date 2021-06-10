@@ -13,12 +13,12 @@
 """
 
 
-def terms_in_power_seq(a: range, b: range)-> int:
+def terms_in_power_seq(a: range, b: range) -> int:
     number_lst: list[int] = []
 
     for i in a: 
         for j in b: 
-            number_lst.append(i ** j)  # all posibilities
+            number_lst.append(i**j)  # all posibilities
 
     return len(set(number_lst))  # clean duplicate and  find lenth
 

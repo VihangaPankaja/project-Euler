@@ -18,25 +18,24 @@
 """
 
 # yeah i could've used annonymous functions 😁
-def f_lef_up(n: int)-> int: return (2 * n + 1) ** 2 - (2 * n)       # values for left up direction from middle
+def f_lef_up(n: int) -> int: return (2*n + 1)**2 - (2*n)       # values for left up direction from middle
 
 
-def f_lef_down(n: int)-> int: return (2 * n + 1) ** 2 - (4 * n)     # values for left down direction from middle
+def f_lef_down(n: int) -> int: return (2*n + 1)**2 - (4*n)     # values for left down direction from middle
 
 
-def f_right_up(n: int)-> int: return (2 * n + 1) ** 2               # values for right up direction from middle
+def f_right_up(n: int) -> int: return (2*n + 1)**2             # values for right up direction from middle
 
 
-def f_right_down(n: int)-> int: return (2 * n + 1) ** 2 - (6 * n)   # values for right down direction from middle
+def f_right_down(n: int) -> int: return (2*n + 1)**2 - (6*n)   # values for right down direction from middle
 
 
-def sum_of_diagonal_numbers(grid: int)-> int:
-    return sum([
-                1, 
-                sum(f_lef_up(n) for n in range(1, int(grid / 2) + 1)),
-                sum(f_lef_down(n) for n in range(1, int(grid / 2) + 1)),
-                sum(f_right_up(n) for n in range(1, int(grid / 2) + 1)),
-                sum(f_right_down(n) for n in range(1, int(grid / 2) + 1))
+def sum_of_diagonal_numbers(grid: int) -> int:
+    return sum([1, 
+                sum(f_lef_up(n) for n in range(1, int(grid/2) + 1)),
+                sum(f_lef_down(n) for n in range(1, int(grid/2) + 1)),
+                sum(f_right_up(n) for n in range(1, int(grid/2) + 1)),
+                sum(f_right_down(n) for n in range(1, int(grid/2) + 1))
             ])
     
     

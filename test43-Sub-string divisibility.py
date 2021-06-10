@@ -19,7 +19,7 @@ from typing import Generator, Iterator
 from itertools import permutations
 
 
-def divicible_pandigital(divicible: dict[str, Iterator[str]])-> Generator[int, None, None]:
+def divicible_pandigital(divicible: dict[str, Iterator[str]]) -> Generator[int, None, None]:
     """ 
         generates 0 to 9 digits pandigital numbers that are follows
             * 𝑑₂𝑑₃𝑑₄  is divisible by 2
