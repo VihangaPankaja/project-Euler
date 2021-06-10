@@ -7,6 +7,7 @@
   
   A number 𝑛 is called deficient 
     if the sum of its proper divisors is less than 𝑛 and
+    
   it is called abundant if this sum exceeds 𝑛.
   
   As 12 is the smallest abundant number, 
@@ -22,40 +23,58 @@
 ? Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 """
 
-from my_math import divisors
+import numpy as np
+import math as m
 
 
-def abn_list() -> list[int]:
-    """ check for abundant numbers in range """
-    global max_non_abn
+def abundant_nums_under(num: int) -> np.ndarray:
+    """ get abundant numbers under given number """
 
-    abn_lst: list[int] = []
-    for i in range(max_non_abn):
-        if sum(divisors(i + 1)) > (i + 1):
-            abn_lst.append((i + 1))
+    nums: np.ndarray = np.zeros(num+1, dtype=bool)
 
-    return abn_lst
-
-
-def sum_of_abn_lst(abn_lst: list[int]) -> list[int]:
-    """ get sum of abundant numbers under range """
-    global max_non_abn
-
-    sum_of_adn: list[int] = []
+    for i in range(12, num+1, 6):   # multiples of 6 are abundant (6 is a perfect number)
+        nums[i] = True
     
-    for i in range(len(abn_lst)):
-        for j in range(i, len(abn_lst)):
-            if abn_lst[i] + abn_lst[j] > max_non_abn:
-                break
+    for i in range(12, num+1):      # 12 is the first abundant number
+        
+        if not nums[i]:
+            
+            div_sum: int = 1        # include 1
+            for j in range(2, m.floor(m.sqrt(i)) + 1):
+                if i%j == 0:
 
-            else:
-                sum_of_adn.append(abn_lst[i] + abn_lst[j])
+                    if i//j == j:
+                        div_sum += j
+                    
+                    else:
+                        div_sum += j
+                        div_sum += i/j
+
+            if div_sum == i:            # is abundant and multiples of abundant also abundant
+                for j in range(2*i, num+1, i):
+                    nums[j] = True
+
+            elif div_sum > i:           # is perfect number but multiples of perfect number is abundant
+                for j in range(i, num+1, i):
+                    nums[j] = True
+    
+    return np.nonzero(nums)[0]
+
+
+def sum_of_non_abn_sums(abundants: np.ndarray, num: int) -> int:
+    """ returns sum of positive inegers which cannot be represented as the sum of 2 abundant numbers """
+    
+    non_abn_sums: np.ndarray = np.ones(num+1, dtype=bool)
+
+    for i in abundants:
+        for j in abundants:
+            if (k:= i+j) <= num:
+                non_abn_sums[k] = False
+            
+            else:break
                 
-    return sum_of_adn
+    return sum(np.nonzero(non_abn_sums)[0])
 
 
 if __name__ == '__main__':
-    max_non_abn: int = 28123
-    
-    print(sum(i for i in range(1, max_non_abn + 1) 
-                    if i not in sum_of_abn_lst(abn_list())))   # sum of numbers not in list
+    print(sum_of_non_abn_sums(abundant_nums_under(28_123), 28_123))
