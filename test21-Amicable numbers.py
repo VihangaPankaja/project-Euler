@@ -15,47 +15,40 @@
 ? Evaluate the sum of all the amicable numbers under 10000. 
 """
 
-import my_math
-
-
-def uncheck_prime() -> None:
-    prime_lst = my_math.prime_list_till(amicable_num - 1)       # get primes under target
-
-    num_check[0] = -1   # uncheck number 1
-
-    for i in prime_lst:
-        num_check[i - 1] = -1
-        
-    return None
+import numpy as np
+from math import sqrt, ceil
 
 
 def d(n: int) -> int:
     '''return sum divisors'''
-    divisors = []
 
-    for i in range(1, int(n/2 + 1)):
+    divisors: np.ndarray = np.zeros(ceil(n/2) + 2, dtype=bool)  # array of false
+    divisors[1] = True
+
+    for i in range(2, ceil(sqrt(n)) + 1):
         if n % i == 0:
-            divisors.append(i)
+            divisors[i] = True          # factor
+            divisors[n//i] = True       # factor
 
-    return sum(divisors)
+    return sum(np.nonzero(divisors)[0])
 
 
-def amicable_cheack() -> list[int]:
+def amicable_list_under(num_check: np.ndarray, amicable_num: int) -> np.ndarray:
+    """ returns amicable numbers under the given number """
+
     for i in range(1, amicable_num):
-        if num_check[i - 1] == 0:           # check if not unchecked
-
-            if i == d(d(i)) and i != d(i):   # ckeck for amicable number
-                num_check[i - 1] = d(i)         # mark amikable
-                num_check[d(i) - 1] = i         # mark amicable
-
-            else:
-                num_check[i - 1] = -1           # uncheck
-                
-    return num_check
+        if not num_check[i]:           # check if not unchecked
+            
+            if i == d(D:= d(i)) and i != D:          # ckeck for amicable number
+                num_check[i] = True             # mark amikable
+                num_check[D] = True          # mark amicable
+        
+    return np.nonzero(num_check)[0]
 
 
 if __name__ == "__main__":
-    amicable_num: int = 10000
-    num_check: list[int] = [0] * (amicable_num - 1)     # as a checkbox for every number
-    
-    print(sum(i for i in amicable_cheack() if i != -1))
+    amicable_num: int = 10_000
+    # as a checkbox for every number
+    num_check: np.ndarray = np.zeros(amicable_num, dtype=bool)
+
+    print(sum(amicable_list_under(num_check, amicable_num)))
