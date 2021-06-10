@@ -30,7 +30,7 @@ import math as m
 def abundant_nums_under(num: int) -> np.ndarray:
     """ get abundant numbers under given number """
 
-    nums: np.ndarray = np.zeros(num+1, dtype=bool)
+    nums: np.ndarray = np.zeros(num+1, dtype=bool)      # fille array with false
 
     for i in range(12, num+1, 6):   # multiples of 6 are abundant (6 is a perfect number)
         nums[i] = True
@@ -43,7 +43,7 @@ def abundant_nums_under(num: int) -> np.ndarray:
             for j in range(2, m.floor(m.sqrt(i)) + 1):
                 if i%j == 0:
 
-                    if i//j == j:
+                    if i//j == j:   # i/j also same
                         div_sum += j
                     
                     else:
@@ -68,12 +68,12 @@ def sum_of_non_abn_sums(abundants: np.ndarray, num: int) -> int:
 
     for i in abundants:
         for j in abundants:
-            if (k:= i+j) <= num:
+            if (k:= i+j) <= num:        # sum of abundants
                 non_abn_sums[k] = False
             
             else:break
                 
-    return sum(np.nonzero(non_abn_sums)[0])
+    return sum(np.nonzero(non_abn_sums)[0]) # numbers doesn't get from sum of abundants
 
 
 if __name__ == '__main__':
