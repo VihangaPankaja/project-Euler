@@ -16,40 +16,42 @@
   NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
-
-def T_n(n: int, term_lst: list[int]) -> list[int]:
-    if n == 2:
-        term_lst.append(1)
-
-    elif n == 1:
-        return term_lst
-
-    elif n % 2 == 0:                    # if n even
-        term_lst.append(int(n/2))
-        T_n(int(n/2), term_lst)
-
-    else:                              # if n odd
-        term_lst.append(3*n + 1)
-        T_n(3*n + 1, term_lst)
-
-    return term_lst
+import numpy as np
 
 
-def lonst_chain(max_number: int) -> int:
-    max_start: int = 0
-    max_terms: int = 0
+def T_next(n: int) -> int:
+    return 3*n + 1 if n % 2 else n//2
+
+
+def longest_chain(max_number: int) -> int:
+    """ find the longest chain giving number under given number """
+
+    nums: np.ndarray = np.ones(max_number, dtype=bool)
+    chain_size: dict[int, int] = {}
 
     for i in range(1, max_number):
-        term_lst: list[int] = [i]                      # new term list with currunt number for function
-        seq_lenth = len(T_n(i, term_lst))             # lenth for that number
 
-        if seq_lenth > max_terms:           # lenth higher than currunt max
-            max_terms = seq_lenth
-            max_start = i
+        if nums[i]:     # if wasn't check before
+            def chain(n):
+                """ return chain size of next number, update chain_size and update nums """
+                
+                try:                    # if in chain_size
+                    return chain_size[n]
+
+                except KeyError:
+                    if n == 1:
+                        chain_size[1] = 1
+                        return 1
+                    chain_size[n] = (k := 1 + chain(T_next(n)))     # add to chain_size
+                    if n < max_number:
+                        nums[n] = False     # set in nums
+                    return k
             
-    return (max_start, max_terms)
+            chain(i)
 
+    return max(chain_size, key=lambda x: chain_size[x])     # return that has biggest chain
 
 
 if __name__ == '__main__':
-    print(*lonst_chain(1_000_000))
+    global nums, chain_size
+    print(longest_chain(1_000_000))
