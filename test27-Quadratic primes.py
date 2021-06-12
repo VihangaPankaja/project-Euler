@@ -34,32 +34,29 @@ def q_formula_prime_count(a, b) -> int:
         if is_prime((n**2) + (a*n) + b):
             prime_coun += 1
             
-        else:
-            break
+        else:break
         
         n += 1
-        
         
     return prime_coun
 
 
 def main() -> tuple[int, int]:
 
-    a: range = range(-999, 1000)        # 𝑎 value range
-    b: range = range(-1000, 1001)       # 𝑏 value range
-    dictionary: dict = {}        # key = prime numbers count , values = 𝑎,𝑏 values used
+    a: range = range(-999, 1000, 2)        # 𝑎 value range # cannot be even
+    b: range = range(-999, 1000, 2)        # 𝑏 value range # cannot be even
+    dictionary: dict[int, int] = {}        # key = prime numbers count , values = 𝑎,𝑏 values used
     
     """ get primes possible for all 𝑎,𝑏 values """ 
 
     for i in a:
         for j in b:
             prime_coun: int = q_formula_prime_count(i, j)
-            dictionary[prime_coun] = (i, j)
+            dictionary[prime_coun] = i*j
 
     return dictionary[max(dictionary.keys())]  # get 𝑎,𝑏 for maximus primes found
 
 
 
 if __name__ == '__main__':
-    a, b = main()
-    print(a*b)
+    print(main())
