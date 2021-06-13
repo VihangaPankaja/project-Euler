@@ -8,47 +8,53 @@
 ? How many circular primes are there below one million
 """
 
-from my_math import prime_list_till
+from my_math import primesfrom2to
+from typing import Generator
 
 
-def number_rotations(n) -> list[int]:
-    digits: list[str] = list(str(n))
-    rotate: list[int] = []
+def rotations(num: int) -> Generator[int, None, None]:
+    """ yields rotated numbers for given number """
 
-    for _ in range(len(digits)):
-        digits.append(digits.pop(0))            # rotate digits
-        rotate.append(int(''.join(digits)))
+    num: str = str(num)
 
-    return rotate                               # return rotated digits
+    for i in range(len(num) - 1):
+        yield int(num[-1-i:] + num[: -1-i])
 
 
-def circular_prime_count(prime_lst: list[int]) -> list[int]:
-    circular_primes: list[int] = []                          # circukar primes pound
-    
-    while True:
-        elem = number_rotations(prime_lst[0])       # checck first in primes
-        for i in elem:
-            if i not in prime_lst:                  # if all of rotated numebrs aren't prime break
-                break
+def circular_primes_count(primes_under: int) -> int:
+    """ returns how many circular primes under the given number ,
+     made for only 10ⁿ (𝑛 ∈ ℤ) numbers as it only check for primes under given range  """
+
+    # 0 -> unchecked, 1 -> circular prime, -1 -> not a circular prime
+    circular_primes: dict[int, int] = {
+        x: 0 for x in primesfrom2to(primes_under)}
+    original = circular_primes.copy()
+    found: set[int] = set()
+
+    def is_prime(n):
+        try:    # try to find in dictionary
+            if not circular_primes[n]:
+                return True
+            return False
+        except KeyError:    # not in dictionary
+            return False
+
+    for prime in original:
+        if circular_primes[prime]:  # previously checked
+            continue
+
+        rot = (prime, *rotations(prime))    # all rotations
+        if all(map(is_prime, rot)):     # all rotations are prime
+            for i in rot:
+                circular_primes[i] = 1
+                found.add(i)
 
         else:
-            for j in elem:
-                circular_primes.append(j)           # if all primes add to list
-        
+            for i in rot:
+                circular_primes[i] = -1
 
-        for j in elem:
-            try:
-                prime_lst.remove(j)                 # remove all checked primes
+    return len(found)
 
-            except:
-                pass
-        
-        if prime_lst == []:                         # if primes are empty
-            break
 
-    return len(set(circular_primes))
-    
-    
 if __name__ == "__main__":
-    print(circular_prime_count(prime_list_till(1_000_000)))
-
+    print(circular_primes_count(1_000_000))
