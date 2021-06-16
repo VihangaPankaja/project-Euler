@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "eular\\Scripts\\python.exe",
-    "git.ignoreLimitWarning": true,
-    "files.associations": {
-        "*.html": "html",
-        "string": "cpp"
-    }
-}
