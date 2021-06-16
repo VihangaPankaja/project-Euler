@@ -1,0 +1,8 @@
+__pycache__/
+eular/
+*.exe
+try.cpp
+try2.cpp
+try.py
+try.ipynb
+.vscode
