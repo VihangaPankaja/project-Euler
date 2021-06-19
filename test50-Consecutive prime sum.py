@@ -14,7 +14,17 @@ import numpy as np
 
 
 def prime_sum_of_consecutive_primes(limit: int) -> int:
-    """ returns prime that can be written as the lonest sum of consecutive primes below given limit """
+    """returns prime that can be written as the lonest sum of consecutive 
+    primes below given limit
+
+    Args:
+    ----
+        limit (int): upper limit of numbers
+
+    Returns:
+    ----
+        int:
+    """
 
     primes: np.ndarray[int] = primesfrom2to(limit)      # all primes under given limit
     prime_sum: tuple[int, int] = (0, 0)                 # holds max chain sum found and chain length

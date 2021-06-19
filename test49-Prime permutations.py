@@ -15,7 +15,12 @@ from my_math import is_prime
 from itertools import permutations
 
 def arithmetic_seq() -> str:
-    """ returns concatenated three terms in above arithmetic sequence """
+    """returns concatenated three terms in above arithmetic sequence
+
+    Returns:
+    ----
+        str:
+    """
     
     for i in range(1_000, 10_000 - 3330):
         if all([
