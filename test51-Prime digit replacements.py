@@ -41,10 +41,10 @@ def primality_for_given_digt_numbers(digits: int) -> dict[int, bool]:
         10**(digits - 1), 10**digits)}   # initialize dictionary in number range
 
     for i in primesfrom2to(10**digits):
-        if i < 10**(digits - 1):
+        if i < 10**(digits - 1):    # not on considering digit range
             continue
 
-        is_prime[i] = True
+        is_prime[i] = True  # mark primes
 
     return is_prime
 
@@ -54,10 +54,12 @@ def is_prime_family(members_in_family: int, template: array, is_prime: dict[int,
     update min prime if found
 
     Args:
+    ----
         members_in_family (int): how many primes
         template (array[str]): number with replacable possitions
 
     Returns:
+    ----
         bool:
     """
     global min_prime
@@ -65,16 +67,16 @@ def is_prime_family(members_in_family: int, template: array, is_prime: dict[int,
     smll_in = None
 
     for i in '0123456789':
-        if template[0] == '*' and i == '0':
+        if template[0] == '*' and i == '0':     # 0 is not applied in first digit
             continue
 
-        if is_prime[int(k := template.tounicode().replace('*', i))]:
+        if is_prime[int(k := template.tounicode().replace('*', i))]:    # check for replaced values
             primes += 1
 
-            if smll_in is None:
+            if smll_in is None:     # for first prime found
                 smll_in = int(k)
             
-    if primes == members_in_family:
+    if primes == members_in_family:     # if all primes found equals to members cound requires
         if min_prime is None or min_prime > smll_in:
             min_prime = smll_in
         return True
@@ -93,12 +95,13 @@ def template(replacement: tuple[int], digits: int) -> Generator[array, None, Non
     ----
         array[str]: number templte with replacable possitions
     """
+    
     l: int = len(replacement)
-    for num in range(10**(l) if not replacement[0] else 0, 10**(l + 1)):
+    for num in range(10**(l) if not replacement[0] else 0, 10**(l + 1)):    # if first value replcing start with 10ˡ
         tem: array[str] = array('u', "*" * digits)
         num: str = str(num).rjust(l, '0')
 
-        for index, i in enumerate(replacement):
+        for index, i in enumerate(replacement):     # replce parts with numbers to generate template
             tem[i] = num[index]
 
         yield tem
@@ -121,11 +124,13 @@ def smallest_prime_family(members_in_family: int) -> int:
     cur_digits: int = 2
     check: bool = True
 
-    while check:
+    while check:    # untill find check only for n digit numbers 
         is_prime: dict[int, bool] = primality_for_given_digt_numbers(
             cur_digits)
 
-        for replcement in chain(*(combinations(range(cur_digits), i) for i in range(1, cur_digits))):
+        for replcement in chain(*(combinations(range(cur_digits), i) for i in range(1, cur_digits))):   
+            # all possibilities of getting 𝑖 items from 𝑛 items where 𝑖 is 1 to 𝑛-1
+            
             for tem in template(replcement, cur_digits):
                 if (is_prime_family(members_in_family, tem, is_prime)):
                     check = False
