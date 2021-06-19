@@ -49,7 +49,8 @@ def primality_for_given_digt_numbers(digits: int) -> dict[int, bool]:
     return is_prime
 
 
-def is_prime_family(members_in_family: int, template: array, is_prime: dict[int, bool]) -> bool:
+def is_prime_family(members_in_family: int, template: array, 
+                    is_prime: dict[int, bool]) -> bool:
     """return true if given number of primes for given template.
     update min prime if found
 
@@ -97,7 +98,8 @@ def template(replacement: tuple[int], digits: int) -> Generator[array, None, Non
     """
     
     l: int = len(replacement)
-    for num in range(10**(l) if not replacement[0] else 0, 10**(l + 1)):    # if first value replcing start with 10ˡ
+    for num in range(10**(l) if not replacement[0] else 0, 
+                     10**(l + 1)):    # if first value replcing start with 10ˡ
         tem: array[str] = array('u', "*" * digits)
         num: str = str(num).rjust(l, '0')
 
@@ -128,9 +130,10 @@ def smallest_prime_family(members_in_family: int) -> int:
         is_prime: dict[int, bool] = primality_for_given_digt_numbers(
             cur_digits)
 
-        for replcement in chain(*(combinations(range(cur_digits), i) for i in range(1, cur_digits))):   
+        for replcement in chain(*(combinations(range(cur_digits), i) 
+                                  for i in range(1, cur_digits))):   
             # all possibilities of getting 𝑖 items from 𝑛 items where 𝑖 is 1 to 𝑛-1
-            
+
             for tem in template(replcement, cur_digits):
                 if (is_prime_family(members_in_family, tem, is_prime)):
                     check = False
