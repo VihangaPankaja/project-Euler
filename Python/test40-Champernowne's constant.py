@@ -11,6 +11,17 @@
 
 
 def d_n(n: int) -> int:
+    """ find 𝑛ᵗʰ digit of concatenated number
+
+    Args:
+    ----
+        n (int): 𝑛ᵗʰ digit
+
+    Returns:
+    ----
+        int: 
+    """
+    
     if n <= 0:
         return None
     
@@ -27,19 +38,20 @@ def d_n(n: int) -> int:
                 
                 n -= last_digit    # remove nth digits till previous digit
 
-                num = (10**power -1) + ( (n // (power+1) + 1) if n % (power+1) != 0 else (n // (power+1)) )   # selct number in 𝑛ᵗʰ digit
+                num = ((10**power -1) + ( (n // (power+1) + 1) 
+                                         if n % (power+1) != 0 
+                                         else (n // (power+1)) ))   # selct number in 𝑛ᵗʰ digit
                 ######{last num of   ###{ quotient + 1}#########{remainder is 0 }#######{   quotient   }####
                 ######previous digit}#######################################################################
                 ## eg: 10 -> 10-9=1 -> quo=0 rem=1
                 ##     11 -> 11-9=2 -> quo=1 rem=0
                 
-                return int(str(num)[n % (power+1) - 1])   # return requied digit from selected number 
+                return int(str(num)[n%(power + 1) - 1])   # return requied digit from selected number 
             
             else:
-                last_digit += (power+1) * (10 ** (power+1) - 10**power)   # concatinated digits for current number of digitss
+                last_digit += (power + 1) * (10**(power + 1) - 10**power)   # concatinated digits for current number of digitss
                 power += 1      # next 10th power
     
-
 
 if __name__ == '__main__':
     print(d_n(1) 

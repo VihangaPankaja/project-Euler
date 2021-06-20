@@ -16,12 +16,17 @@ from typing import Generator
 
 
 def pentagonal(n: int=1) -> Generator[int, None, None]:
-    """ 
+    """    
     generates pentagonal numbers.
-        Parameters:
-            𝑛 (int): (optional) starts with given number
-            
-    ! infine generator
+        ! infine generator
+
+    Args:
+    ----
+        n (int, optional): starts with given number. Defaults to 1.
+
+    Yields:
+    ----
+        Generator[int, None, None]:
     """
 
     while True:
@@ -30,6 +35,16 @@ def pentagonal(n: int=1) -> Generator[int, None, None]:
     
 
 def is_pentagonal(n: int) -> bool:
+    """ checks if a number is a pentagonal number
+
+    Args:
+    ----
+        n (int): number
+
+    Returns:
+    ----
+        bool:
+    """
     if (1 + (1 + 24*n) ** 0.5) % 6 == 0:
         return True
     
@@ -37,8 +52,12 @@ def is_pentagonal(n: int) -> bool:
 
 
 def main() -> int:
-    """ find the pair of pentagonal numbers that sum and difference also penagonal and 𝐷 is minimised """
+    """ find the pair of pentagonal numbers that sum and difference also penagonal and 𝐷 is minimised 
 
+    Returns:
+        int: 𝐷ₘᵢₙ
+    """
+    
     for index_k, P_k in enumerate(pentagonal()):    # 𝑃ₖ values
 
         start: int = int((1 + (72*index_k + 49)**0.5) /6) 

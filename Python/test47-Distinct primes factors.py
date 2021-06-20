@@ -15,7 +15,16 @@ from my_math import is_prime
 
 
 def distinct_prime_factors(n: int) -> int:
-    """ reurns how many distinct prime factors to given number """
+    """ reurns how many distinct prime factors to given number 
+
+    Args:
+    ----
+        n (int): number to find prime factors
+
+    Returns:
+    ----
+        int:
+    """
 
     prime_factors: set = set()
 
@@ -36,7 +45,16 @@ def distinct_prime_factors(n: int) -> int:
 
 
 def consecutive_prime_factors(distinct_factors: int) -> int:
-    """ returns first number for first n consecutive integers to have distinct n prime factors """
+    """ returns first number for first n consecutive integers to have distinct n prime factors 
+
+    Args:
+    ----
+        distinct_factors (int): number of distinct prime factors want
+
+    Returns:
+    ----
+        int: 
+    """
 
     cur_num: int = 10    # starts checking numbers from 9
     

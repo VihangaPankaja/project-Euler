@@ -21,15 +21,24 @@ from itertools import permutations
 
 def divicible_pandigital(divicible: dict[str, dict[str, bool]]) -> Generator[int, None, None]:
     """ 
-        generates 0 to 9 digits pandigital numbers that are follows
-            * 𝑑₂𝑑₃𝑑₄  is divisible by 2
-            * 𝑑₃𝑑₄𝑑₅  is divisible by 3
-            * 𝑑₄𝑑₅𝑑₆  is divisible by 5
-            * 𝑑₅𝑑₆𝑑₇  is divisible by 7
-            * 𝑑₆𝑑₇𝑑₈  is divisible by 11
-            * 𝑑₇𝑑₈𝑑₉  is divisible by 13
-            * 𝑑₈𝑑₉𝑑₁₀ is divisible by 17
+    generates 0 to 9 digits pandigital numbers that are follows
+        * 𝑑₂𝑑₃𝑑₄  is divisible by 2
+        * 𝑑₃𝑑₄𝑑₅  is divisible by 3
+        * 𝑑₄𝑑₅𝑑₆  is divisible by 5
+        * 𝑑₅𝑑₆𝑑₇  is divisible by 7
+        * 𝑑₆𝑑₇𝑑₈  is divisible by 11
+        * 𝑑₇𝑑₈𝑑₉  is divisible by 13
+        * 𝑑₈𝑑₉𝑑₁₀ is divisible by 17
+        
         rules where 𝑑ₙ is 𝑛ᵗʰ digit
+    
+    Args:
+    ----
+        divicible (dict[str, dict[str, bool]]): dictionary of diviciblility
+
+    Yields:
+    ----
+        Generator[int, None, None]: 
     """
 
     for digits in permutations(map(str, range(10))):
@@ -48,7 +57,17 @@ def divicible_pandigital(divicible: dict[str, dict[str, bool]]) -> Generator[int
             yield int(num)
 
 
-def make_divisible_dic():
+def make_divisible_dic() -> dict[str, dict[str, bool]]:
+    """ make dictionary of divicible number divicibility under 1000
+
+    Returns:
+    ----
+        dict[str, dict[str, bool]]: divicible by 2,3,5,7,11,13,17
+        
+    >>> make_divisible_dic()
+    ... {'d2':{'000':True, '001':False, '002':True, ..., '999':False},'d3':{...}, ..., 'd17':{...}}
+    """
+    
     nums = [k for i in range(1000) if len(set((k:= str(i).rjust(3, '0')))) == 3]
 
     divicible: dict[str, dict[str, bool]] = {

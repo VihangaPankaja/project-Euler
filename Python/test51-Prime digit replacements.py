@@ -14,6 +14,7 @@
 ?    by replacing part of the number (not necessarily adjacent digits) with the same digit, 
 ?    is part of an eight prime value family.
 """
+# ! run time about 40s
 
 from my_math import primesfrom2to
 from array import array

@@ -17,31 +17,55 @@
 ? how many are triangle words
 """
 
-
 from functools import cache    # only hashable objects can be cached
 # implementing frozendict for cache dict
 # using cache because using function multiple times with same variable
 
 class Frozendict(dict):
     """ hashable dictionary """
+    
     def __hash__(self):
         return hash(frozenset(self.items()))
 
 
 @cache
 def wrd_scor(wrd: str) -> int:
+    """ calculate score for given letters in words
+        A = 1, B = 2, ...
+
+    Args:
+    ----
+        wrd (str): word to calculate score
+
+    Returns:
+    ----
+        int: sum of scores
+        
+    >>> wrd_scor('SKY')
+    ... 55
+    """
+    
     scores = Frozendict({chr(x+64):x for x in range(1, 27)})
     
     return sum([scores[i] for i in wrd])
 
 
 def triangle_lst(num: int) -> list[int]:
+    """ calculate triangle numbers under given number
+
+    Args:
+        num (int): max number
+
+    Returns:
+        list[int]: list of triangle numbers
+    """
+    
     triangles: list[int] = [1]
-    n = 1
+    n: int = 1
     
     while triangles[-1] <= num:
-        n+=1
-        triangles.append(int(n*(n+1)/ 2))
+        n += 1
+        triangles.append(int(n*(n + 1) / 2))
     
     return triangles
 

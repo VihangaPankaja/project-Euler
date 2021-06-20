@@ -1,6 +1,9 @@
 # project-Euler
 
-project eular problems solved with python
-and some with c++
+project eular problems solved with
+
+- python
+- c++
+- JS
 
 > ! not all codes are optimized

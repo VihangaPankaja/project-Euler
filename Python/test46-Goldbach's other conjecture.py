@@ -18,9 +18,13 @@ from my_math import is_prime
 
 
 def twice_square() -> Generator[int, None, None]:
-    """ 
+    """
     Generates twice of square numbers
-    ! infinite generator
+        ! infinite generator
+
+    Yields:
+    ----
+        Generator[int, None, None]:
     """
     
     n: int = 1
@@ -31,11 +35,15 @@ def twice_square() -> Generator[int, None, None]:
         
 
 def odd_composite() -> Generator[int, None, None]:
-    """ 
-    Generates odd composite numbers
-    ! infinite generator
     """
-    
+    Generates odd composite numbers
+        ! infinite generator
+
+    Yields:
+    ----
+        Generator[int, None, None]: composite numbers
+    """
+
     n: int = 9  # first odd composite
     
     while True:
@@ -46,10 +54,13 @@ def odd_composite() -> Generator[int, None, None]:
         
 
 def smallest_odd_composite() -> int:
-    """ 
-    returns smallest odd composite that cannot be written as the sum of a prime and twice a square
+    """ returns smallest odd composite that cannot be written as the sum of a prime and twice a square
+
+    Returns:
+    ----
+        int:
     """
-    
+        
     for com in odd_composite():
         for sub in twice_square():
             if sub >= com - 1:          # no matching primes found

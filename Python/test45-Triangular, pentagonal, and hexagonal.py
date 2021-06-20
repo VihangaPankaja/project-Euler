@@ -13,13 +13,19 @@ from typing import Generator
 
 
 def triangle(n: int=286) -> Generator[int, None, None]:
-    """ 
+    """    
     generates triangle numbers
-        Parameters:
-            n (int): (optional) starts with given number
-            
-    ! infine generator
+        ! infine generator
+
+    Args:
+    ----
+        n (int, optional): starts with given number. Defaults to 286.
+
+    Yields:
+    ----
+        Generator[int, None, None]: 
     """
+            
     
     while True:
         yield int(n * (n+1) / 2)
@@ -27,6 +33,17 @@ def triangle(n: int=286) -> Generator[int, None, None]:
         
 
 def is_pentagonal(n: int) -> bool:
+    """ checks if the number is a pentagonal number
+
+    Args:
+    ----
+        n (int): number to check
+
+    Returns:
+    ----
+        bool: 
+    """
+    
     if (1 + (1 + 24*n) ** 0.5) % 6 == 0:
         return True
     
@@ -34,6 +51,17 @@ def is_pentagonal(n: int) -> bool:
 
 
 def is_hexagonal(n: int) -> bool:
+    """ checks if the number is a hexagonal number
+
+    Args:
+    ----
+        n (int): number to check
+
+    Returns:
+    ----
+        bool: 
+    """
+    
     if (1 + (1 + 8*n) ** 0.5) % 4 == 0:
         return True
     
