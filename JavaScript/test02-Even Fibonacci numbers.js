@@ -9,3 +9,21 @@
 */
 
 
+function fibEvenSum(nums_under) {
+    let sum = 0;
+    let fib_prev_2 = 1;
+    let fib_prev_1 = 1;
+    let Fnew;
+
+    for (Fnew = 2; Fnew < nums_under; Fnew = fib_prev_2 + fib_prev_1) {
+        fib_prev_2 = fib_prev_1;
+        fib_prev_1 = Fnew;
+        if (Fnew%2 === 0) {
+            sum += Fnew;
+        };
+    };
+
+    return sum;
+};
+
+console.log(fibEvenSum(4_000_000));
