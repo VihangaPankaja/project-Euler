@@ -12,10 +12,14 @@ function total(num){
     for (let i = 0; i < num; i++){
         if (i%3 === 0 || i%5 === 0){
             sum += i;
-        }
-    }
+        };
+    };
 
     return sum;
-}
+};
 
-console.log(total(1000));
+
+// this equals to __name__ == '__main__' in python. requre is undefined in browsers.
+if (typeof require !== 'undefined' && require.main === module) { 
+    console.log(total(1000));
+};

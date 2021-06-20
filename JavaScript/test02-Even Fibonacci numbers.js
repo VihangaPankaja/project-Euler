@@ -26,4 +26,7 @@ function fibEvenSum(nums_under) {
     return sum;
 };
 
-console.log(fibEvenSum(4_000_000));
+
+if (typeof require !== 'undefined' && require.main === module) {
+    console.log(fibEvenSum(4_000_000));
+};
