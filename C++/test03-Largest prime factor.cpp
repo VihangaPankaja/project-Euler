@@ -13,9 +13,13 @@ int largest_factor(long long number_left){
     long long  i = 2;
 
     while (i < number_left){            // if not prime
-        if (number_left % i == 0){      // if divicible by i
-            number_left /= i;           // get other factor
-        }
+        while (true){
+            if (number_left % i == 0 && number_left / i != 1){      // if divicible by i
+                number_left /= i;           // get other factor
+            }else {
+                break;
+            };
+        };
         i++;
     }
 
@@ -24,7 +28,7 @@ int largest_factor(long long number_left){
 
 
 int main(){
-    cout << largest_factor(600851475143);
+    cout << largest_factor(600851475143) << endl;
     
     return 0;
 }
