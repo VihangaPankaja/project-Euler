@@ -1,14 +1,24 @@
 """
-  The decimal number, 
+    The decimal number, 
 *       585 = 1001001001 (binary), 
         is palindromic in both bases.
         
-? Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
-  (Please note that the palindromic number, in either base, may not include leading zeros.)
+?   Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+    (Please note that the palindromic number, in either base, may not include leading zeros.)
 """
 
 
 def palindrome_list_till(top: int) -> list[int]:
+    """ find all numbers that binary format and itself is palindromic
+
+    Args:
+    ----
+        top (int): numbers under
+
+    Returns:
+    ----
+        list[int]: 
+    """
     palindromic: list[int] = []
 
     n: int= 0
@@ -26,7 +36,6 @@ def palindrome_list_till(top: int) -> list[int]:
             palindromic.append(n)
             
     return palindromic
-
 
 
 if __name__ == '__main__':

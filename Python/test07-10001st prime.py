@@ -1,14 +1,25 @@
 """ 
-  By listing the first six prime numbers: 
-*   2, 3, 5, 7, 11, and 13, 
+    By listing the first six prime numbers: 
+*       2, 3, 5, 7, 11, and 13, 
     we can see that the 6th prime is 13.
 
-? What is the 10 001st prime number 
+?   What is the 10 001st prime number 
 """
 
 
 
 def nth_prime(prime_no: int) -> int:
+    """ returns the 𝑛ᵗʰ prime number
+
+    Args:
+    ----
+        prime_no (int): possition
+
+    Returns
+    ----
+        int:
+    """
+    
     from math import sqrt
 
     prime_count: int = 0

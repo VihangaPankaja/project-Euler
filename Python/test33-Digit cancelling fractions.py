@@ -1,20 +1,27 @@
 """
-  The fraction 49/98 is a curious fraction, 
-  as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, 
-  is obtained by cancelling the 9s.
-  
-  We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
-  
-  There are exactly four non-trivial examples of this type of fraction, 
-  less than one in value, and containing two digits in the numerator and denominator.
+    The fraction 49/98 is a curious fraction, 
+    as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, 
+    is obtained by cancelling the 9s.
+    
+    We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+    
+    There are exactly four non-trivial examples of this type of fraction, 
+    less than one in value, and containing two digits in the numerator and denominator.
 
-? If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+?   If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 """
 
 from math import prod
 
 
-def non_trivial_product() -> tuple[int]:
+def non_trivial_product() -> tuple[int, int]:
+    """ find the product of 4 non-trivial fractions
+
+    Returns:
+    ----
+        tuple[int, int]: (numerator, denominator)
+    """
+    
     pos_prod: list[tuple[int]] = []
     
     for i, j in ((n, m) for n in range(11,100) 
@@ -48,6 +55,18 @@ def non_trivial_product() -> tuple[int]:
 
 
 def simplify_frac(nuratr: int, denmtr: int) -> int:
+    """ returns denominator of the simplified fraction
+
+    Args:
+    ----
+        nuratr (int): numeratror
+        denmtr (int): denominator
+
+    Returns:
+    ----
+        int:
+    """
+    
     for i in range(nuratr, 0, -1):            # simplify the fraction
         if (nuratr % i == 0 and 
             denmtr % i == 0):

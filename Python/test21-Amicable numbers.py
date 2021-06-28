@@ -1,18 +1,18 @@
 """ 
-  Let d(𝑛) be defined as the sum of proper divisors of 𝑛 (numbers less than 𝑛 which divide evenly into 𝑛)
-  .
-* If d(𝑎) = 𝑏 and d(𝑏) = 𝑎, where 𝑎 ≠ 𝑏, 
-  then 𝑎 and 𝑏 are an amicable pair and each of 𝑎 and 𝑏 are called amicable numbers.
-  
-  For example, the proper divisors of 220 are 
-  1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; 
-  therefore d(220) = 284. 
-  
-  The proper divisors of 284 are,
-  1, 2, 4, 71 and 142; 
-  so d(284) = 220.
+    Let d(𝑛) be defined as the sum of proper divisors of 𝑛 (numbers less than 𝑛 which divide evenly into 𝑛)
 
-? Evaluate the sum of all the amicable numbers under 10000. 
+*   If d(𝑎) = 𝑏 and d(𝑏) = 𝑎, where 𝑎 ≠ 𝑏, 
+    then 𝑎 and 𝑏 are an amicable pair and each of 𝑎 and 𝑏 are called amicable numbers.
+    
+    For example, the proper divisors of 220 are 
+    1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; 
+    therefore d(220) = 284. 
+    
+    The proper divisors of 284 are,
+    1, 2, 4, 71 and 142; 
+    so d(284) = 220.
+
+?   Evaluate the sum of all the amicable numbers under 10000. 
 """
 
 import numpy as np
@@ -20,7 +20,16 @@ from math import sqrt, ceil
 
 
 def d(n: int) -> int:
-    '''return sum divisors'''
+    """ returns the sum of all the divisors
+
+    Args:
+    ----
+        n (int): number
+
+    Returns:
+    ----
+        int: 
+    """
 
     divisors: np.ndarray = np.zeros(ceil(n/2) + 2, dtype=bool)  # array of false
     divisors[1] = True
@@ -34,7 +43,17 @@ def d(n: int) -> int:
 
 
 def amicable_list_under(num_check: np.ndarray, amicable_num: int) -> np.ndarray:
-    """ returns amicable numbers under the given number """
+    """ returns amicable numbers under the given number
+
+    Args:
+    ----
+        num_check (np.ndarray): marked number array
+        amicable_num (int): numbers under
+
+    Returns:
+    ----
+        np.ndarray: 
+    """
 
     for i in range(1, amicable_num):
         if not num_check[i]:           # check if not unchecked

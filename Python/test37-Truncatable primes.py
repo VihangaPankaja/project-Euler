@@ -1,20 +1,29 @@
 """
-  The number 3797 has an interesting property. 
-    Being prime itself, it is possible to continuously remove digits from left to right, 
-    and remain prime at each stage:
-*       3797, 797, 97, and 7. 
+    The number 3797 has an interesting property. 
+        Being prime itself, it is possible to continuously remove digits from left to right, 
+        and remain prime at each stage:
+*           3797, 797, 97, and 7. 
     Similarly we can work from right to left: 
 *       3797, 379, 37, and 3.
  
-? Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+?   Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
  
- NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+    NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 
 
-def is_prime(n: int)-> int:
-    '''return if prime or not'''
+def is_prime(n: int)-> bool:
+    """ primality of the given number
 
+    Args:
+    ----
+        n (int): number
+
+    Returns:
+    ----
+        bool: primality
+    """
+    
     for i in range(2, int(n**0.5) + 2):
         if n % i == 0:
             break
@@ -24,8 +33,14 @@ def is_prime(n: int)-> int:
     return False
 
 
-
 def main() -> list[int]:
+    """ find primes that truncatable for both directions
+
+    Returns:
+    ----
+        list[int]: 
+    """
+    
     trunctable: list[int] = []
     lst_digits: list[int] = [2, 3, 5, 7]
 

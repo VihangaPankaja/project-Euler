@@ -4,23 +4,23 @@
 ? What is the largest prime factor of the number 600851475143
  */
 
+function largestFactor(number) {
+  let i = 2;
 
-function largestFactor(number){
-    let i = 2;
+  while (i < number) {
+    while (true) {
+      if (number % i === 0 && number / i !== 1) {
+        number /= i;
+      } else {
+        break;
+      }
+    }
+    i++;
+  }
 
-    while (i < number){
-        while (true) {
-            if (number % i === 0 && number / i !== 1) {
-                number /= i;
-            }else {break;}
-        };
-        i++;
-    };
+  return number;
+}
 
-    return number;
-};
-
-
-if (typeof require !== 'undefined' && require.main === module){
-    console.log(largestFactor(600_851_475_143));
+if (typeof require !== "undefined" && require.main === module) {
+  console.log(largestFactor(600_851_475_143));
 }

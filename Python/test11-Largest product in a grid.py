@@ -23,10 +23,10 @@ num_list = (''.join(
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''.split('\n'))).split(' ')    ## create list of numbers as string
 
 """ 
-  The product of [9×7][10×8][11×9][12×10] numbers is 
-* 26 × 63 × 78 × 14 = 1788696.
+    The product of [9×7][10×8][11×9][12×10] numbers is 
+*       26 × 63 × 78 × 14 = 1788696.
 
-? What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid
+?   What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid
 """
 
 import numpy as np
@@ -35,7 +35,16 @@ grid: np.ndarray = np.array(num_list, dtype='i').reshape(20, 20)    # format num
 
 
 def max_in_block(array_block: np.ndarray) -> int:
-    """ returns max possible product from 4 numbers in 4 by 4 array """
+    """ returns max possible product from 4 numbers in 4 by 4 array
+
+    Args:
+    ----
+        array_block (np.ndarray): 4×4 array block
+
+    Returns:
+    ----
+        int:
+    """
     
     diag1 = (array_block[0, 0] 
              * array_block[1, 1] 
@@ -70,6 +79,17 @@ def max_in_block(array_block: np.ndarray) -> int:
 
 
 def greatest_product(grid: np.ndarray) -> int:
+    """ find the greatest product in 20×20 grid
+
+    Args:
+    ----
+        grid (np.ndarray): 20×20 grid
+
+    Returns:
+    ----
+        int:
+    """
+    
     cur_max: int = 0
     x, y = grid.shape      # len in x,y axis
 
@@ -82,7 +102,6 @@ def greatest_product(grid: np.ndarray) -> int:
                 
                 
     return cur_max
-
 
 
 if __name__ == '__main__':

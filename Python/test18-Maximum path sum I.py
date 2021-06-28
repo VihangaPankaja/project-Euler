@@ -1,14 +1,14 @@
 """ 
-  By starting at the top of the triangle below and moving to adjacent numbers on the row below, 
-  the maximum total from top to bottom is 23.
+    By starting at the top of the triangle below and moving to adjacent numbers on the row below, 
+    the maximum total from top to bottom is 23.
 *      3
 *     7 4
 *    2 4 6
 *   8 5 9 3
 
-  That is, 3 + 7 + 4 + 9 = 23.
+    That is, 3 + 7 + 4 + 9 = 23.
 
-? Find the maximum total from top to bottom of the triangle below:
+?   Find the maximum total from top to bottom of the triangle below:
 *                 75
 *                95 64
 *               17 47 82
@@ -25,9 +25,9 @@
 *    63 66 04 68 89 53 67 30 73 16 69 87 40 31
 *   04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 
-  NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route.
-        However, Problem 67, is the same challenge with a triangle containing one-hundred rows;
-        it cannot be solved by brute force, and requires a clever method! ;o) 
+    NOTE:   As there are only 16384 routes, it is possible to solve this problem by trying every route.
+            However, Problem 67, is the same challenge with a triangle containing one-hundred rows;
+            it cannot be solved by brute force, and requires a clever method! ;o) 
 """
 
 from typing import NoReturn
@@ -52,13 +52,33 @@ numbers = '''  75
 
 
 def value_for_cordinate(line, position) -> int:
-    """ get value for given coordinates at grid """
+    """ get value for given coordinates at grid
+
+    Args:
+    ----
+        line ([type]): line NO:
+        position ([type]): Possition in line
+
+    Returns:
+    ----
+        int: [description]
+    """
+    
     global num_lst
     
     return int(num_lst[my_math.triangle(line-1) + (position-1)])
 
 
 def maxmum_sum(cur_line: int = 1, currunt_position: int = 1, currunt_sum: int = 0) -> NoReturn:
+    """ find sums in every path
+
+    Args:
+    ----
+        cur_line (int, optional): current line working. Defaults to 1.
+        currunt_position (int, optional): current possition in working line. Defaults to 1.
+        currunt_sum (int, optional): current sum along path followed. Defaults to 0.
+    """
+    
     global total_lines, sum_list
 
     if cur_line == total_lines - 1:                                                                                     # at 2nd last line complete path and calculate sum

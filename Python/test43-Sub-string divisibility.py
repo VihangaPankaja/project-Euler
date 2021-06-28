@@ -1,9 +1,9 @@
 """ 
-  The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, 
-  but it also has a rather interesting sub-string divisibility property.
-  
-  Let 𝑑₁ be the 1ˢᵗ digit, 𝑑₂ be the 2ⁿᵈ digit, and so on. 
-  In this way, we note the following:
+    The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, 
+    but it also has a rather interesting sub-string divisibility property.
+    
+    Let 𝑑₁ be the 1ˢᵗ digit, 𝑑₂ be the 2ⁿᵈ digit, and so on. 
+    In this way, we note the following:
 *       𝑑₂𝑑₃𝑑₄  = 406   is divisible by 2
 *       𝑑₃𝑑₄𝑑₅  = 063   is divisible by 3
 *       𝑑₄𝑑₅𝑑₆  = 635   is divisible by 5
@@ -12,7 +12,7 @@
 *       𝑑₇𝑑₈𝑑₉  = 728   is divisible by 13
 *       𝑑₈𝑑₉𝑑₁₀ = 289   is divisible by 17
 
-? Find the sum of all 0 to 9 pandigital numbers with this property.
+?   Find the sum of all 0 to 9 pandigital numbers with this property.
 """
 
 from typing import Generator

@@ -1,23 +1,29 @@
 """ 
-  A permutation is an ordered arrangement of objects.
-  For example, 
-    3124 is one possible permutation of the
-    digits 1, 2, 3 and 4. 
+    A permutation is an ordered arrangement of objects.
+    For example, 
+        3124 is one possible permutation of the
+        digits 1, 2, 3 and 4. 
   
-  If all of the permutations are listed numerically or alphabetically, 
-  we call it lexicographic order.
+    If all of the permutations are listed numerically or alphabetically, 
+    we call it lexicographic order.
 
-  The lexicographic permutations of 0, 1 and 2 are:
-*    012   021   102   120   201   210
+    The lexicographic permutations of 0, 1 and 2 are:
+*       012   021   102   120   201   210
 
-? What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9? 
+?   What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9? 
 """
 
 from typing import NoReturn
 
 
 def lex_permu(sel_nums: list[int] = []) -> NoReturn:   # or use permutations module in itertolls library
-    """ returns list of lexicographic permutation for a given iterable """
+    """ returns list of lexicographic permutation for a given iterable
+
+    Args:
+    ----
+        sel_nums (list[int], optional): selected numbers from previous iteration of the function. Defaults to [].
+    """
+    
     global count, digits, stop, number
     
     rem_dig: list[int] = [i for i in digits if i not in sel_nums]  # list of digits remaing after previous selections

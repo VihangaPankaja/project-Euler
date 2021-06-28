@@ -1,17 +1,30 @@
 """
-  In the United Kingdom the currency is made up of pound (£) and pence (p). 
+    In the United Kingdom the currency is made up of pound (£) and pence (p). 
   
-  There are eight coins in general circulation:
-*   1p, 2p, 5p, 10p, 20p, 50p, £1 (100p), and £2 (200p).
+    There are eight coins in general circulation:
+*       1p, 2p, 5p, 10p, 20p, 50p, £1 (100p), and £2 (200p).
 
-  It is possible to make £2 in the following way:  
-    1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
+    It is possible to make £2 in the following way:  
+        1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
     
-? How many different ways can £2 be made using any number of coins?
+?   How many different ways can £2 be made using any number of coins?
 """
 
 
 def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []) -> int:
+    """ find all possibilities of coins combinations for a given value
+
+    Args:
+    ----
+        cur_index (int, optional): selected coin. Defaults to 0.
+        cur_tot (int, optional): current total. Defaults to 0.
+        chs (list[int], optional): previously found possibilities. Defaults to [].
+
+    Returns:
+    ----
+        int:
+    """
+    
     global coins, tar_val, posibilities
 
     coin_count: int = 0
@@ -19,7 +32,7 @@ def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []) -> int:
         cur_val = coin_count * coins[cur_index]  #value from currunt type of coin
         
         if cur_val + cur_tot > tar_val:   #check if the currunt combination cannot rech the tearget
-            break
+            return
         
         elif cur_val + cur_tot == tar_val:  #check if the currunt combination can rech the target
             posibilities +=1

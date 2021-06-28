@@ -1,10 +1,10 @@
 """ 
-  An irrational decimal fraction is created by concatenating the positive integers:
-*   0.123456789101112131415161718192021...
+    An irrational decimal fraction is created by concatenating the positive integers:
+*       0.123456789101112131415161718192021...
 
-  It can be seen that the 12ᵗʰ digit of the fractional part is 1.
+    It can be seen that the 12ᵗʰ digit of the fractional part is 1.
   
-  If 𝑑ₙ represents the 𝑛ᵗʰ digit of the fractional part, find the value of the following expression.
+    If 𝑑ₙ represents the 𝑛ᵗʰ digit of the fractional part, find the value of the following expression.
 ?   𝑑₁ × 𝑑₁₀ × 𝑑₁₀₀ × 𝑑₁₀₀₀ × 𝑑₁₀₀₀₀ × 𝑑₁₀₀₀₀₀ × 𝑑₁₀₀₀₀₀₀
 """
 

@@ -1,30 +1,38 @@
 """
-  he following iterative sequence is defined for the set of positive integers:
+    he following iterative sequence is defined for the set of positive integers:
 
-*   𝑛 → 𝑛/2       (n is even)
-*   𝑛 → 3𝑛 + 1    (𝑛 is odd)
+*       𝑛 → 𝑛/2       (n is even)
+*       𝑛 → 3𝑛 + 1    (𝑛 is odd)
 
-  Using the rule above and starting with 13, we generate the following sequence:
-*   13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+    Using the rule above and starting with 13, we generate the following sequence:
+*       13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
 
-  It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. 
-  Although it has not been proved yet (Collatz Problem), 
-  it is thought that all starting numbers finish at 1.
+    It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. 
+    Although it has not been proved yet (Collatz Problem), 
+    it is thought that all starting numbers finish at 1.
 
-? Which starting number, under one million, produces the longest chain?
+?   Which starting number, under one million, produces the longest chain?
 
-  NOTE: Once the chain starts the terms are allowed to go above one million.
+    NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
 import numpy as np
 
 
-def T_next(n: int) -> int:
-    return 3*n + 1 if n % 2 else n//2
+def T_next(n: int) -> int: return 3*n + 1 if n % 2 else n//2
 
 
 def longest_chain(max_number: int) -> int:
-    """ find the longest chain giving number under given number """
+    """ find the longest chain giving number under given number
+
+    Args:
+    ----
+        max_number (int): number
+
+    Returns:
+    ----
+        int: 
+    """
 
     nums: np.ndarray = np.ones(max_number, dtype=bool)
     chain_size: dict[int, int] = {}
