@@ -28,7 +28,7 @@ import math as m
 
 
 def abundant_nums_under(num: int) -> np.ndarray:
-    """ get abundant numbers under given numbe
+    """ get abundant numbers under given number
 
     Args:
     ----
