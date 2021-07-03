@@ -39,22 +39,23 @@ def abundant_nums_under(num: int) -> np.ndarray:
         np.ndarray:
     """
 
-    nums: np.ndarray = np.zeros(num+1, dtype=bool)      # fille array with false
+    # fille array with false
+    nums: np.ndarray = np.zeros(num+1, dtype=bool)
 
     for i in range(12, num+1, 6):   # multiples of 6 are abundant (6 is a perfect number)
         nums[i] = True
-    
+
     for i in range(12, num+1):      # 12 is the first abundant number
-        
+
         if not nums[i]:
-            
+
             div_sum: int = 1        # include 1
             for j in range(2, m.floor(m.sqrt(i)) + 1):
-                if i%j == 0:
+                if i % j == 0:
 
                     if i//j == j:   # i/j also same
                         div_sum += j
-                    
+
                     else:
                         div_sum += j
                         div_sum += i/j
@@ -66,7 +67,7 @@ def abundant_nums_under(num: int) -> np.ndarray:
             elif div_sum > i:           # is perfect number but multiples of perfect number is abundant
                 for j in range(i, num+1, i):
                     nums[j] = True
-    
+
     return np.nonzero(nums)[0]
 
 
@@ -82,17 +83,19 @@ def sum_of_non_abn_sums(abundants: np.ndarray, num: int) -> int:
     ----
         int:
     """
-    
+
     non_abn_sums: np.ndarray = np.ones(num+1, dtype=bool)
 
     for i in abundants:
         for j in abundants:
-            if (k:= i+j) <= num:        # sum of abundants
+            if (k := i+j) <= num:        # sum of abundants
                 non_abn_sums[k] = False
-            
-            else:break
-                
-    return sum(np.nonzero(non_abn_sums)[0]) # numbers doesn't get from sum of abundants
+
+            else:
+                break
+
+    # numbers doesn't get from sum of abundants
+    return sum(np.nonzero(non_abn_sums)[0])
 
 
 if __name__ == '__main__':
