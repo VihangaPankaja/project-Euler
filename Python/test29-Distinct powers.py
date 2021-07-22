@@ -18,9 +18,9 @@ def terms_in_power_seq(a: range, b: range) -> int:
 
     for i in a: 
         for j in b: 
-            number_lst.append(i**j)  # all posibilities
+            number_lst.append(i**j)  # all possibilities
 
-    return len(set(number_lst))  # clean duplicate and  find lenth
+    return len(set(number_lst))  # clean duplicate and  find length
 
     
 if __name__ == "__main__":

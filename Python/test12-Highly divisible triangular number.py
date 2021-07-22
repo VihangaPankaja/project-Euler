@@ -40,22 +40,22 @@ def factors_list(n: int) -> list[int]:
     lst: list[int] = []
     
     for i in prime_list:
-        if i > n:             # if number larger than currunly checking prime stop looping
+        if i > n:             # if number larger than currently checking prime stop looping
             break
         
         while True:
-            if n % i == 0:      # check if currunt factor divicable by currunt prime and add to list if
+            if n % i == 0:      # check if currunt factor divisible by currunt prime and add to list if
                 lst.append(i)
                 n /= i          # next factor after divide
             
-            else:               # if not divicable stop looping
+            else:               # if not divisible stop looping
                 break
     
     return lst                  # return prime factor list maybe with same numbers included
 
 
 def above_divisors(divisors: int) -> tuple[int]:
-    """ return triangle number that has divisors over given number with divisors found as tupple
+    """ return triangle number that has divisors over given number with divisors found as tuple
 
     Args:
     ----
@@ -71,12 +71,12 @@ def above_divisors(divisors: int) -> tuple[int]:
         fac_lst: list[int] = factors_list(triangle(n))     # get prime factor list
         combinations = 1
 
-        ## tottal divicors are equal to multipy of power of same primes that raised to power plus one (xᵃ × yᵇ × .... >>>> (a+1)×(b+1)×......)
+        ## total divisors are equal to multiply of power of same primes that raised to power plus one (xᵃ × yᵇ × .... >>>> (a+1)×(b+1)×......)
         for i in list(set(fac_lst)):
             combinations *= (fac_lst.count(i) + 1)
         ##################
 
-        if combinations >= divisors:   # if required divicors reached
+        if combinations >= divisors:   # if required divisors reached
             break
 
         n += 1

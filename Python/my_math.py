@@ -138,7 +138,7 @@ from typing import Generator
 def prime_gen(recursionLimit: int = 1_000_000)-> Generator[int, None, None]:
     """
     generates primes numbers on demand 
-     set recursion limit to higher number if recursion depth exceeds exception occured
+     set recursion limit to higher number if recursion depth exceeds exception occurred
         default limit is 1_000_000
     ! not working very well because of lot of recursions and generators
     """
@@ -172,7 +172,7 @@ def is_prime(n: int) -> bool:
     i: int = 5      # for 5
     # coprimes below 25 is divisible by 2 or 3
     while i ** 2 <= n:      # only check till √̅𝑖  6𝑘 ± 1 <= √̅𝑛 (i as 6𝑘-1)
-        if n % i == 0 or n % (i + 2) == 0:      # divicable by 6𝑘-1 or 6𝑘 + 1 as 𝑖 is 6𝑘-1 type
+        if n % i == 0 or n % (i + 2) == 0:      # divisible by 6𝑘-1 or 6𝑘 + 1 as 𝑖 is 6𝑘-1 type
             return False
 
         i += 6
@@ -209,7 +209,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
         9:'nine',
         10:'ten',
         11:'eleven',
-        12:'twelwe',
+        12:'twelve',
         13:'thirteen',
         14:'fourteen',
         15:'fifteen',
@@ -270,7 +270,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
             return ''
         
         else:
-            def hundrads(digit: int, spaces:bool=True)-> str: return (' ' if spaces else '').join([wrd[digit], 'hundrad'])  # str for 100 multiplications
+            def hundreds(digit: int, spaces:bool=True)-> str: return (' ' if spaces else '').join([wrd[digit], 'hundred'])  # str for 100 multiplications
             def tenths(digit: int)-> str: return wrd[digit*10]      # str for 10 multiplications after 20
             def ones_and_till_nineteen(digit: int)-> str: return wrd[digit]     # str for 1 to 19
             
@@ -280,7 +280,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
             
             if val[0]!='0' and val[1:]=='00':       # multiplications of 100
                 return ''.join([
-                        hundrads(int(val[0]), spaces),
+                        hundreds(int(val[0]), spaces),
                         (' 'if suffix!='' and spaces else ''),
                         suffix
                     ])
@@ -289,7 +289,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
                 
                 if val[1] in ['0', '1']:    # values above 100 and last 2 digits between 1 and 19
                     return ''.join([
-                            hundrads(int(val[0]), spaces),
+                            hundreds(int(val[0]), spaces),
                             gap,
                             'and',
                             gap,
@@ -300,7 +300,7 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
                 
                 else:                       # values above 100 and last 2 digits between 20 and 99
                     return ''.join([
-                            hundrads(int(val[0]), spaces),
+                            hundreds(int(val[0]), spaces),
                             gap,
                             'and', 
                             gap,
@@ -379,17 +379,17 @@ def num_to_word(n: Union[int, float, str], spaces:bool=True) -> str:
 
 
 def triangle(n) -> int:
-    '''retunrs triange value of the given number'''
+    '''returns triangle value of the given number'''
     return int(n * (n+1) / 2)
 
 
 def reverse_triangle(x) -> int:
-    '''retuns n value for trangle n'''
+    '''returns n value for triangle n'''
     return int((((8*x + 1)**0.5) - 1) / 2)
 
 
 def divisors(n) -> list[int]:
-    '''returnd a list of divisors'''
+    '''returns a list of divisors'''
     divisors = []
     for i in range(1, int(n / 2 + 1)):
         if n % i == 0:

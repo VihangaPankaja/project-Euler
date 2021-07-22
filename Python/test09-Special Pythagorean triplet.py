@@ -12,24 +12,24 @@
 from typing import Union
 
 
-def prod_of_py_trplle(trpple_sum: int) -> Union[int,str]:
-    """ find the pythog tripple that equals to given sum
+def prod_of_py_triplet(triple_sum: int) -> Union[int,str]:
+    """ find the Pythagorean triplet that equals to given sum
 
     Args:
     ----
-        trpple_sum (int): sum of tripple
+        triple_sum (int): sum of triplet
 
     Returns:
     ----
-        Union[int,str]: product of tripple
+        Union[int,str]: product of triplet
     """
     
     loop: bool = True
     
-    for b in range(1, (int(trpple_sum//2) + 1)):   # a    ## possible a,b 's
+    for b in range(1, (int(triple_sum//2) + 1)):   # a    ## possible a,b 's
         for a in range(1, b+1):                                             ##
-            if a**2 + b**2 == (trpple_sum - a - b)**2:   # c = sum -a-b then a² + b² = (sum -a-b)²
-                lst = [a, b, (trpple_sum - a - b)]
+            if a**2 + b**2 == (triple_sum - a - b)**2:   # c = sum -a-b then a² + b² = (sum -a-b)²
+                lst = [a, b, (triple_sum - a - b)]
 
                 loop = False
                 break
@@ -44,4 +44,4 @@ def prod_of_py_trplle(trpple_sum: int) -> Union[int,str]:
 
 
 if __name__ == '__main__':
-    print(prod_of_py_trplle(1_000))
+    print(prod_of_py_triplet(1_000))

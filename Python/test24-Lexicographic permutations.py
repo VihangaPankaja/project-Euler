@@ -16,7 +16,7 @@
 from typing import NoReturn
 
 
-def lex_permu(sel_nums: list[int] = []) -> NoReturn:   # or use permutations module in itertolls library
+def lex_permu(sel_nums: list[int] = []) -> NoReturn:   # or use permutations module in itertools library
     """ returns list of lexicographic permutation for a given iterable
 
     Args:
@@ -26,16 +26,16 @@ def lex_permu(sel_nums: list[int] = []) -> NoReturn:   # or use permutations mod
     
     global count, digits, stop, number
     
-    rem_dig: list[int] = [i for i in digits if i not in sel_nums]  # list of digits remaing after previous selections
+    rem_dig: list[int] = [i for i in digits if i not in sel_nums]  # list of digits reaming after previous selections
 
     if len(rem_dig) == 2:           ## selecting last 2 digits
-        for i in range(2):          # last 2 digis can store in 2 posible ways
+        for i in range(2):          # last 2 digits can store in 2 possible ways
             count += 1              # indexing in number series
             
             if how_number == count:         # check if requested number reached
                 stop = True                 # stop looping
                 
-                if i == 0:                                     # check for what number use for as there are 2 posible numbers in last 2 digits
+                if i == 0:                                     # check for what number use for as there are 2 possible numbers in last 2 digits
                     number = (''.join([str(i) for i in 
                                        (sel_nums + [rem_dig[0], rem_dig[1]])]))   # join digits as a number 
                 

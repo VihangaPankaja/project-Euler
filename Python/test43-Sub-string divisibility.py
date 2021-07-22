@@ -19,7 +19,7 @@ from typing import Generator
 from itertools import permutations
 
 
-def divicible_pandigital(divicible: dict[str, dict[str, bool]]) -> Generator[int, None, None]:
+def divisible_pandigital(divisible: dict[str, dict[str, bool]]) -> Generator[int, None, None]:
     """ 
     generates 0 to 9 digits pandigital numbers that are follows
         * 𝑑₂𝑑₃𝑑₄  is divisible by 2
@@ -34,7 +34,7 @@ def divicible_pandigital(divicible: dict[str, dict[str, bool]]) -> Generator[int
     
     Args:
     ----
-        divicible (dict[str, dict[str, bool]]): dictionary of diviciblility
+        divisible (dict[str, dict[str, bool]]): dictionary of divisibility
 
     Yields:
     ----
@@ -46,23 +46,23 @@ def divicible_pandigital(divicible: dict[str, dict[str, bool]]) -> Generator[int
 
         if all((
             num[0] != '0',
-            divicible['d2'][num[1:4]],
-            divicible['d3'][num[2:5]],
-            divicible['d5'][num[3:6]],
-            divicible['d7'][num[4:7]],
-            divicible['d11'][num[5:8]],
-            divicible['d13'][num[6:9]],
-            divicible['d17'][num[7:10]]
-        )):     # check if follow digits divicible rules follows and not starts with 0
+            divisible['d2'][num[1:4]],
+            divisible['d3'][num[2:5]],
+            divisible['d5'][num[3:6]],
+            divisible['d7'][num[4:7]],
+            divisible['d11'][num[5:8]],
+            divisible['d13'][num[6:9]],
+            divisible['d17'][num[7:10]]
+        )):     # check if follow digits divisible rules follows and not starts with 0
             yield int(num)
 
 
 def make_divisible_dic() -> dict[str, dict[str, bool]]:
-    """ make dictionary of divicible number divicibility under 1000
+    """ make dictionary of divisible number divisibility under 1000
 
     Returns:
     ----
-        dict[str, dict[str, bool]]: divicible by 2,3,5,7,11,13,17
+        dict[str, dict[str, bool]]: divisible by 2,3,5,7,11,13,17
         
     >>> make_divisible_dic()
     ... {'d2':{'000':True, '001':False, '002':True, ..., '999':False},'d3':{...}, ..., 'd17':{...}}
@@ -70,7 +70,7 @@ def make_divisible_dic() -> dict[str, dict[str, bool]]:
     
     nums = [k for i in range(1000) if len(set((k:= str(i).rjust(3, '0')))) == 3]
 
-    divicible: dict[str, dict[str, bool]] = {
+    divisible: dict[str, dict[str, bool]] = {
         'd2': {i: False for i in nums},
         'd3': {i: False for i in nums},
         'd5': {i: False for i in nums},
@@ -80,24 +80,24 @@ def make_divisible_dic() -> dict[str, dict[str, bool]]:
         'd17': {i: False for i in nums}
     }
 
-    for i in divicible['d2'].keys():
+    for i in divisible['d2'].keys():
         if int(i) % 2 == 0:
-            divicible['d2'][i] = True
+            divisible['d2'][i] = True
         if int(i) % 3 == 0:
-            divicible['d3'][i] = True
+            divisible['d3'][i] = True
         if int(i) % 5 == 0:
-            divicible['d5'][i] = True
+            divisible['d5'][i] = True
         if int(i) % 7 == 0:
-            divicible['d7'][i] = True
+            divisible['d7'][i] = True
         if int(i) % 11 == 0:
-            divicible['d11'][i] = True
+            divisible['d11'][i] = True
         if int(i) % 13 == 0:
-            divicible['d13'][i] = True
+            divisible['d13'][i] = True
         if int(i) % 17 == 0:
-            divicible['d17'][i] = True
+            divisible['d17'][i] = True
             
-    return divicible
+    return divisible
 
 
 if __name__ == "__main__":
-    print(sum(divicible_pandigital(make_divisible_dic())))
+    print(sum(divisible_pandigital(make_divisible_dic())))

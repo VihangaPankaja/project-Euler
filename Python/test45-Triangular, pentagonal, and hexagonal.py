@@ -15,7 +15,7 @@ from typing import Generator
 def triangle(n: int=286) -> Generator[int, None, None]:
     """    
     generates triangle numbers
-        ! infine generator
+        ! infinite generator
 
     Args:
     ----

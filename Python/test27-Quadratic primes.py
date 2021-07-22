@@ -38,17 +38,17 @@ def q_formula_prime_count(a: int, b: int) -> int:
     """
 
     n: int = 0
-    prime_coun: int = 0
+    prime_count: int = 0
 
     while True:
         if is_prime((n**2) + (a*n) + b):
-            prime_coun += 1
+            prime_count += 1
             
         else:break
         
         n += 1
         
-    return prime_coun
+    return prime_count
 
 
 def main() -> tuple[int, int]:
@@ -61,8 +61,8 @@ def main() -> tuple[int, int]:
 
     for i in a:
         for j in b:
-            prime_coun: int = q_formula_prime_count(i, j)
-            dictionary[prime_coun] = i*j
+            prime_count: int = q_formula_prime_count(i, j)
+            dictionary[prime_count] = i*j
 
     return dictionary[max(dictionary.keys())]  # get 𝑎,𝑏 for maximus primes found
 

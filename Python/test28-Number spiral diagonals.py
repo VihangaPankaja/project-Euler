@@ -17,7 +17,7 @@
 ?   What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way
 """
 
-# yeah i could've used annonymous functions 😁
+# yeah i could've used anonymous functions 😁
 def f_lef_up(n: int) -> int: return (2*n + 1)**2 - (2*n)       # values for left up direction from middle
 
 

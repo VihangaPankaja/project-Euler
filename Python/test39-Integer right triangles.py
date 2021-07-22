@@ -3,7 +3,7 @@
     there are exactly three solutions for p = 120.
 *       {20,48,52}, {24,45,51}, {30,40,50}
   
-?   For which value of p ≤ 1000, is the number of solutions maximised
+?   For which value of p ≤ 1000, is the number of solutions maximized
 """
 
 
@@ -49,10 +49,10 @@ def max_solutions(p_max: int) -> int:
                 
                 
                 if p <= p_max:
-                    tripple: set[int] = {a, b, c}     # sets not permutate
+                    triple: set[int] = {a, b, c}     # sets not permutate
                     
-                    if tripple not in solutions[p]:
-                        solutions[p].append(tripple)
+                    if triple not in solutions[p]:
+                        solutions[p].append(triple)
                         
                 else:
                     break

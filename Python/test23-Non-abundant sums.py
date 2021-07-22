@@ -71,12 +71,12 @@ def abundant_nums_under(num: int) -> np.ndarray:
     return np.nonzero(nums)[0]
 
 
-def sum_of_non_abn_sums(abundants: np.ndarray, num: int) -> int:
-    """ returns sum of positive inegers which cannot be represented as the sum of 2 abundant numbers
+def sum_of_non_abn_sums(abundant: np.ndarray, num: int) -> int:
+    """ returns sum of positive integers which cannot be represented as the sum of 2 abundant numbers
 
     Args:
     ----
-        abundants (np.ndarray): abundant number array
+        abundant (np.ndarray): abundant number array
         num (int): numbers under
 
     Returns:
@@ -86,15 +86,15 @@ def sum_of_non_abn_sums(abundants: np.ndarray, num: int) -> int:
 
     non_abn_sums: np.ndarray = np.ones(num+1, dtype=bool)
 
-    for i in abundants:
-        for j in abundants:
-            if (k := i+j) <= num:        # sum of abundants
+    for i in abundant:
+        for j in abundant:
+            if (k := i+j) <= num:        # sum of abundant
                 non_abn_sums[k] = False
 
             else:
                 break
 
-    # numbers doesn't get from sum of abundants
+    # numbers doesn't get from sum of abundant
     return sum(np.nonzero(non_abn_sums)[0])
 
 

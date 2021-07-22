@@ -19,8 +19,8 @@
 """
 
 
-def cycle_lenth(d: int) -> int:
-    """ returns number of rucurring digits for 1/𝑑 for given 𝑑
+def cycle_length(d: int) -> int:
+    """ returns number of recurring digits for 1/𝑑 for given 𝑑
 
     Args:
     ----
@@ -31,17 +31,17 @@ def cycle_lenth(d: int) -> int:
         int:
     """
     
-    remainig: list[int] = [1]   # because 1/
+    remaining: list[int] = [1]   # because 1/
     
     while True:
-        remainig.append((remainig[-1]*10) % d)    ## remaing from dividing
+        remaining.append((remaining[-1]*10) % d)    ## remaining from dividing
 
-        if remainig[-1] == 0:                       # check if 1/𝑑 has no recurring digits
+        if remaining[-1] == 0:                       # check if 1/𝑑 has no recurring digits
             return 0
 
-        elif remainig[-1] in remainig[:-1]:        ## check for recurring cycle completed
-            return (len(remainig) 
-                    - remainig.index(remainig[-1]) 
+        elif remaining[-1] in remaining[:-1]:        ## check for recurring cycle completed
+            return (len(remaining) 
+                    - remaining.index(remaining[-1]) 
                     - 1)
 
 
@@ -57,12 +57,12 @@ def longest_repeating_decimal(max_d: int) -> int:
         int:
     """
     
-    cyc_lenths: list[int] = []      # list of number of recurring digits for given number
+    cyc_lengths: list[int] = []      # list of number of recurring digits for given number
 
     for d in range(1, max_d):
-        cyc_lenths.append(cycle_lenth(d))
+        cyc_lengths.append(cycle_length(d))
 
-    return cyc_lenths.index(max(cyc_lenths)) + 1        # find dthat has max recurring digit cycle
+    return cyc_lengths.index(max(cyc_lengths)) + 1        # find that has max recurring digit cycle
 
 
 if __name__ == '__main__':

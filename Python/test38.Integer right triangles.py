@@ -72,10 +72,10 @@ def concatenate(n: int) -> Union[bool, int]:
 
             
 if __name__ == '__main__':
-    numerbs: list[int] = []
+    numbers: list[int] = []
     
     for i in range(10_000):                              # last number can get 9 digits like this is 9999 (4 and 5 digits)
         if is_pendigital(j:= concatenate(i)):
-            numerbs.append(j)
+            numbers.append(j)
 
-    print(max(numerbs))               # find biggest pandigital number
+    print(max(numbers))               # find biggest pandigital number

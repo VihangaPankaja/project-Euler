@@ -8,7 +8,7 @@
     It can be seen that 𝑃₄ + 𝑃₇ = 22 + 70 = 92 = P8. 
     However, their difference, 70 − 22 = 48, is not pentagonal.
     
-*   Find the pair of pentagonal numbers, 𝑃ⱼ and 𝑃ₖ, for which their sum and difference are pentagonal and 𝐷 = |𝑃ₖ − 𝑃ⱼ| is minimised; 
+*   Find the pair of pentagonal numbers, 𝑃ⱼ and 𝑃ₖ, for which their sum and difference are pentagonal and 𝐷 = |𝑃ₖ − 𝑃ⱼ| is minimized; 
 ?   what is the value of 𝐷? 
 """
 
@@ -18,7 +18,7 @@ from typing import Generator
 def pentagonal(n: int=1) -> Generator[int, None, None]:
     """    
     generates pentagonal numbers.
-        ! infine generator
+        ! infinite generator
 
     Args:
     ----
@@ -52,7 +52,7 @@ def is_pentagonal(n: int) -> bool:
 
 
 def main() -> int:
-    """ find the pair of pentagonal numbers that sum and difference also penagonal and 𝐷 is minimised 
+    """ find the pair of pentagonal numbers that sum and difference also penagonal and 𝐷 is minimized 
 
     Returns:
         int: 𝐷ₘᵢₙ
@@ -61,14 +61,14 @@ def main() -> int:
     for index_k, P_k in enumerate(pentagonal()):    # 𝑃ₖ values
 
         start: int = int((1 + (72*index_k + 49)**0.5) /6) 
-        # reduce unnecessary computation by strat from higher term
+        # reduce unnecessary computation by start from higher term
         
         for P_j in pentagonal(start):   # 𝑃ⱼ values
             if P_j == P_k:
                 break
             
             if (is_pentagonal(P_k - P_j) and 
-                is_pentagonal(P_k + P_j)):   # addtion and substractiona aloso in pentagonal
+                is_pentagonal(P_k + P_j)):   # addition and substractiona also in pentagonal
                 
                 return P_k - P_j           # first 𝐷 is answer but after find may take long time to reach loop end
 

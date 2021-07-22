@@ -20,10 +20,10 @@ def smallest_divisible(num: int) -> int:
     cur_num: int= num
 
     for i in range(1, (num+1)):
-        if cur_num % i == 0:         # check the number divicable by the number curruntly checking
+        if cur_num % i == 0:         # check the number divisible by the number currently checking
             continue
 
-        for j in range(2, (i+1)):   # check number multily by 2 to currunt check if that divicable
+        for j in range(2, (i+1)):   # check number multiply by 2 to currunt check if that divisible
             if (cur_num*j) % i == 0:
                 cur_num *= j
                 break

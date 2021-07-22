@@ -21,16 +21,16 @@ def largest_prime_factor(num: int) -> int:
     lrgfact: int = 1
 
     while tempnum > lastnum:
-        for i in range(lastnum, int(tempnum+1)) :  # check for divicable numbers, strat from last divicable number
+        for i in range(lastnum, int(tempnum+1)) :  # check for divisible numbers, start from last divisible number
             
-            if tempnum % i == 0:  # if ivicable
+            if tempnum % i == 0:  # if dividable
                 if i > lrgfact:   # if currunt factor larger than previous one
                     lrgfact = i
 
                 tempnum /= i  # other factor
                 lastnum = i
 
-                break   # run untill there are no facr0ts
+                break   # run until there are no facrots
 
     if tempnum > lrgfact:
         lrgfact = tempnum

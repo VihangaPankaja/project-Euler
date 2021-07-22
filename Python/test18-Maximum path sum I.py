@@ -109,7 +109,7 @@ if __name__ == '__main__':
         num_lst.remove('')
     #############
 
-    for i in range(my_math.reverse_triangle(len(num_lst)) - 1):                                 # itterate for lines - 1 times
+    for i in range(my_math.reverse_triangle(len(num_lst)) - 1):                                 # iterate for lines - 1 times
         num_lst[my_math.triangle(i+1) - 1] = num_lst[my_math.triangle(i+1) - 1][:-1]            # remove line break(\n) from last vale for every line
 
     total_lines: int = my_math.reverse_triangle(len(num_lst))

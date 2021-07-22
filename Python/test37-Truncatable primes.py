@@ -46,11 +46,11 @@ def main() -> list[int]:
 
     n = 10
     while True:
-        if len(trunctable) == 11:  # there is only 11 trunctables
+        if len(trunctable) == 11:  # there is only 11 truncatable
             break
 
         elif ((int(str(n)[0]) not in lst_digits) or
-              (int(str(n)[-1]) not in lst_digits)):   #firs an last digit should be a prime. to save proccesing
+              (int(str(n)[-1]) not in lst_digits)):   #firs an last digit should be a prime. to save processing
             
             pass
 

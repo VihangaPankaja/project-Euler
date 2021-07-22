@@ -31,7 +31,7 @@ from math import prod  # to find product of list
 
 
 def adj_prod(digit: int) -> list[int]:
-    """ returns list of products in adjecent digits
+    """ returns list of products in adjacent digits
 
     Args:
     ----
@@ -47,9 +47,9 @@ def adj_prod(digit: int) -> list[int]:
     number = ''.join(number.split('\n'))                                # make number one line
     products: list[int] = []
     
-    for i in range(len(number) + 1 - digit):            # select adjecent digits
-        slected = list(number[i : (i+digit)])             # list the adjecent digits
-        products.append(prod(map(int, slected)))        # add product to list
+    for i in range(len(number) + 1 - digit):            # select adjacent digits
+        selected = list(number[i : (i+digit)])             # list the adjacent digits
+        products.append(prod(map(int, selected)))        # add product to list
 
     return products
 

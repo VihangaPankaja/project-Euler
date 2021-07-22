@@ -22,7 +22,7 @@ from itertools import combinations, chain
 from typing import Generator
 
 
-def primality_for_given_digt_numbers(digits: int) -> dict[int, bool]:
+def primality_for_given_digit_numbers(digits: int) -> dict[int, bool]:
     """dictionary of primality for given digit numbers
 
     Args:
@@ -34,7 +34,7 @@ def primality_for_given_digt_numbers(digits: int) -> dict[int, bool]:
         dict[int:bool]: True if prime in dictionary
 
     eg:-
-    >>> primality_for_given_digt_numbers(1)
+    >>> primality_for_given_digit_numbers(1)
     ... {0:False, 1:False, 2:True,...
     """
 
@@ -66,7 +66,7 @@ def is_prime_family(members_in_family: int, template: array,
     """
     global min_prime
     primes = 0
-    smll_in = None
+    small_in = None
 
     for i in '0123456789':
         if template[0] == '*' and i == '0':     # 0 is not applied in first digit
@@ -75,18 +75,18 @@ def is_prime_family(members_in_family: int, template: array,
         if is_prime[int(k := template.tounicode().replace('*', i))]:    # check for replaced values
             primes += 1
 
-            if smll_in is None:     # for first prime found
-                smll_in = int(k)
+            if small_in is None:     # for first prime found
+                small_in = int(k)
             
-    if primes == members_in_family:     # if all primes found equals to members cound requires
-        if min_prime is None or min_prime > smll_in:
-            min_prime = smll_in
+    if primes == members_in_family:     # if all primes found equals to members count requires
+        if min_prime is None or min_prime > small_in:
+            min_prime = small_in
         return True
     return False
 
 
 def template(replacement: tuple[int], digits: int) -> Generator[array, None, None]:
-    """generates number template that witha replacable possitions for given replacement  possitions
+    """generates number template that with replacable possitions for given replacement  possitions
 
     Args:
     ----
@@ -100,11 +100,11 @@ def template(replacement: tuple[int], digits: int) -> Generator[array, None, Non
     
     l: int = len(replacement)
     for num in range(10**(l) if not replacement[0] else 0, 
-                     10**(l + 1)):    # if first value replcing start with 10ˡ
+                     10**(l + 1)):    # if first value replacing start with 10ˡ
         tem: array[str] = array('u', "*" * digits)
         num: str = str(num).rjust(l, '0')
 
-        for index, i in enumerate(replacement):     # replce parts with numbers to generate template
+        for index, i in enumerate(replacement):     # replace parts with numbers to generate template
             tem[i] = num[index]
 
         yield tem
@@ -127,15 +127,15 @@ def smallest_prime_family(members_in_family: int) -> int:
     cur_digits: int = 2
     check: bool = True
 
-    while check:    # untill find check only for n digit numbers 
-        is_prime: dict[int, bool] = primality_for_given_digt_numbers(
+    while check:    # until find check only for n digit numbers 
+        is_prime: dict[int, bool] = primality_for_given_digit_numbers(
             cur_digits)
 
-        for replcement in chain(*(combinations(range(cur_digits), i) 
+        for replacement in chain(*(combinations(range(cur_digits), i) 
                                   for i in range(1, cur_digits))):   
             # all possibilities of getting 𝑖 items from 𝑛 items where 𝑖 is 1 to 𝑛-1
 
-            for tem in template(replcement, cur_digits):
+            for tem in template(replacement, cur_digits):
                 if (is_prime_family(members_in_family, tem, is_prime)):
                     check = False
 

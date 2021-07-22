@@ -54,30 +54,30 @@ def non_trivial_product() -> tuple[int, int]:
             prod(i[1] for i in pos_prod))   # products of numerators and denominators
 
 
-def simplify_frac(nuratr: int, denmtr: int) -> int:
+def simplify_frac(numerator: int, denominator: int) -> int:
     """ returns denominator of the simplified fraction
 
     Args:
     ----
-        nuratr (int): numeratror
-        denmtr (int): denominator
+        numerator (int): numerator
+        denominator (int): denominator
 
     Returns:
     ----
         int:
     """
     
-    for i in range(nuratr, 0, -1):            # simplify the fraction
-        if (nuratr % i == 0 and 
-            denmtr % i == 0):
+    for i in range(numerator, 0, -1):            # simplify the fraction
+        if (numerator % i == 0 and 
+            denominator % i == 0):
             
-            nuratr /= i
-            denmtr /= i
+            numerator /= i
+            denominator /= i
         
-        if nuratr == 1:
+        if numerator == 1:
             break
     
-    return denmtr
+    return denominator
 
 
 if __name__ == '__main__':

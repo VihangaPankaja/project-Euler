@@ -40,16 +40,16 @@ def d_n(n: int) -> int:
 
                 num = ((10**power -1) + ( (n // (power+1) + 1) 
                                          if n % (power+1) != 0 
-                                         else (n // (power+1)) ))   # selct number in 𝑛ᵗʰ digit
+                                         else (n // (power+1)) ))   # select number in 𝑛ᵗʰ digit
                 ######{last num of   ###{ quotient + 1}#########{remainder is 0 }#######{   quotient   }####
                 ######previous digit}#######################################################################
                 ## eg: 10 -> 10-9=1 -> quo=0 rem=1
                 ##     11 -> 11-9=2 -> quo=1 rem=0
                 
-                return int(str(num)[n%(power + 1) - 1])   # return requied digit from selected number 
+                return int(str(num)[n%(power + 1) - 1])   # return required digit from selected number 
             
             else:
-                last_digit += (power + 1) * (10**(power + 1) - 10**power)   # concatinated digits for current number of digitss
+                last_digit += (power + 1) * (10**(power + 1) - 10**power)   # concatinated digits for current number of digits
                 power += 1      # next 10th power
     
 

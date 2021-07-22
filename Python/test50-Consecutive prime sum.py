@@ -36,7 +36,7 @@ def prime_sum_of_consecutive_primes(limit: int) -> int:
         if prime_sums.size < prime_sum[1]:  # current chain smaller than maximum prime chain found
             break
         
-        for j in prime_sums[::-1]:  # check for prime from last to beginnig
+        for j in prime_sums[::-1]:  # check for prime from last to beginning
             if j < prime_sum[0]:    # current sum smaller than maximum prime sum found
                 break
             

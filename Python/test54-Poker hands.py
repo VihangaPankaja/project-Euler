@@ -50,11 +50,11 @@
 """
 
 from typing import Callable
-from statistics import mode     # or can use max(iter, key=lambda x: iter.count(x))
+from statistics import mode, multimode     # or can use max(iter, key=lambda x: iter.count(x))
 
 
 def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Royal Flush and who whould win
+    """ checks if the hand is Royal Flush and who would win
 
     Args
     ----
@@ -82,8 +82,8 @@ def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
     return 0    # no players have
 
 
-def Staight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Staight flush and who whould win
+def Straight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
+    """ checks if the hand is Straight flush and who would win
     
     Args
     ----
@@ -91,16 +91,16 @@ def Staight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
     
     Returns
     ----
-        int: 0 if no Staight flush or tie, 1 if player 1 wins, 2 if player 2 wins
+        int: 0 if no Straight flush or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
     
     def is_StraightFlush(card: list[str], suits: list[str]) -> bool:
-        if not all(suits[0] == x for x in suits[1:]):       # ckeck if all are same suit
+        if not all(suits[0] == x for x in suits[1:]):       # check if all are same suit
             return False
         
         return (card_values[max(card, key=lambda x: card_values[x])] 
-            - card_values[min(card, key=lambda x: card_values[x])]) == 4       # ckeck if cards are consecutive
+            - card_values[min(card, key=lambda x: card_values[x])]) == 4       # check if cards are consecutive
     
     if is_StraightFlush(hand['p1']['card'], hand['p1']['suit']):        # player 1 has
         if is_StraightFlush(hand['p2']['card'], hand['p2']['suit']):        # also player 2 has
@@ -119,7 +119,7 @@ def Staight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Four_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Four of a kind and who whould win
+    """ checks if the hand is Four of a kind and who would win
     
     Args
     ----
@@ -148,7 +148,7 @@ def Four_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Full house and who whould win
+    """ checks if the hand is Full house and who would win
     
     Args
     ----
@@ -179,7 +179,7 @@ def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Flush and who whould win
+    """ checks if the hand is Flush and who would win
     
     Args
     ----
@@ -211,7 +211,7 @@ def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Straight and who whould win
+    """ checks if the hand is Straight and who would win
     
     Args
     ----
@@ -244,7 +244,7 @@ def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Three of a kind and who whould win
+    """ checks if the hand is Three of a kind and who would win
     
     Args
     ----
@@ -271,7 +271,7 @@ def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
 
 
 def Twe_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is Twe pairs and who whould win
+    """ checks if the hand is Twe pairs and who would win
     
     Args
     ----
@@ -282,10 +282,30 @@ def Twe_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no Twe pairs or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    def is_TwoPair(card: list[str]) -> bool:
+        return len(multimode(card)) == 2
+    
+    if is_TwoPair(hand['p1']['card']):
+        if is_TwoPair(hand['p2']['card']):
+            p1: list[str] = sorted(multimode(hand['p1']['card']), key=lambda x: card_values[x], reverse=True)       # sort values of 2 pairs
+            p2: list[str] = sorted(multimode(hand['p2']['card']), key=lambda x: card_values[x], reverse=True)
+            
+            for i in range(2):
+                if p1[i] != p2[i]:      # if values of pairs are different
+                    return {True:1, False:2}[card_values[p1[i]] > card_values[p2[i]]]
+            else:       # if pairs are similar
+                pass
+            return 0        # all card values similar
+        return 1
+
+    elif is_TwoPair(hand['p2']['card']):
+        return 2
+    return 0
 
 
 def One_pair(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is One pair and who whould win
+    """ checks if the hand is One pair and who would win
     
     Args
     ----
@@ -296,10 +316,10 @@ def One_pair(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no One pair or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
-
+    
 
 def High_card(hand: dict[str,dict[str,list[str]]]) -> int:
-    """ checks if the hand is High card and who whould win
+    """ checks if the hand is High card and who would win
     
     Args
     ----
@@ -327,7 +347,7 @@ def count_poker_wins(hands: list[dict[str,dict[str,list[str]]]], player: int) ->
     
     rank: list[Callable] = [
         Royal_flush, 
-        Staight_flush,
+        Straight_flush,
         Four_of_a_kind,
         Full_house,
         Flush,

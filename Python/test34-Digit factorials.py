@@ -11,16 +11,16 @@ from  math import factorial
 
 
 def factorial_digits() -> list[int]:
-    fatorials_for_digts: dict[int, int] = {x:factorial(x) for x in range(10)}   # dictionary of factorils for respective digits for reduse proccesing needed
+    factorials_for_digits: dict[int, int] = {x:factorial(x) for x in range(10)}   # dictionary of factorils for respective digits for reduse processing needed
     numbers: list[int] = []
 
     for n in range(10, 7*factorial(9)):    # all possible number range at 7 digits it reaches maximum like this
         digits: list[int] = list(map(int, str(n)))      # n as a digit list
 
-        if fatorials_for_digts[max(digits)] > n:    # check factorial of maximum digit exceeds n
+        if factorials_for_digits[max(digits)] > n:    # check factorial of maximum digit exceeds n
             continue
 
-        if n == sum(map(lambda x: fatorials_for_digts[x], digits)):     # what was asked
+        if n == sum(map(lambda x: factorials_for_digits[x], digits)):     # what was asked
             numbers.append(n)
             
     return numbers

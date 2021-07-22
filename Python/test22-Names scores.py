@@ -24,7 +24,7 @@ def sum_score_for_names() -> list[int]:
     
     with open('files\p022_names.txt', 'r', encoding='utf-8') as file:
         file = [x for x in file.read().split('"') if x not in ['"', ',']]  # get names from file
-        file.sort()    # sort alphabaticaly
+        file.sort()    # sort alphabetically
 
 
         values: list[int] = []

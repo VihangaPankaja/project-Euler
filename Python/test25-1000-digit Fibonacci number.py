@@ -34,9 +34,9 @@ def fib_digits(digits_in_num: int) -> int:
     fib_num = [1, 1]  # fibanachi series with first 2 numbers
 
     while True:
-        fib_num.append(fib_num[-1] + fib_num[-2])   # find next nuber in series
+        fib_num.append(fib_num[-1] + fib_num[-2])   # find next number in series
         
-        if len(str(fib_num[-1])) == digits_in_num:  # check dgits in number satisfies
+        if len(str(fib_num[-1])) == digits_in_num:  # check digits in number satisfies
             break
         
     return len(fib_num)

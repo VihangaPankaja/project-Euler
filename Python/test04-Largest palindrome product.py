@@ -20,7 +20,7 @@ def prod_digit_palindrome(num: int) -> list[int]:
         list[int]:
     """
     
-    num_list: list[int] = []   # list for posiible palindrome numbers for given digits in factors
+    num_list: list[int] = []   # list for possible palindrome numbers for given digits in factors
 
 
     for i in range((10**(num - 1)), (10**num)):   ### possible factors for given digits 

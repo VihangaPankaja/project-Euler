@@ -25,33 +25,33 @@ def pos_count(cur_index: int = 0, cur_tot: int = 0,chs: list[int] = []) -> int:
         int:
     """
     
-    global coins, tar_val, posibilities
+    global coins, tar_val, possibilities
 
     coin_count: int = 0
     while True:
         cur_val = coin_count * coins[cur_index]  #value from currunt type of coin
         
-        if cur_val + cur_tot > tar_val:   #check if the currunt combination cannot rech the tearget
+        if cur_val + cur_tot > tar_val:   #check if the currunt combination cannot reach the tearget
             return
         
-        elif cur_val + cur_tot == tar_val:  #check if the currunt combination can rech the target
-            posibilities +=1
+        elif cur_val + cur_tot == tar_val:  #check if the currunt combination can reach the target
+            possibilities +=1
             
-            return posibilities
+            return possibilities
         
         else:
             if cur_index != 7:  #check if not the last item
                 pos_count(cur_index + 1, 
                           cur_tot + cur_val, 
-                          chs + [coin_count])  #calling functioon again to choose next type of coin
+                          chs + [coin_count])  #calling function again to choose next type of coin
         
         
-        coin_count +=1 #coins selected from currn type of coins increase by 1
+        coin_count +=1 #coins selected from current type of coins increase by 1
 
 
 if __name__ == '__main__':
     tar_val: int = 200
     coins: tuple[int] = (1, 2, 5, 10, 20, 50, 100, 200)
-    posibilities: int = 0
+    possibilities: int = 0
     
     print(pos_count())

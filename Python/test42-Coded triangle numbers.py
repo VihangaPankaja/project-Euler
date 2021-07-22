@@ -29,7 +29,7 @@ class Frozendict(dict):
 
 
 @cache
-def wrd_scor(wrd: str) -> int:
+def wrd_score(wrd: str) -> int:
     """ calculate score for given letters in words
         A = 1, B = 2, ...
 
@@ -41,7 +41,7 @@ def wrd_scor(wrd: str) -> int:
     ----
         int: sum of scores
         
-    >>> wrd_scor('SKY')
+    >>> wrd_score('SKY')
     ... 55
     """
     
@@ -73,10 +73,10 @@ def triangle_lst(num: int) -> list[int]:
 if __name__ == '__main__':
     ################## load file #####################
     with open('files\p042_words.txt', 'r') as f:
-        wrds = [i[1:-1] for i in f.read().split(',')]
+        words = [i[1:-1] for i in f.read().split(',')]
     ##################################################
 
-    score_lst = [wrd_scor(wrd) for wrd in wrds]  # word scores
+    score_lst = [wrd_score(wrd) for wrd in words]  # word scores
     triangles = triangle_lst(max(score_lst))
     is_triangle_wrd_lst = [(lambda x:x in triangles)(i) for i in score_lst]   # check for word score is triangle
     

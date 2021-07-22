@@ -36,7 +36,7 @@ def circular_primes_count(primes_under: int) -> int:
 
     Args:
     ----
-        primes_under (int): numbers to ckeck under
+        primes_under (int): numbers to check under
 
     Returns:
     ----

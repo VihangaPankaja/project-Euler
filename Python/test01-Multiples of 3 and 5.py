@@ -11,4 +11,4 @@ def total(num: int) -> int:
 
 
 if __name__ == '__main__':
-    print(total(1000)) 
+    print(total(1000))

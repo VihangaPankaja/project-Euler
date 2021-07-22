@@ -58,8 +58,8 @@ def amicable_list_under(num_check: np.ndarray, amicable_num: int) -> np.ndarray:
     for i in range(1, amicable_num):
         if not num_check[i]:           # check if not unchecked
             
-            if i == d(D:= d(i)) and i != D:          # ckeck for amicable number
-                num_check[i] = True             # mark amikable
+            if i == d(D:= d(i)) and i != D:          # check for amicable number
+                num_check[i] = True             # mark amicable
                 num_check[D] = True          # mark amicable
         
     return np.nonzero(num_check)[0]

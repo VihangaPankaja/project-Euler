@@ -47,24 +47,24 @@ def pandigital_nums() -> set[int]:
     
     for digits in permutations([*range(1, 10)], 5):      # factors only using digits once
         
-        ## 1 digit by 4 digit posibilities ##
+        ## 1 digit by 4 digit possibilities ##
         product: int = (digits[0] 
                         * int(''.join(map(str, digits[1:]))))  # product in $ * $$$$
         
         if (1000 <= product <= 9999 and         # check if contains 4 digits
              len(set(str(product))) == 4 and    # check product has different digits
-             is_pandigital(product, digits)):   # chech product and identity is pandigital  
+             is_pandigital(product, digits)):   # check product and identity is pandigital  
               
             nums_found.add(product)
         
         
-        ## 2 digit by 3 digit posibilities ##
+        ## 2 digit by 3 digit possibilities ##
         product: int= (int(''.join(map(str, digits[:2]))) 
                        * int(''.join(map(str, digits[2:]))))  # product in $$ * $$$
         
         if (1000 <= product <= 9999 and         # check if contains 4 digits
             len(set(str(product))) == 4 and     # check product has different digits 
-            is_pandigital(product, digits)):    # chech product and identity is pandigital
+            is_pandigital(product, digits)):    # check product and identity is pandigital
             
             nums_found.add(product)
             

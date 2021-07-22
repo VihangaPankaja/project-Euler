@@ -64,7 +64,7 @@ def calender(year: int, month: int) -> None:
     calender_curr = [0] * (7*6)   # get new calender to fill
     ## calculating firs day's possition ##
     calender_prev.reverse()
-    next_start = (14 - calender_prev.index(1)) % 7  # as indexing use in python (strat from 0)
+    next_start = (14 - calender_prev.index(1)) % 7  # as indexing use in python (start from 0)
     #######
 
     for mark in range(next_start, next_start + days_for_month(year, month)):        # from the starting point fill the calender
