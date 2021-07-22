@@ -69,10 +69,8 @@ def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
         if not all(suits[0] == x for x in suits[1:]):       # check if all are in same suit
             return False
         
-        if not all(['T' in card, 'J' in card, 'Q' in card, 
-                    'K' in card, 'A' in card]):     # if all cards between 10 to A contains
-            return False
-        return True
+        return all(['T' in card, 'J' in card, 'Q' in card, 
+                    'K' in card, 'A' in card])     # if all cards between 10 to A contains
     
     if is_RoyalFlush(hand['p1']['card'], hand['p1']['suit']):       # player 1 has
         if is_RoyalFlush(hand['p2']['card'], hand['p2']['suit']):   # also player 2 has
@@ -101,10 +99,8 @@ def Staight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
         if not all(suits[0] == x for x in suits[1:]):       # ckeck if all are same suit
             return False
         
-        if (card_values[max(card, key=lambda x: card_values[x])] 
-            - card_values[min(card, key=lambda x: card_values[x])]) == 4:       # ckeck if cards are consecutive
-            return True
-        return False
+        return (card_values[max(card, key=lambda x: card_values[x])] 
+            - card_values[min(card, key=lambda x: card_values[x])]) == 4       # ckeck if cards are consecutive
     
     if is_StraightFlush(hand['p1']['card'], hand['p1']['suit']):        # player 1 has
         if is_StraightFlush(hand['p2']['card'], hand['p2']['suit']):        # also player 2 has
@@ -136,9 +132,7 @@ def Four_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
     global card_values
     
     def is_FourofaKind(card: list[str]) -> bool:
-        if card.count(mode(card)) == 4:     # has 4 same valued cards
-            return True
-        return False
+        return card.count(mode(card)) == 4     # has 4 same valued cards
     
     if is_FourofaKind(hand['p1']['card']):
         if is_FourofaKind(hand['p2']['card']):
@@ -167,10 +161,8 @@ def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
     global card_values
     
     def is_FullHouse(card: list[str]) -> bool:
-        if card.count(mode(card)) == 3:     # has 3 same valued cards
-            if len(set(card)) == 2:         # also has 2 same valued cards
-                return True
-            return False
+        if card.count(mode(card)) == 3:         # has 3 same valued cards
+            return len(set(card)) == 2          # also has 2 same valued cards
         return False
     
     if is_FullHouse(hand['p1']['card']):
@@ -229,6 +221,25 @@ def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no Straight or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    def is_Straight(card: list[str]) -> bool:
+        return ((card_values[max(card, key= lambda x: card_values[x])] 
+                 - card_values[min(card, key=lambda x: card_values[x])])  == 4        # is consecutive 5 cards
+                        and len(set(card)) == 5)                                      # no same cards
+
+    if is_Straight(hand['p1']['card']):
+        if is_Straight(hand['p2']['card']):
+            if ((p1:= card_values[max(hand['p1']['card'], key=lambda x: card_values[x])])          # max valued card of player 1
+                > (p2:= card_values[max(hand['p2']['card'], key=lambda x: card_values[x])])):      # max valued card of player 2
+                return 1
+            elif p1 == p2:          # max valued cards are equal
+                return 0
+            return 2
+        return 1
+    
+    elif is_Straight(hand['p2']['card']):
+        return 2
+    return 0
 
 
 def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
