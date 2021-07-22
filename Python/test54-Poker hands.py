@@ -50,7 +50,7 @@
 """
 
 from typing import Callable
-from statistics import mode     # or can use max(iter, lambda x: iter.count(x))
+from statistics import mode     # or can use max(iter, key=lambda x: iter.count(x))
 
 
 def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
@@ -175,8 +175,8 @@ def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
     
     if is_FullHouse(hand['p1']['card']):
         if is_FullHouse(hand['p2']['card']):
-            if (card_values[mode(hand['p1']['card'])] 
-                > card_values[mode(hand['p2']['card'])]):
+            if (card_values[mode(hand['p1']['card'])]           # value of same 3 cards of player 1
+                > card_values[mode(hand['p2']['card'])]):       # value of same 3 cards of player 2
                 return 1
             return 2
         return 1
@@ -198,6 +198,23 @@ def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no Flush or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    def is_Flush(suit: list[str]) -> bool:
+        return len(set(suit)) == 1          # all in same suit
+    
+    if is_Flush(hand['p1']['suit']):
+        if is_Flush(hand['p2']['suit']):
+            if ((p1:= card_values[max(hand['p1']['card'], key=lambda x: card_values[x])])          # max valued card of player 1
+                > (p2:= card_values[max(hand['p2']['card'], key=lambda x: card_values[x])])):      # max valued card of player 2
+                return 1
+            elif p1 == p2:          # max valued cards are equal
+                return 0
+            return 2
+        return 1
+    
+    elif is_Flush(hand['p2']['suit']):
+        return 2
+    return 0
 
 
 def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
