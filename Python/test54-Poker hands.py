@@ -196,12 +196,13 @@ def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
     
     if is_Flush(hand['p1']['suit']):
         if is_Flush(hand['p2']['suit']):
-            if ((p1:= card_values[max(hand['p1']['card'], key=lambda x: card_values[x])])          # max valued card of player 1
-                > (p2:= card_values[max(hand['p2']['card'], key=lambda x: card_values[x])])):      # max valued card of player 2
-                return 1
-            elif p1 == p2:          # max valued cards are equal
-                return 0
-            return 2
+            p1: list[str] = sorted(hand['p1']['card'], key=lambda x: card_values[x], reverse=True)     # sort by card values in descending order
+            p2: list[str] = sorted(hand['p2']['card'], key=lambda x: card_values[x], reverse=True)
+            
+            for i in range(5):
+                if p1[i] != p2[i]:
+                    return {True:1, False:2}[card_values[p1[i]] > card_values[p2[i]]]       # which one has more value
+            return 0                                                                        # if all same
         return 1
     
     elif is_Flush(hand['p2']['suit']):
@@ -254,6 +255,19 @@ def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no Three of a kind or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    def is_TreeofaKind(card: list[str]) -> bool:
+        return card.count(mode(card)) == 3
+    
+    if is_TreeofaKind(hand['p1']['card']):
+        if is_TreeofaKind(hand['p2']['card']):
+            return {True:1, False:2}[card_values[mode(hand['p1']['card'])] 
+                                     > card_values[mode(hand['p2']['card'])]]       # which has higher value 3 cards
+        return 1
+    
+    elif is_TreeofaKind(hand['p2']['card']):
+        return 2
+    return 0
 
 
 def Twe_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
