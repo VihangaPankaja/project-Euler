@@ -50,11 +50,12 @@
 """
 
 from typing import Callable
-from statistics import mode, multimode     # or can use max(iter, key=lambda x: iter.count(x))
+from statistics import mode, multimode     # or can use max(iter, key=lambda x: iter.count(x)) for mode
 
 
 def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Royal Flush and who would win
+        Ten, Jack, Queen, King, Ace, in same suit
 
     Args
     ----
@@ -84,6 +85,8 @@ def Royal_flush(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Straight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Straight flush and who would win
+        All cards are consecutive values of same suit,
+        if both hands are Straight flush, player with most valued card wins
     
     Args
     ----
@@ -120,6 +123,8 @@ def Straight_flush(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Four_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Four of a kind and who would win
+        Four cards of the same value,
+        if both hands are Four of a kind, player with most valued same 4 card wins
     
     Args
     ----
@@ -149,7 +154,9 @@ def Four_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Full house and who would win
-    
+        Three cars are same value and other 2 cards also same value pair,
+        if both hands are Full House, player with most valued same 3 cards wins
+
     Args
     ----
         hand (dict[str,dict[str,list[str]]]): hand
@@ -180,6 +187,10 @@ def Full_house(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Flush and who would win
+        All cards of the same suit,
+        if both hands are Flush, 
+        player with most valued card wins,
+        if those cards are same check for next most valued card and so on
     
     Args
     ----
@@ -212,6 +223,9 @@ def Flush(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Straight and who would win
+        All cards are consecutive values,
+        if both hands are Straight,
+        check for most valued card
     
     Args
     ----
@@ -245,6 +259,9 @@ def Straight(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Three of a kind and who would win
+        Three cards of the same value,
+        if both hands are Three of a kind,
+        player with most valued 3 same cads wins
     
     Args
     ----
@@ -272,6 +289,11 @@ def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def Two_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Twe pairs and who would win
+        Two different pairs,
+        if both hands are Twe pairs,
+        check for most valued pair,
+        if those are same check next pair,
+        if all of above are same check the other card
     
     Args
     ----
@@ -310,6 +332,13 @@ def Two_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def One_pair(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is One pair and who would win
+        Two cards of the same value,
+        if both hands are One pair,
+        check for most valued pair,
+        if those are same,
+        check max valued card from others,
+        if those are same,
+        check next max valued card and so on
     
     Args
     ----
@@ -348,6 +377,8 @@ def One_pair(hand: dict[str,dict[str,list[str]]]) -> int:
 
 def High_card(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is High card and who would win
+        Most valued card,
+        if those are same check the next most valued card and so on
     
     Args
     ----
@@ -359,8 +390,8 @@ def High_card(hand: dict[str,dict[str,list[str]]]) -> int:
     """
     global card_values
     
-    p1: list[int] = sorted([card_values[i] for i in hand['p1']['card']], key=int, reverse=True)       # sort descending order by card values
-    p2: list[int] = sorted([card_values[i] for i in hand['p2']['card']], key=int, reverse=True)
+    p1: list[int] = sorted([card_values[i] for i in hand['p1']['card']], reverse=True)       # sort descending order by card values
+    p2: list[int] = sorted([card_values[i] for i in hand['p2']['card']], reverse=True)
     
     if p1 != p2:
         return {True:1, False:2}[p1 > p2]
