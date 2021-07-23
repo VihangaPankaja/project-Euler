@@ -358,6 +358,13 @@ def High_card(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    p1: list[int] = sorted([card_values[i] for i in hand['p1']['card']], key=int, reverse=True)       # sort descending order by card values
+    p2: list[int] = sorted([card_values[i] for i in hand['p2']['card']], key=int, reverse=True)
+    
+    if p1 != p2:
+        return {True:1, False:2}[p1 > p2]
+    return 0
 
 
 def count_poker_wins(hands: list[dict[str,dict[str,list[str]]]], player: int) -> int:
@@ -390,7 +397,7 @@ def count_poker_wins(hands: list[dict[str,dict[str,list[str]]]], player: int) ->
         for i in rank:
             if (win:= i(hand)):
                 return win
-            
+
     return [winner(hand) for hand in hands].count(player)
 
 
