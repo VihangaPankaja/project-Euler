@@ -270,7 +270,7 @@ def Three_of_a_kind(hand: dict[str,dict[str,list[str]]]) -> int:
     return 0
 
 
-def Twe_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
+def Two_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
     """ checks if the hand is Twe pairs and who would win
     
     Args
@@ -292,11 +292,15 @@ def Twe_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
             p2: list[str] = sorted(multimode(hand['p2']['card']), key=lambda x: card_values[x], reverse=True)
             
             for i in range(2):
-                if p1[i] != p2[i]:      # if values of pairs are different
+                if p1[i] != p2[i]:                                              # if values of pairs are different
                     return {True:1, False:2}[card_values[p1[i]] > card_values[p2[i]]]
             else:       # if pairs are similar
-                pass
-            return 0        # all card values similar
+                p1 = [i for i in set(hand['p1']['card']) if i not in p1]        # find single card in hand
+                p2 = [i for i in set(hand['p2']['card']) if i not in p2]        # find single card in hand
+
+                if p1[0] != p2[0]:      
+                    return {True:1, False:2}[p1[0] > p2[0]]                     # if single cards are different
+            return 0                                                            # all card values similar
         return 1
 
     elif is_TwoPair(hand['p2']['card']):
@@ -353,7 +357,7 @@ def count_poker_wins(hands: list[dict[str,dict[str,list[str]]]], player: int) ->
         Flush,
         Straight,
         Three_of_a_kind,
-        Twe_pairs,
+        Two_pairs,
         One_pair,
         High_card
     ]
