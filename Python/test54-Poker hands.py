@@ -284,7 +284,7 @@ def Two_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
     global card_values
     
     def is_TwoPair(card: list[str]) -> bool:
-        return len(multimode(card)) == 2
+        return len(multimode(card)) == 2        # 2 modes ⟹ 2 pairs
     
     if is_TwoPair(hand['p1']['card']):
         if is_TwoPair(hand['p2']['card']):
@@ -299,7 +299,7 @@ def Two_pairs(hand: dict[str,dict[str,list[str]]]) -> int:
                 p2 = [i for i in set(hand['p2']['card']) if i not in p2]        # find single card in hand
 
                 if p1[0] != p2[0]:      
-                    return {True:1, False:2}[p1[0] > p2[0]]                     # if single cards are different
+                    return {True:1, False:2}[card_values[p1[0]] > card_values[p2[0]]]                     # if single cards are different
             return 0                                                            # all card values similar
         return 1
 
@@ -320,6 +320,30 @@ def One_pair(hand: dict[str,dict[str,list[str]]]) -> int:
         int: 0 if no One pair or tie, 1 if player 1 wins, 2 if player 2 wins
     """
     global card_values
+    
+    def is_OnePair(card: list[str]) -> bool:
+        return card.count(mode(card)) == 2     # one pair
+    
+    if is_OnePair(hand['p1']['card']):
+        if is_OnePair(hand['p2']['card']):
+            if mode(hand['p1']['card']) != mode(hand['p2']['card']):
+                return {True:1, False:2}[card_values[mode(hand['p1']['card'])] 
+                                         > card_values[mode(hand['p2']['card'])]]                           # which has biggest in pair
+            
+            p1: list[str] = sorted([i for i in hand['p1']['card'] if i != mode(hand['p1']['card'])], 
+                                    key=lambda x: card_values[x], reverse=True)                             # sorted cards without pair
+            p2: list[str] = sorted([i for i in hand['p2']['card'] if i != mode(hand['p2']['card'])], 
+                                    key=lambda x: card_values[x], reverse=True)
+            
+            for i in range(3):      # check other cards
+                if p1[i] != p2[i]:
+                    return {True:1, False:2}[p1[i] > p2[i]]
+            return 0    # all cards are equal
+        return 1
+    
+    elif is_OnePair(hand['p2']['card']):
+        return 2
+    return 0
     
 
 def High_card(hand: dict[str,dict[str,list[str]]]) -> int:
