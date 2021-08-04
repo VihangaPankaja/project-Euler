@@ -10,12 +10,12 @@
 using namespace std;
 
 /* return sum of all the multiples of 3 or 5 below given number */
-int divicible(int till){
+int divisible(int till){
     int total = 0;
 
     for (int i = 0; i < till; i++ ){
-        if (i % 3 == 0 or i % 5 == 0){      // check if divicible by 3 and 5
-                total += i;                 // add divicible numbers
+        if (i % 3 == 0 or i % 5 == 0){      // check if divisible by 3 and 5
+                total += i;                 // add divisible numbers
         }
     }
 
@@ -24,7 +24,7 @@ int divicible(int till){
 
 
 int main(){
-    cout << divicible(1000);
+    cout << divisible(1000);
 
     return 0;
 }

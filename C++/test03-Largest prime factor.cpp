@@ -14,7 +14,7 @@ int largest_factor(long long number_left){
 
     while (i < number_left){            // if not prime
         while (true){
-            if (number_left % i == 0 && number_left / i != 1){      // if divicible by i
+            if (number_left % i == 0 && number_left / i != 1){      // if divisible by i
                 number_left /= i;           // get other factor
             }else {
                 break;

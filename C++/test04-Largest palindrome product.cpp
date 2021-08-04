@@ -14,16 +14,16 @@
 using namespace std;
 
 /* returns max of palindromic products */
-int max_prod_digit_palimdrome(int num){
-    int cur_max = 0;    // holds max palindrome curruntly found
+int max_prod_digit_palindrome(int num){
+    int cur_max = 0;    // holds max palindrome currently found
 
     for (int i = pow(10,(num-1)); i < pow(10,num); i++){
         for (int j = pow(10,(num-1)); j < pow(10,num); j++){
             string mul = to_string(i * j);      // convert multiplication to string
-            string rmul = mul;
-            reverse(rmul.begin(), rmul.end());  // reverse of string
+            string reverseMul = mul;
+            reverse(reverseMul.begin(), reverseMul.end());  // reverse of string
             
-            if ((mul.compare(rmul) == 0) && (cur_max < i*j)){   // check for palindromic and larger than previous
+            if ((mul.compare(reverseMul) == 0) && (cur_max < i*j)){   // check for palindromic and larger than previous
                 cur_max = i*j;
             }
         }
@@ -34,7 +34,7 @@ int max_prod_digit_palimdrome(int num){
 
 
 int main(){
-    cout << max_prod_digit_palimdrome(3);
+    cout << max_prod_digit_palindrome(3);
 
     return 0;
 }

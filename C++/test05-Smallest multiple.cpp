@@ -14,11 +14,11 @@ int smallest_divisible(int num){
     int cur_num = num;
 
     for (int i = 1; i <= num; i++){
-        if (cur_num % i == 0){      // curruntly found number can be divicible by curruntly checking number
+        if (cur_num % i == 0){      // currently found number can be divisible by currently checking number
             continue;
         }
 
-        for (int j = 2; j <= num; j++){     // check multiples of curruntly found number can be divisible
+        for (int j = 2; j <= num; j++){     // check multiples of currently found number can be divisible
             if ((cur_num * j) % i == 0){
                 cur_num *= j;
                 break;

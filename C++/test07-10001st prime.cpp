@@ -31,7 +31,7 @@ bool IsPrime(int n)
 
 /* returns given placed prime number */
 int nthPrime(int prime_no){
-    int primesFound = 2, k = 1;     /* ckeck for 6k ± 1 numbers. 2,3 includes in primesFound */
+    int primesFound = 2, k = 1;     /* check for 6k ± 1 numbers. 2,3 includes in primesFound */
 
     while (primesFound <= prime_no){
         if (IsPrime(6*k - 1)){primesFound++;}
